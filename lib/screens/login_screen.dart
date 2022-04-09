@@ -40,6 +40,7 @@ class LoginScreen extends StatelessWidget {
                   decoration: const InputDecoration(
                     labelText: 'Username',
                     border: const OutlineInputBorder(),
+                    isDense: true,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -47,6 +48,7 @@ class LoginScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(),
+                    isDense: true,
                   ),
                 ),
                 const SizedBox(height: 8),
