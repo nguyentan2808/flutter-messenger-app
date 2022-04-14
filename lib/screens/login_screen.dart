@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lab6/screens/home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -9,6 +8,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    void _handleLogin() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    }
 
     return Scaffold(
       body: ListView(
@@ -23,6 +29,9 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: size.height * 0.05,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -36,19 +45,39 @@ class LoginScreen extends StatelessWidget {
                       fontFamily: "Outfit"),
                 ),
                 const SizedBox(height: 16),
-                const TextField(
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                    border: const OutlineInputBorder(),
-                    isDense: true,
+                TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.person,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                    ),
+                    // fillColor: Colors.red,
+
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 29.0, vertical: 16.0),
+                    hintStyle:
+                        const TextStyle(fontFamily: 'Outfit', fontSize: 16),
+                    hintText: "Username or Phone Number",
                   ),
                 ),
                 const SizedBox(height: 16),
-                const TextField(
+                TextField(
                   decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                    isDense: true,
+                    prefixIcon: Icon(
+                      Icons.verified_user_rounded,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 16.0),
+                    hintStyle:
+                        const TextStyle(fontFamily: 'Outfit', fontSize: 16),
+                    hintText: "Password",
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -66,29 +95,31 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(40))),
                         fixedSize: MaterialStateProperty.all(
                             Size(size.width * 0.9, 50))),
-                    onPressed: () {},
-                    child: const Text("Login")),
+                    onPressed: _handleLogin,
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white),
+                      // style: TextStyle(
+                      //     color: Theme.of(context).textTheme.bodyText1?.color),
+                    )),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Divider(),
+                    CustomDivider(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "Or sign in with",
                         style: TextStyle(
                             fontFamily: 'Outfit', fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Divider(),
+                    CustomDivider(),
                   ],
                 ),
                 const SizedBox(height: 16),
-                SvgPicture.asset(
-                  'assets/images/social_svg.svg',
-                  height: 40,
-                )
+                const SocialButtons()
               ],
             ),
           ),
@@ -98,8 +129,8 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class Divider extends StatelessWidget {
-  const Divider({Key? key}) : super(key: key);
+class CustomDivider extends StatelessWidget {
+  const CustomDivider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +140,56 @@ class Divider extends StatelessWidget {
       width: size.width * 0.25,
       height: 2,
       decoration: BoxDecoration(
-        color: Colors.indigo[500],
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(10),
       ),
+    );
+  }
+}
+
+class SocialButtons extends StatelessWidget {
+  const SocialButtons({Key? key}) : super(key: key);
+
+  final double spacing = 14.0;
+
+  void _handleGoogleLogin() {}
+
+  void _handleFacebookLogin() {}
+
+  void _handleAppleLogin() {}
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(100.0),
+          child: SvgPicture.asset(
+            'assets/images/google_svg.svg',
+            height: 40,
+          ),
+          onTap: _handleGoogleLogin,
+        ),
+        SizedBox(width: spacing),
+        InkWell(
+          child: SvgPicture.asset(
+            'assets/images/facebook_svg.svg',
+            height: 40,
+          ),
+          borderRadius: BorderRadius.circular(100.0),
+          onTap: _handleFacebookLogin,
+        ),
+        SizedBox(width: spacing),
+        InkWell(
+          child: SvgPicture.asset(
+            'assets/images/apple_svg.svg',
+            height: 40,
+          ),
+          borderRadius: BorderRadius.circular(100.0),
+          onTap: _handleAppleLogin,
+        ),
+      ],
     );
   }
 }
