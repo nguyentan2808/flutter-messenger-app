@@ -18,6 +18,8 @@ class ThemeService {
   /// Switch theme and save to local storage
   void switchTheme() {
     Get.changeThemeMode(_loadFromStorage() ? ThemeMode.light : ThemeMode.dark);
-    _saveToStorage(!_loadFromStorage());
+    _saveToStorage(
+      !_loadFromStorage(),
+    );
   }
 }

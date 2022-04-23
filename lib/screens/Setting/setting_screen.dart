@@ -140,7 +140,7 @@ class _SettingScreenState extends State<SettingScreen> {
     //                           style: TextStyle(
     //                               fontFamily: 'Outfit',
     //                               fontSize: 22,
-    //                               fontWeight: FontWeight.w500)),
+    //                               fontWeight: FontWeight.w500),),
     //                       Text(
     //                         'Privacy, secutrity, change email or number',
     //                         style: TextStyle(
@@ -148,14 +148,14 @@ class _SettingScreenState extends State<SettingScreen> {
     //                         ),
     //                       )
     //                     ],
-    //                   )),
+    //                   ),),
     //                 ]),
     //                 const SizedBox(
     //                   height: 12,
     //                 ),
     //               ],
     //             );
-    //           }))
+    //           }),)
     //         ],
     //       ),
     //     ),

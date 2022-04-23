@@ -11,7 +11,7 @@
 //         debugShowCheckedModeBanner: false,
 //         useInheritedMediaQuery: true,
 //         theme: ThemeData(
-//           primarySwatch: Colors.indigo,
+//           primarySwatch: Colors.Theme.of(context).primaryColor,
 //         ),
 //         darkTheme: darkThemeData(context)
 //         // locale: DevicePreview.locale(context),
@@ -30,9 +30,11 @@ import 'package:lab6/services/theme_service.dart';
 import 'package:lab6/theme.dart';
 
 void main() async {
-  await GetStorage.init(); // add this
+  await GetStorage.init();
 
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -41,17 +43,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              useInheritedMediaQuery: true,
-              themeMode: ThemeService().theme, // add this
-              theme: lightThemeData(context),
-              darkTheme: darkThemeData(context),
-              title: 'Flutter Demo',
-              locale: DevicePreview.locale(context),
-              builder: DevicePreview.appBuilder,
-              home: const LoginScreen(),
-            ));
+      enabled: false,
+      builder: (context) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        useInheritedMediaQuery: true,
+        themeMode: ThemeService().theme,
+        theme: lightThemeData(context),
+        darkTheme: darkThemeData(context),
+        title: 'Telegram',
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        home: const LoginScreen(),
+      ),
+    );
   }
 }

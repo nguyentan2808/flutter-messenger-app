@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../Setting/setting_screen.dart';
+import '../chats/chats_screen.dart';
 import 'components/bottom_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
   final List<Widget> tabs = [
-    const S1(),
+    const ChatsScreen(),
     const S2(),
     const S3(),
     const SettingScreen()
