@@ -17,21 +17,30 @@ class Conversations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomAppBar(),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (context, index) => index == 0
-                ? const HorizontalList()
-                : Conversation(
-                    onPress: () => handleOpenChatDetail(),
-                    index: index,
-                  ),
-          ),
-        )
-      ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      body: Column(
+        children: [
+          const CustomAppBar(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) => index == 0
+                  ? const HorizontalList()
+                  : Conversation(
+                      onPress: () => handleOpenChatDetail(),
+                      index: index,
+                    ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
