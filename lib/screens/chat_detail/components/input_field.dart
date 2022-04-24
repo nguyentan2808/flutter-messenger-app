@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab6/constant.dart';
 
 class InputField extends StatefulWidget {
   const InputField({
@@ -12,41 +13,34 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   bool isTyping = false;
   String message = '';
-  final FocusNode inputMessageFocus = FocusNode();
-  final TextEditingController inputMessageController = TextEditingController();
+  final FocusNode inputFocus = FocusNode();
+  final TextEditingController inputController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    inputMessageFocus.addListener(handleChangeFocus);
-    inputMessageController.addListener(handleChangeInputMessage);
+    inputFocus.addListener(handleChangeFocus);
+    inputController.addListener(handleChangeInput);
   }
 
   @override
   void dispose() {
     super.dispose();
-    inputMessageController.removeListener(handleChangeInputMessage);
-    inputMessageFocus.removeListener(handleChangeFocus);
-    inputMessageController.dispose();
-    inputMessageFocus.dispose();
+    inputController.removeListener(handleChangeInput);
+    inputFocus.removeListener(handleChangeFocus);
+    inputController.dispose();
+    inputFocus.dispose();
   }
 
   void handleChangeFocus() {
     setState(() {
-      isTyping = inputMessageFocus.hasFocus;
+      isTyping = inputFocus.hasFocus;
     });
   }
 
-  void handleChangeInputMessage() {
+  void handleChangeInput() {
     setState(() {
-      message = inputMessageController.text;
-    });
-  }
-
-  void loseFocus() {
-    inputMessageFocus.unfocus();
-    setState(() {
-      isTyping = false;
+      message = inputController.text;
     });
   }
 
@@ -63,80 +57,88 @@ class _InputFieldState extends State<InputField> {
               color: Colors.black.withOpacity(0.1),
             ),
           ]),
-      child: SafeArea(
-        child: Row(children: [
-          isTyping
-              ? IconButton(
-                  onPressed: loseFocus,
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18,
-                  ),
-                  color: Theme.of(context).primaryColor,
-                )
-              : Row(
-                  children: [
-                    Icon(
-                      Icons.mic,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    const SizedBox(width: 10),
-                    Icon(
-                      Icons.image,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ],
-                ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: GestureDetector(
-              onTap: loseFocus,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Row(children: [
-                  Icon(
-                    Icons.sentiment_satisfied_alt_outlined,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .color
-                        ?.withOpacity(0.5),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: TextField(
-                      focusNode: inputMessageFocus,
-                      controller: inputMessageController,
-                      decoration: InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 12.0),
-                          isDense: true,
-                          hintStyle: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1!
-                                  .fontSize),
-                          hintText: 'Type your message',
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  Icon(
-                    Icons.send,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .color
-                        ?.withOpacity(0.5),
-                  ),
-                ]),
+      child: Row(
+        children: [
+          buildActions(),
+          const SizedBox(width: kDefaultPadding * 0.8),
+          buildInput(context)
+        ],
+      ),
+    );
+  }
+
+  Widget buildActions() {
+    if (isTyping) {
+      return IconButton(
+        onPressed: inputFocus.unfocus,
+        icon: const Icon(
+          Icons.arrow_back_ios_new,
+          size: 18,
+        ),
+        color: Theme.of(context).primaryColor,
+      );
+    } else {
+      return Row(
+        children: [
+          Icon(
+            Icons.mic,
+            color: Theme.of(context).primaryColor,
+          ),
+          const SizedBox(width: kDefaultPadding * (3 / 4)),
+          Icon(
+            Icons.image,
+            color: Theme.of(context).primaryColor,
+          ),
+        ],
+      );
+    }
+  }
+
+  Expanded buildInput(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: inputFocus.unfocus,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: Row(children: [
+            Icon(
+              Icons.sentiment_satisfied_alt_outlined,
+              color: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .color
+                  ?.withOpacity(0.5),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: TextField(
+                focusNode: inputFocus,
+                controller: inputController,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: kDefaultPadding * (3 / 4)),
+                    isDense: true,
+                    hintStyle: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyText1!.fontSize),
+                    hintText: 'Type your message',
+                    border: InputBorder.none),
               ),
             ),
-          )
-        ]),
+            Icon(
+              Icons.send,
+              color: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .color
+                  ?.withOpacity(0.5),
+            ),
+          ]),
+        ),
       ),
     );
   }
