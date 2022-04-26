@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lab6/services/i18n_service.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../services/theme_service.dart';
@@ -11,7 +13,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  bool isOpen = false;
+  bool _isDarkMode = false;
+  bool _isVN = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,53 +23,31 @@ class _SettingScreenState extends State<SettingScreen> {
         SettingsSection(
           title: const Text('Common'),
           tiles: <SettingsTile>[
-            SettingsTile.navigation(
-              leading: const Icon(Icons.language),
-              title: const Text('Language'),
-              value: const Text('English'),
-            ),
             SettingsTile.switchTile(
               onToggle: (value) {
                 setState(() {
-                  isOpen = value;
+                  _isDarkMode = value;
                 });
                 ThemeService().switchTheme();
               },
-              initialValue: isOpen,
+              initialValue: _isDarkMode,
               leading: const Icon(Icons.format_paint),
-              title: const Text('Enable custom theme'),
-            ),
-          ],
-        ),
-        SettingsSection(
-          title: const Text('Common'),
-          tiles: <SettingsTile>[
-            SettingsTile.navigation(
-              leading: const Icon(Icons.language),
-              title: const Text('Language'),
-              value: const Text('English'),
+              title: const Text('Dark mode'),
             ),
             SettingsTile.switchTile(
-              onToggle: (value) {},
-              initialValue: true,
-              leading: const Icon(Icons.format_paint),
-              title: const Text('Enable custom theme'),
-            ),
-          ],
-        ),
-        SettingsSection(
-          title: const Text('Common'),
-          tiles: <SettingsTile>[
-            SettingsTile.navigation(
+              onToggle: (value) {
+                if (_isVN) {
+                  I18nService().changeLocale('en');
+                } else {
+                  I18nService().changeLocale('vi');
+                }
+                setState(() {
+                  _isVN = !_isVN;
+                });
+              },
+              initialValue: _isDarkMode,
               leading: const Icon(Icons.language),
-              title: const Text('Language'),
-              value: const Text('English'),
-            ),
-            SettingsTile.switchTile(
-              onToggle: (value) {},
-              initialValue: true,
-              leading: const Icon(Icons.format_paint),
-              title: const Text('Enable custom theme'),
+              title: Text('hello'.tr),
             ),
           ],
         ),
