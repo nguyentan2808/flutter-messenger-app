@@ -22,4 +22,13 @@ class ThemeService {
       !_loadFromStorage(),
     );
   }
+
+  void switchToSystem() {
+    Get.changeThemeMode(ThemeMode.system);
+    if (ThemeMode.system == ThemeMode.dark) {
+      _saveToStorage(true);
+    } else {
+      _saveToStorage(false);
+    }
+  }
 }
