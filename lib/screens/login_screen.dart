@@ -18,9 +18,9 @@ class LoginScreen extends StatelessWidget {
       );
     }
 
-    return SafeArea(
-      child: Scaffold(
-        body: ListView(
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
           children: [
             SizedBox(
               height: size.height * 0.4,
