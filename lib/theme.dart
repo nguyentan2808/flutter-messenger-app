@@ -6,9 +6,9 @@ ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
     primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: appBarTheme,
+    appBarTheme: const AppBarTheme(elevation: 0),
     iconTheme: const IconThemeData(color: kContentColorLightTheme),
-    textTheme: GoogleFonts.outfitTextTheme(Theme.of(context).textTheme)
+    textTheme: GoogleFonts.sourceSansProTextTheme(Theme.of(context).textTheme)
         .apply(bodyColor: kContentColorLightTheme),
     colorScheme: const ColorScheme.light(
       primary: kPrimaryColor,
@@ -22,9 +22,10 @@ ThemeData darkThemeData(BuildContext context) {
   return ThemeData.dark().copyWith(
     primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: kContentColorLightTheme,
-    appBarTheme: appBarTheme,
+    appBarTheme:
+        const AppBarTheme(color: kContentColorLightTheme, elevation: 0),
     iconTheme: const IconThemeData(color: kContentColorDarkTheme),
-    textTheme: GoogleFonts.outfitTextTheme(Theme.of(context).textTheme)
+    textTheme: GoogleFonts.sourceSansProTextTheme(Theme.of(context).textTheme)
         .apply(bodyColor: kContentColorDarkTheme),
     colorScheme: const ColorScheme.dark().copyWith(
       primary: kPrimaryColor,
@@ -33,5 +34,3 @@ ThemeData darkThemeData(BuildContext context) {
     ),
   );
 }
-
-const appBarTheme = AppBarTheme(centerTitle: false, elevation: 0);
