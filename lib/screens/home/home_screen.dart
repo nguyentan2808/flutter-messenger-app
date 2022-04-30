@@ -38,7 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 vertical: kDefaultPadding / 2,
               ),
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                radius: 18,
+                backgroundImage: AssetImage(
+                  'assets/images/avatar.jpg',
+                ),
               ),
             ),
             SizedBox(width: kDefaultPadding),

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:lab6/constant.dart';
 import 'package:lab6/services/theme_service.dart';
 
-class DarkModeScreen extends StatefulWidget {
-  const DarkModeScreen({Key? key}) : super(key: key);
+class ThemeModeScreen extends StatefulWidget {
+  const ThemeModeScreen({Key? key}) : super(key: key);
 
   @override
-  State<DarkModeScreen> createState() => _DarkModeScreenState();
+  State<ThemeModeScreen> createState() => _ThemeModeScreenState();
 }
 
-class _DarkModeScreenState extends State<DarkModeScreen> {
+class _ThemeModeScreenState extends State<ThemeModeScreen> {
   late String _mode;
 
   @override
