@@ -2,7 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/screens/login_screen.dart';
+import 'package:lab6/screens/splash/splash.dart';
 import 'package:lab6/services/theme_service.dart';
 import 'package:lab6/theme.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         darkTheme: darkThemeData(context),
         title: 'Telegram',
         builder: DevicePreview.appBuilder,
-        home: const LoginScreen(),
+        home: const SplashScreen(),
         translations: I18nService(),
         locale: I18nService().locale,
         fallbackLocale: I18nService.fallbackLocale,

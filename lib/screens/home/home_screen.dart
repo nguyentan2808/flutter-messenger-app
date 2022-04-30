@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab6/constant.dart';
 
-import '../Setting/setting_screen.dart';
+import '../setting/setting_screen.dart';
 import '../conversations/conversations.dart';
 import 'components/bottom_navigation.dart';
 

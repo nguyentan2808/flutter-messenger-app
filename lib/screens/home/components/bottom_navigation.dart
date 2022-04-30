@@ -11,8 +11,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      // showUnselectedLabels: false,
+      selectedFontSize: 12,
       selectedItemColor: Theme.of(context).primaryColor,
       currentIndex: selectedIndex,
       onTap: handleChangeIndex,
