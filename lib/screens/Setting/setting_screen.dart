@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lab6/constant.dart';
+import '../account/account_screen.dart';
 import 'data/settings_data.dart';
 import 'models/item_model.dart';
 
@@ -33,43 +34,50 @@ class AccountPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              CircleAvatar(
-                backgroundImage: const AssetImage('assets/images/avatar.jpg'),
-                radius: Get.width * 1 / 8,
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    child: const Icon(
-                      Icons.camera_alt_rounded,
-                      size: 20,
-                    ),
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey[300],
+    return GestureDetector(
+      onTap: () => Get.to(
+        () => const AccountScreen(),
+        transition: Transition.cupertinoDialog,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                CircleAvatar(
+                  backgroundImage: const AssetImage('assets/images/avatar.jpg'),
+                  radius: Get.width * 1 / 8,
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      child: const Icon(
+                        Icons.camera_alt_rounded,
+                        size: 20,
+                        color: Colors.black,
+                      ),
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey[300],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: kDefaultPadding / 2),
-          Text(
-            name,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-          )
-        ],
+              ],
+            ),
+            const SizedBox(height: kDefaultPadding / 2),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+            )
+          ],
+        ),
       ),
     );
   }

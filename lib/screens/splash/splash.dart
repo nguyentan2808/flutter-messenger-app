@@ -47,15 +47,18 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: Get.width / 4,
                   ),
                   const SizedBox(
-                    height: kDefaultPadding * 1,
+                    height: kDefaultPadding * 3,
                   ),
                   // SizedBox(
-                  //   height: 30,
-                  //   width: 30,
+                  //   height: 3,
+                  //   width: Get.width / 4,
                   //   child: isLoading
-                  //       ? const CircularProgressIndicator(
-                  //           strokeWidth: 3,
-                  //           color: Colors.blue,
+                  //       ? LinearProgressIndicator(
+                  //           valueColor: const AlwaysStoppedAnimation<Color>(
+                  //               Colors.blue),
+                  //           backgroundColor: Colors.blue[200],
+                  //           // valueColor: const AlwaysStoppedAnimation<Color>(
+                  //           //     Colors.green),
                   //         )
                   //       : null,
                   // )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../account/account_screen.dart';
 import '../models/item_model.dart';
 import '../components/theme_mode_screen.dart';
 import '../components/language_screen.dart';
@@ -37,7 +38,12 @@ List<ItemModel> listAppSettings = [
     title: 'Account',
     subTitle: 'Privacy, terms, security',
     isNavigation: false,
-    handleClick: () {},
+    handleClick: () {
+      Get.to(
+        () => const AccountScreen(),
+        transition: Transition.rightToLeft,
+      );
+    },
   ),
 ];
 

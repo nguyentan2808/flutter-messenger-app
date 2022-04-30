@@ -30,11 +30,18 @@ class FaceBookButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: 20, color: color),
-          const SizedBox(width: kDefaultPadding / 2),
-          Text(
-            text,
-            style: TextStyle(fontWeight: FontWeight.w600, color: color),
-          ),
+          text != ""
+              ? Row(
+                  children: [
+                    const SizedBox(width: kDefaultPadding / 2),
+                    Text(
+                      text,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, color: color),
+                    ),
+                  ],
+                )
+              : Container(),
         ],
       ),
     );
