@@ -35,6 +35,16 @@ class I18nService extends Translations {
     _saveToStorage(lang);
   }
 
+  void syncToSystem() {
+    String? systemLanguageCode = Get.deviceLocale?.languageCode;
+
+    if (systemLanguageCode != null) {
+      changeLocale(systemLanguageCode);
+    }
+
+    debugPrint("Set to: $systemLanguageCode");
+  }
+
   @override
   Map<String, Map<String, String>> get keys => {
         'vi_VN': vi,

@@ -70,11 +70,17 @@ class _DarkModeScreenState extends State<DarkModeScreen> {
             ),
             onTap: () => handleChangeMode('system'),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: Text(
               "If system is selected, the app will automatically adjust your appearance based on your device's system settings.",
-              style: TextStyle(color: Colors.black54, fontSize: 12),
+              style: TextStyle(
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      ?.color
+                      ?.withOpacity(0.6),
+                  fontSize: 12),
             ),
           ),
         ],

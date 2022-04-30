@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab6/constant.dart';
 
 import '../../../components/filled_outline_button.dart';
 
@@ -10,8 +11,9 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
-      color: Theme.of(context).primaryColor,
+      padding: const EdgeInsets.symmetric(
+          horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Row(children: [
         FillOutlineButton(press: () {}, text: "Recent Message"),
         const SizedBox(width: 8),

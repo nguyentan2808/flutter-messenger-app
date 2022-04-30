@@ -12,7 +12,7 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      showUnselectedLabels: false,
+      // showUnselectedLabels: false,
       selectedItemColor: Theme.of(context).primaryColor,
       currentIndex: selectedIndex,
       onTap: handleChangeIndex,
@@ -25,10 +25,10 @@ class BottomNavigation extends StatelessWidget {
           icon: Icon(Icons.people_alt),
           label: 'Friends',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.collections),
-          label: 'Story',
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.collections),
+        //   label: 'Story',
+        // ),
         BottomNavigationBarItem(
           icon: CircleAvatar(
             radius: 13,

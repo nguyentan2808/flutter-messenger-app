@@ -149,6 +149,8 @@ import 'package:get/get.dart';
 import 'package:lab6/constant.dart';
 import 'package:lab6/screens/Setting/dark_mode.dart';
 
+import 'language_screen.dart';
+
 class ItemModel {
   IconData icon;
   Color iconColor;
@@ -174,7 +176,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  List<ItemModel> listAccountSettings = [
+  List<ItemModel> listAppSettings = [
     ItemModel(
       icon: Icons.dark_mode,
       iconColor: Colors.black,
@@ -189,19 +191,24 @@ class _SettingScreenState extends State<SettingScreen> {
       },
     ),
     ItemModel(
+      icon: Icons.translate,
+      iconColor: Colors.indigo,
+      title: 'Languages',
+      subTitle: 'Change app language',
+      isNavigation: false,
+      handleClick: () {
+        Get.to(
+          () => const LanguagesScreen(),
+          transition: Transition.rightToLeft,
+        );
+      },
+    ),
+    ItemModel(
       icon: Icons.person,
       iconColor: Colors.cyan,
       title: 'Account',
-      subTitle: 'Privacy, terms, security.',
+      subTitle: 'Privacy, terms, security',
       isNavigation: false,
-      handleClick: () {},
-    ),
-    ItemModel(
-      icon: Icons.settings,
-      iconColor: Colors.amber,
-      title: 'Settings',
-      subTitle: 'App settings',
-      isNavigation: true,
       handleClick: () {},
     ),
   ];
@@ -260,7 +267,7 @@ class _SettingScreenState extends State<SettingScreen> {
     ),
     ItemModel(
       icon: Icons.exit_to_app,
-      iconColor: Colors.purple,
+      iconColor: Colors.grey,
       title: 'Logout',
       subTitle: 'Exit your account',
       isNavigation: false,
@@ -270,17 +277,61 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> accounts =
-        listAccountSettings.map((item) => SettingRow(item: item)).toList();
-
     return SingleChildScrollView(
       child: Column(
         children: [
-          SettingSection(title: "Accounts", list: listAccountSettings),
+          const AccountPreview(),
+          SettingSection(title: "Apps", list: listAppSettings),
           SettingSection(title: "Preference", list: listPreferenceSettings),
           SettingSection(title: "Other", list: listOthersSettings),
-          // ...accounts,
-          // ...accounts
+        ],
+      ),
+    );
+  }
+}
+
+class AccountPreview extends StatelessWidget {
+  const AccountPreview({Key? key}) : super(key: key);
+  final name = "Nguyễn Tân";
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultPadding),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              CircleAvatar(
+                backgroundImage: const AssetImage('assets/images/avatar.jpg'),
+                radius: Get.width * 1 / 8,
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    child: const Icon(
+                      Icons.camera_alt_rounded,
+                      size: 20,
+                    ),
+                    height: 30,
+                    width: 30,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey[300],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: kDefaultPadding / 2),
+          Text(
+            name,
+            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+          )
         ],
       ),
     );
@@ -327,14 +378,14 @@ class SettingRow extends StatelessWidget {
     return ListTile(
       visualDensity: const VisualDensity(vertical: -2),
       leading: Container(
-        padding: const EdgeInsets.all(kDefaultPadding / 2),
+        padding: const EdgeInsets.all(kDefaultPadding / 2 + 1),
         decoration: BoxDecoration(
             color: item.iconColor,
             borderRadius: const BorderRadius.all(Radius.circular(100))),
         child: Icon(
           item.icon,
           color: Colors.white,
-          size: 24,
+          size: 22,
         ),
       ),
       trailing: const Icon(Icons.navigate_next),
