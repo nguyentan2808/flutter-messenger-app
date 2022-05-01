@@ -69,13 +69,16 @@ class _InputFieldState extends State<InputField> {
 
   Widget buildActions() {
     if (isTyping) {
-      return IconButton(
-        onPressed: inputFocus.unfocus,
-        icon: const Icon(
-          Icons.arrow_back_ios_new,
-          size: 18,
+      return GestureDetector(
+        onTap: inputFocus.unfocus,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            size: 16,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
-        color: Theme.of(context).primaryColor,
       );
     } else {
       return Row(

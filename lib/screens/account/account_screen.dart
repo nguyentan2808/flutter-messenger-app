@@ -26,7 +26,7 @@ class _AccountScreenState extends State<AccountScreen> {
     status: 'Deadline season is coming',
   );
 
-  bool isMe = false;
+  bool isMe = true;
 
   @override
   Widget build(BuildContext context) {
@@ -34,32 +34,34 @@ class _AccountScreenState extends State<AccountScreen> {
       appBar: AppBar(
         title: Text(user.name),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(kDefaultPadding * 2 / 3),
-          child: Column(
-            children: [
-              // AccountPreview(),
-              AccountImages(
-                user: user,
-              ),
-              AccountActions(
-                user: user,
-                isMe: isMe,
-              ),
-              Divider(
-                color: Colors.grey[400],
-              ),
-              AccountDetail(
-                user: user,
-              ),
-              Divider(
-                color: Colors.grey[400],
-              ),
-              AccountFriends(
-                user: user,
-              )
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding * 2 / 3),
+            child: Column(
+              children: [
+                // AccountPreview(),
+                AccountImages(
+                  user: user,
+                ),
+                AccountActions(
+                  user: user,
+                  isMe: isMe,
+                ),
+                Divider(
+                  color: Colors.grey[400],
+                ),
+                AccountDetail(
+                  user: user,
+                ),
+                Divider(
+                  color: Colors.grey[400],
+                ),
+                AccountFriends(
+                  user: user,
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -47,7 +47,7 @@ class AccountImages extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(100.0)),
                   border: Border.all(
                     color: Colors.white,
-                    width: 2.0,
+                    width: 3.0,
                   ),
                 ),
               ),

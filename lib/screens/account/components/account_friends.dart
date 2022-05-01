@@ -27,7 +27,7 @@ class AccountFriends extends StatelessWidget {
                   ),
                   Text(
                     "479 friends",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 14),
                   )
                 ],
               ),
@@ -49,7 +49,7 @@ class AccountFriends extends StatelessWidget {
           mainAxisSpacing: kDefaultPadding / 2 + 2,
           crossAxisCount: 3,
           childAspectRatio: (0.9),
-
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

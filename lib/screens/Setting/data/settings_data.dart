@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../account/account_screen.dart';
+import '../../change_password/change_password.dart';
 import '../models/item_model.dart';
 import '../components/theme_mode_screen.dart';
 import '../components/language_screen.dart';
@@ -34,9 +35,9 @@ List<ItemModel> listAppSettings = [
   ),
   ItemModel(
     icon: Icons.person,
-    iconColor: Colors.cyan,
+    iconColor: Colors.green,
     title: 'Account',
-    subTitle: 'Privacy, terms, security',
+    subTitle: 'User information settings',
     isNavigation: false,
     handleClick: () {
       Get.to(
@@ -98,6 +99,19 @@ List<ItemModel> listOthersSettings = [
     subTitle: 'Send us a report',
     isNavigation: false,
     handleClick: () {},
+  ),
+  ItemModel(
+    icon: Icons.warning,
+    iconColor: Colors.indigo,
+    title: 'Change password',
+    subTitle: 'Lorem ipsum dolor sit amet',
+    isNavigation: false,
+    handleClick: () {
+      Get.to(
+        () => ChangePasswordScreen(),
+        transition: Transition.rightToLeft,
+      );
+    },
   ),
   ItemModel(
     icon: Icons.exit_to_app,

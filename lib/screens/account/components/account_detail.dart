@@ -16,7 +16,7 @@ class AccountDetail extends StatelessWidget {
         children: [
           DetailRow(
             title: 'User name',
-            content: user.username,
+            content: "@" + user.username,
             icon: Icons.person,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),

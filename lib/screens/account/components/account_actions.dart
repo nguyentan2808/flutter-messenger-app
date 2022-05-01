@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../components/facebook_button.dart';
 import '../../../constant.dart';
 import '../../../models/user_model.dart';
+import '../../edit_profile/edit_profile_screen.dart';
 
 class AccountActions extends StatelessWidget {
   const AccountActions({Key? key, required this.user, required this.isMe})
@@ -31,31 +33,49 @@ class AccountActions extends StatelessWidget {
             Expanded(
               flex: 20,
               child: isMe
-                  ? const FaceBookButton(
+                  ? FaceBookButton(
                       text: "Edit profile",
                       icon: Icons.edit_rounded,
-                      isActive: true)
+                      isActive: true,
+                      onPressed: () {
+                        Get.to(
+                          () => EditProfileScreen(),
+                          arguments: user,
+                          transition: Transition.cupertinoDialog,
+                        );
+                      },
+                    )
                   : Row(
-                      children: const [
+                      children: [
                         Expanded(
-                            child: FaceBookButton(
-                                text: "Thêm bạn bè",
-                                icon: Icons.person_add,
-                                isActive: true)),
-                        SizedBox(width: kDefaultPadding / 2),
+                          child: FaceBookButton(
+                            text: "Thêm bạn bè",
+                            icon: Icons.person_add,
+                            isActive: true,
+                            onPressed: () {},
+                          ),
+                        ),
+                        const SizedBox(width: kDefaultPadding / 2),
                         Expanded(
-                            child: FaceBookButton(
-                                text: "Nhắn tin",
-                                icon: Icons.send,
-                                isActive: false))
+                          child: FaceBookButton(
+                            text: "Nhắn tin",
+                            icon: Icons.send,
+                            isActive: false,
+                            onPressed: () {},
+                          ),
+                        )
                       ],
                     ),
             ),
             const SizedBox(width: kDefaultPadding / 2),
-            const Expanded(
+            Expanded(
               flex: 3,
               child: FaceBookButton(
-                  text: "", icon: Icons.more_horiz, isActive: false),
+                text: "",
+                icon: Icons.more_horiz,
+                isActive: false,
+                onPressed: () {},
+              ),
             ),
           ],
         )
