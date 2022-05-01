@@ -101,14 +101,14 @@ List<ItemModel> listOthersSettings = [
     handleClick: () {},
   ),
   ItemModel(
-    icon: Icons.warning,
+    icon: Icons.password,
     iconColor: Colors.indigo,
     title: 'Change password',
     subTitle: 'Lorem ipsum dolor sit amet',
     isNavigation: false,
     handleClick: () {
       Get.to(
-        () => ChangePasswordScreen(),
+        () => const ChangePasswordScreen(),
         transition: Transition.rightToLeft,
       );
     },
