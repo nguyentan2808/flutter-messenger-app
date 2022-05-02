@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../constant.dart';
 import 'home/home_screen.dart';
+import 'sign_up/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -93,6 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           GestureDetector(
+            onTap: () {
+              Get.to(
+                () => const SignUpScreen(),
+                transition: Transition.rightToLeft,
+              );
+            },
             child: Text(
               ' Sign Up',
               style: TextStyle(
@@ -145,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  ElevatedButton buildLoginButton(Size size, void _handleLogin()) {
+  ElevatedButton buildLoginButton(Size size, void Function() _handleLogin) {
     return ElevatedButton(
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
@@ -161,8 +168,6 @@ class _LoginScreenState extends State<LoginScreen> {
       child: const Text(
         "Login",
         style: TextStyle(color: Colors.white),
-        // style: TextStyle(
-        //     color: Theme.of(context).textTheme.bodyText1?.color),
       ),
     );
   }
@@ -243,8 +248,6 @@ class _LoginScreenState extends State<LoginScreen> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100.0),
         ),
-        // fillColor: Colors.red,
-
         contentPadding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
         hintStyle: const TextStyle(fontSize: 16),

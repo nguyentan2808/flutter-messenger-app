@@ -1,74 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lab6/components/facebook_button.dart';
 
+import '../../components/facebook_button.dart';
 import '../../constant.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
 
+  void _confirmGoBack() => Get.dialog(
+        AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(kDefaultRadius / 2),
+          ),
+          title: const Text('Go back'),
+          content: const Text('Your changes will be lost, are you sure?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Get.back(),
+            ),
+            TextButton(
+              child: const Text('Back'),
+              onPressed: () {
+                Get.back();
+                Get.back();
+              },
+            ),
+          ],
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Change Password'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(kDefaultPadding),
-          child: Column(
-            children: [
-              SizedBox(
-                height: Get.height * 0.35,
-                child: Padding(
-                  padding: const EdgeInsets.all(kDefaultPadding * 1.5),
-                  child: SvgPicture.asset(
-                    'assets/images/edit_password_svg.svg',
-                    alignment: Alignment.topCenter,
+    return WillPopScope(
+      onWillPop: () async {
+        _confirmGoBack();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Change Password'),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * 0.35,
+                  child: Padding(
+                    padding: const EdgeInsets.all(kDefaultPadding * 1.5),
+                    child: SvgPicture.asset(
+                      'assets/images/change.svg',
+                      alignment: Alignment.topCenter,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: kDefaultPadding,
-              ),
-              const EditRow(
-                name: 'Password',
-                defaultValue: "123456789",
-              ),
-              const EditRow(
-                name: 'New password',
-                defaultValue: "123456789",
-              ),
-              const EditRow(
-                name: 'Confirm password',
-                defaultValue: "123456789",
-              ),
-              const SizedBox(
-                height: kDefaultPadding,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  FaceBookButton(
-                    text: "Cancel",
-                    icon: Icons.cancel,
-                    isActive: false,
-                    onPressed: () {},
-                  ),
-                  const SizedBox(
-                    width: kDefaultPadding / 2,
-                  ),
-                  FaceBookButton(
-                    text: "Save",
-                    icon: Icons.save,
-                    isActive: true,
-                    onPressed: () {},
-                  ),
-                ],
-              )
-            ],
+                const SizedBox(
+                  height: kDefaultPadding,
+                ),
+                const EditRow(
+                  name: 'Password',
+                  defaultValue: "123456789",
+                ),
+                const EditRow(
+                  name: 'New password',
+                  defaultValue: "123456789",
+                ),
+                const EditRow(
+                  name: 'Confirm password',
+                  defaultValue: "123456789",
+                ),
+                const SizedBox(
+                  height: kDefaultPadding,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    FaceBookButton(
+                      text: "Cancel",
+                      icon: Icons.cancel,
+                      isActive: false,
+                      onPressed: _confirmGoBack,
+                    ),
+                    const SizedBox(
+                      width: kDefaultPadding / 2,
+                    ),
+                    FaceBookButton(
+                      text: "Save",
+                      icon: Icons.save,
+                      isActive: true,
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
