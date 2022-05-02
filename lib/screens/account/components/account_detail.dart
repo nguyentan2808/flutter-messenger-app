@@ -69,7 +69,11 @@ class DetailRow extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: Theme.of(context).primaryColor),
+            Icon(
+              icon,
+              color: Colors.grey.withOpacity(0.8),
+              size: 22,
+            ),
             const SizedBox(width: kDefaultPadding / 2),
             Text(
               title,

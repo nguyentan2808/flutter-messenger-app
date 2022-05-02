@@ -92,11 +92,13 @@ class _LoginScreenState extends State<LoginScreen> {
               textAlign: TextAlign.center,
             ),
           ),
-          Text(
-            ' Sign Up',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: 13,
+          GestureDetector(
+            child: Text(
+              ' Sign Up',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 13,
+              ),
             ),
           )
         ],

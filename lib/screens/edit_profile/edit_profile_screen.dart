@@ -11,6 +11,26 @@ class EditProfileScreen extends StatelessWidget {
 
   final UserModel user = Get.arguments;
 
+  void _confirmGoBack() => Get.dialog(
+        AlertDialog(
+          title: const Text('Go back'),
+          content: const Text('Your changes will be lost, are you sure?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Get.back(),
+            ),
+            TextButton(
+              child: const Text('Back'),
+              onPressed: () {
+                Get.back();
+                Get.back();
+              },
+            ),
+          ],
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +86,7 @@ class EditProfileScreen extends StatelessWidget {
                     text: "Cancel",
                     icon: Icons.cancel,
                     isActive: false,
-                    onPressed: () {},
+                    onPressed: _confirmGoBack,
                   ),
                   const SizedBox(
                     width: kDefaultPadding / 2,
