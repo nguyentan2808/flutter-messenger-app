@@ -22,19 +22,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: false,
-      builder: (context) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        useInheritedMediaQuery: true,
-        themeMode: ThemeService().theme,
-        theme: lightThemeData(context),
-        darkTheme: darkThemeData(context),
-        title: 'Telegram',
-        builder: DevicePreview.appBuilder,
-        home: const SplashScreen(),
-        translations: I18nService(),
-        locale: I18nService().locale,
-        fallbackLocale: I18nService.fallbackLocale,
+      enabled: true,
+      builder: (context) => GestureDetector(
+        onTap: () {
+          FocusScopeNode focus = FocusScope.of(context);
+          if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+            FocusManager.instance.primaryFocus!.unfocus();
+          }
+        },
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          useInheritedMediaQuery: true,
+          themeMode: ThemeService().theme,
+          theme: lightThemeData(context),
+          darkTheme: darkThemeData(context),
+          title: 'Telegram',
+          builder: DevicePreview.appBuilder,
+          home: const SplashScreen(),
+          translations: I18nService(),
+          locale: I18nService().locale,
+          fallbackLocale: I18nService.fallbackLocale,
+        ),
       ),
     );
   }
