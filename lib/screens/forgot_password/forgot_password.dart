@@ -144,7 +144,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   }
 
   TextFormField buildTextField(BuildContext context) {
-    String? validator(String? value) {
+    String? _validator(String? value) {
       if (value == null || value.isEmpty) {
         return 'Please enter your phone number';
       } else if (value.length < 8 || value.length > 15) {
@@ -155,7 +155,7 @@ class ForgotPasswordScreen extends StatelessWidget {
 
     return TextFormField(
       controller: _controller,
-      validator: validator,
+      validator: _validator,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
       textInputAction: TextInputAction.done,
       keyboardType: TextInputType.phone,
