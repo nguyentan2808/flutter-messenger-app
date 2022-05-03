@@ -36,81 +36,78 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: WillPopScope(
-        onWillPop: () async {
-          _confirmGoBack();
-          return false;
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Edit Profile'),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: Get.height * 0.35,
-                    child: Padding(
-                      padding: const EdgeInsets.all(kDefaultPadding * 1.5),
-                      child: SvgPicture.asset(
-                        'assets/images/edit_profile_svg.svg',
-                        alignment: Alignment.topCenter,
-                      ),
+    return WillPopScope(
+      onWillPop: () async {
+        _confirmGoBack();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Edit Profile'),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Get.height * 0.35,
+                  child: Padding(
+                    padding: const EdgeInsets.all(kDefaultPadding * 1.5),
+                    child: SvgPicture.asset(
+                      'assets/images/edit_profile_svg.svg',
+                      alignment: Alignment.topCenter,
                     ),
                   ),
-                  const SizedBox(
-                    height: kDefaultPadding,
-                  ),
-                  EditRow(
-                    name: 'Name',
-                    defaultValue: user.name,
-                    type: TextInputType.text,
-                  ),
-                  EditRow(
-                    name: 'Email',
-                    defaultValue: user.email,
-                    type: TextInputType.emailAddress,
-                  ),
-                  EditRow(
-                    name: 'Phone',
-                    defaultValue: user.phone,
-                    type: TextInputType.number,
-                  ),
-                  EditRow(
-                    name: 'Status',
-                    defaultValue: user.status,
-                    type: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: kDefaultPadding,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      FaceBookButton(
-                        text: "Cancel",
-                        icon: Icons.cancel,
-                        isActive: false,
-                        onPressed: _confirmGoBack,
-                      ),
-                      const SizedBox(
-                        width: kDefaultPadding / 2,
-                      ),
-                      FaceBookButton(
-                        text: "Save",
-                        icon: Icons.save,
-                        isActive: true,
-                        onPressed: () {},
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: kDefaultPadding,
+                ),
+                EditRow(
+                  name: 'Name',
+                  defaultValue: user.name,
+                  type: TextInputType.text,
+                ),
+                EditRow(
+                  name: 'Email',
+                  defaultValue: user.email,
+                  type: TextInputType.emailAddress,
+                ),
+                EditRow(
+                  name: 'Phone',
+                  defaultValue: user.phone,
+                  type: TextInputType.number,
+                ),
+                EditRow(
+                  name: 'Status',
+                  defaultValue: user.status,
+                  type: TextInputType.text,
+                ),
+                const SizedBox(
+                  height: kDefaultPadding,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    FaceBookButton(
+                      text: "Cancel",
+                      icon: Icons.cancel,
+                      isActive: false,
+                      onPressed: _confirmGoBack,
+                    ),
+                    const SizedBox(
+                      width: kDefaultPadding / 2,
+                    ),
+                    FaceBookButton(
+                      text: "Save",
+                      icon: Icons.save,
+                      isActive: true,
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ),

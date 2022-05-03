@@ -198,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
             )),
         GestureDetector(
           onTap: () => Get.to(
-            () => const ForgotPasswordScreen(),
+            () => ForgotPasswordScreen(),
             transition: Transition.downToUp,
           ),
           child: const Text(

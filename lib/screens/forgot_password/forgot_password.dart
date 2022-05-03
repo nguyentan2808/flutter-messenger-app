@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../constant.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  ForgotPasswordScreen({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +25,23 @@ class ForgotPasswordScreen extends StatelessWidget {
           child: Column(
             children: [
               buildLogo(),
-              const SizedBox(height: kDefaultPadding * 2),
+              const SizedBox(height: kDefaultPadding * 2.5),
               SizedBox(
                 width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    buildTitle(),
-                    const SizedBox(height: kDefaultPadding * 2),
-                    buildTextField(context),
-                    const SizedBox(height: kDefaultPadding * 2),
-                    buildSubmitButton(context),
-                    const SizedBox(height: kDefaultPadding * 2),
-                    buildGoBack(context)
-                  ],
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildTitle(),
+                      const SizedBox(height: kDefaultPadding * 2.5),
+                      buildTextField(context),
+                      const SizedBox(height: kDefaultPadding * 2.5),
+                      buildSubmitButton(context),
+                      const SizedBox(height: kDefaultPadding * 2.5),
+                      buildGoBack(context)
+                    ],
+                  ),
                 ),
               )
             ],
@@ -84,7 +91,12 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   MaterialButton buildSubmitButton(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          Get.snackbar("Forgot password",
+              "Email sent successfully to ${_controller.text}");
+        }
+      },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
@@ -93,23 +105,19 @@ class ForgotPasswordScreen extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.refresh_outlined,
+        children: const [
+          Icon(
+            Icons.search,
             size: 20,
             color: Colors.white,
           ),
-          Row(
-            children: const [
-              SizedBox(width: kDefaultPadding / 2),
-              Text(
-                "Submit",
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+          SizedBox(width: kDefaultPadding / 2),
+          Text(
+            "Submit",
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
           )
         ],
       ),
@@ -118,23 +126,39 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   Column buildTitle() {
     return Column(
-      children: const [
-        Text(
+      children: [
+        const Text(
           "Forgot Password",
           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: kDefaultPadding / 2),
-        Text(
-          "Don't worry, It happens. Please enter your email or phone number to reset your password.",
-          textAlign: TextAlign.center,
+        const SizedBox(height: kDefaultPadding / 2),
+        SizedBox(
+          width: Get.width * 0.75,
+          child: const Text(
+            "Enter your email to reset your password, we will send you a link to reset your password",
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );
   }
 
-  TextField buildTextField(BuildContext context) {
-    return TextField(
-      textInputAction: TextInputAction.next,
+  TextFormField buildTextField(BuildContext context) {
+    String? validator(String? value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your phone number';
+      } else if (value.length < 8 || value.length > 15) {
+        return 'Please enter a valid phone number';
+      }
+      return null;
+    }
+
+    return TextFormField(
+      controller: _controller,
+      validator: validator,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
+      textInputAction: TextInputAction.done,
+      keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         labelText: 'Phone Number',
         floatingLabelBehavior: FloatingLabelBehavior.always,
