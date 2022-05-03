@@ -7,11 +7,13 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        MessageDisplay(),
-        InputField(),
-      ],
+    return SafeArea(
+      child: Column(
+        children: const [
+          MessageDisplay(),
+          InputField(),
+        ],
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lab6/screens/forgot_password/forgot_password.dart';
 
 import '../constant.dart';
 import 'home/home_screen.dart';
@@ -94,12 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              Get.to(
-                () => const SignUpScreen(),
-                transition: Transition.rightToLeft,
-              );
-            },
+            onTap: () => Get.to(
+              () => const SignUpScreen(),
+              transition: Transition.downToUp,
+            ),
             child: Text(
               ' Sign Up',
               style: TextStyle(
@@ -197,9 +196,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             )),
-        const Text(
-          "Forgot Password?",
-          style: TextStyle(decoration: TextDecoration.underline),
+        GestureDetector(
+          onTap: () => Get.to(
+            () => const ForgotPasswordScreen(),
+            transition: Transition.downToUp,
+          ),
+          child: const Text(
+            "Forgot Password?",
+            style: TextStyle(decoration: TextDecoration.underline),
+          ),
         ),
       ],
     );

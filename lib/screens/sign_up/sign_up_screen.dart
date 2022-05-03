@@ -15,8 +15,8 @@ class SignUpScreen extends StatelessWidget {
           title: const Text(
             'Sign Up',
           ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          foregroundColor: Theme.of(context).textTheme.bodyText1?.color,
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -25,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  'Sign Up - Profile',
+                  'Complete Profile',
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(
                   width: Get.width * 0.6,
                   child: const Text(
-                    "Complete your profile to get started with modern chat app.",
+                    "Complete your profile to get started with modern chat app.🚀",
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
                 buildSignUpButton(context),
                 const SizedBox(height: kDefaultPadding * 2.5),
                 Opacity(
-                  opacity: 0.6,
+                  opacity: 0.8,
                   child: SizedBox(
                     width: Get.width * 0.8,
                     child: const Text(

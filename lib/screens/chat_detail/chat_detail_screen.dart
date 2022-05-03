@@ -48,13 +48,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             primary: widget.themeList[themeIndex],
             secondary: widget.themeList[themeIndex]),
       ),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: ChatDetailAppBar(
-            handleChangeTheme: handleChangeTheme,
-          ),
-          body: const Body(),
+      child: Scaffold(
+        appBar: ChatDetailAppBar(
+          handleChangeTheme: handleChangeTheme,
         ),
+        body: const Body(),
       ),
     );
   }
