@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/constant.dart';
 
+import '../friends/friends_screen.dart';
 import '../setting/setting_screen.dart';
-import '../conversations/conversations.dart';
+import '../conversations/conversations_screen.dart';
 import 'components/bottom_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
   final List<Widget> tabs = [
-    Conversations(),
-    const S2(),
+    const Conversations(),
+    const FriendsScreen(),
     const SettingScreen()
   ];
 
@@ -29,28 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: kDefaultPadding / 2,
-              ),
-              child: CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage(
-                  'assets/images/avatar.jpg',
-                ),
-              ),
-            ),
-            SizedBox(width: kDefaultPadding),
-            Text('Chats'),
-          ],
-        ),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
-      ),
-      body: SafeArea(child: widget.tabs[selectedIndex]),
+      body: widget.tabs[selectedIndex],
       bottomNavigationBar: BottomNavigation(
         handleChangeIndex: handleChangeIndex,
         selectedIndex: selectedIndex,
