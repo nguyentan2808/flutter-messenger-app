@@ -15,7 +15,7 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  UserModel user = UserModel(
+  UserModel user = UserModel.fromMock(
     id: "1",
     username: "nguyentan2808",
     name: "Nguyen Tan",
@@ -32,7 +32,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(user.name),
+        title: Text(user.name as String),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

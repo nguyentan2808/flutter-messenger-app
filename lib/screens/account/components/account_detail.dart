@@ -40,7 +40,7 @@ class AccountDetail extends StatelessWidget {
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
             title: 'Status',
-            content: user.status,
+            content: user.status ?? "",
             icon: Icons.edit,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),

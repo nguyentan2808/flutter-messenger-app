@@ -10,7 +10,7 @@ class FriendsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -22,9 +22,7 @@ class FriendsScreen extends StatelessWidget {
                 ),
                 child: CircleAvatar(
                   radius: 18,
-                  backgroundImage: AssetImage(
-                    'assets/images/avatar.jpg',
-                  ),
+                  backgroundImage: AssetImage('assets/images/avatar.jpg'),
                 ),
               ),
               SizedBox(width: kDefaultPadding),
@@ -32,7 +30,8 @@ class FriendsScreen extends StatelessWidget {
             ],
           ),
           bottom: TabBar(
-            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding:
+                const EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
             indicator: MD2Indicator(
               indicatorHeight: 5,
               indicatorColor: Get.isDarkMode
@@ -41,15 +40,13 @@ class FriendsScreen extends StatelessWidget {
               indicatorSize: MD2IndicatorSize.normal,
             ),
             tabs: const [
-              Tab(text: "Online Users"),
-              Tab(text: "Friend"),
-              Tab(text: "All people"),
+              Tab(text: "Friends"),
+              Tab(text: "People"),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            Icon(Icons.directions_car),
             Icon(Icons.directions_transit),
             Icon(Icons.directions_bike),
           ],
