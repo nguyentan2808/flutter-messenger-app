@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => GestureDetector(
         onTap: () {
           FocusScopeNode focus = FocusScope.of(context);
