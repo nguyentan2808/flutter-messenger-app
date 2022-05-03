@@ -18,7 +18,8 @@ class OnboardingScreen extends StatelessWidget {
       pages: pages.map((page) => buildPageView(page)).toList(),
       onDone: () {
         GetStorage().write("isOnboardingDone", true);
-        Get.offAll(() => const LoginScreen(), transition: Transition.downToUp);
+        Get.offAll(() => const LoginScreen(),
+            transition: Transition.rightToLeftWithFade);
       },
       showBackButton: true,
       back: const Icon(Icons.arrow_back_sharp),

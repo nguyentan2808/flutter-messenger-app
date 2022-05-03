@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
           GestureDetector(
             onTap: () => Get.to(
               () => const SignUpScreen(),
-              transition: Transition.downToUp,
+              transition: Transition.rightToLeftWithFade,
             ),
             child: Text(
               ' Sign Up',
@@ -209,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
         GestureDetector(
           onTap: () => Get.to(
             () => ForgotPasswordScreen(),
-            transition: Transition.downToUp,
+            transition: Transition.rightToLeftWithFade,
           ),
           child: const Text(
             "Forgot Password?",

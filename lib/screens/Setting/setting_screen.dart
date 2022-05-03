@@ -15,14 +15,37 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const AccountPreview(),
-          SettingSection(title: "Apps", list: listAppSettings),
-          SettingSection(title: "Preference", list: listPreferenceSettings),
-          SettingSection(title: "Other", list: listOthersSettings),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: const [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: kDefaultPadding / 2,
+              ),
+              child: CircleAvatar(
+                radius: 18,
+                backgroundImage: AssetImage(
+                  'assets/images/avatar.jpg',
+                ),
+              ),
+            ),
+            SizedBox(width: kDefaultPadding),
+            Text('Settings'),
+          ],
+        ),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const AccountPreview(),
+            SettingSection(title: "Apps", list: listAppSettings),
+            SettingSection(title: "Preference", list: listPreferenceSettings),
+            SettingSection(title: "Other", list: listOthersSettings),
+          ],
+        ),
       ),
     );
   }

@@ -16,7 +16,7 @@ List<ItemModel> listAppSettings = [
     handleClick: () {
       Get.to(
         () => const ThemeModeScreen(),
-        transition: Transition.rightToLeft,
+        transition: Transition.rightToLeftWithFade,
       );
     },
   ),
@@ -29,7 +29,7 @@ List<ItemModel> listAppSettings = [
     handleClick: () {
       Get.to(
         () => const LanguagesScreen(),
-        transition: Transition.rightToLeft,
+        transition: Transition.rightToLeftWithFade,
       );
     },
   ),
@@ -42,7 +42,7 @@ List<ItemModel> listAppSettings = [
     handleClick: () {
       Get.to(
         () => const AccountScreen(),
-        transition: Transition.rightToLeft,
+        transition: Transition.rightToLeftWithFade,
       );
     },
   ),
@@ -109,7 +109,7 @@ List<ItemModel> listOthersSettings = [
     handleClick: () {
       Get.to(
         () => const ChangePasswordScreen(),
-        transition: Transition.rightToLeft,
+        transition: Transition.rightToLeftWithFade,
       );
     },
   ),
