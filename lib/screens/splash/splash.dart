@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lab6/constants/routes_constant.dart';
 
 import '../../constants/theme_constant.dart';
-import '../login_screen.dart';
-import '../onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,13 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Widget initScreen;
+    String initScreen;
     bool? isOnboardingDone = GetStorage().read("isOnboardingDone");
 
     if (isOnboardingDone == null || !isOnboardingDone) {
-      initScreen = const OnboardingScreen();
+      initScreen = Routes.onboarding;
     } else {
-      initScreen = const LoginScreen();
+      initScreen = Routes.login;
     }
 
     Future.delayed(
@@ -35,10 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(
       const Duration(milliseconds: 2000),
-      () => Get.offAll(
-        () => initScreen,
-        transition: Transition.fadeIn,
-      ),
+      () => Get.offAllNamed(initScreen),
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
-import '../chat_detail/chat_detail_screen.dart';
 import 'components/app_bar.dart';
 import 'components/conversation.dart';
 import 'components/horizontal_list.dart';
@@ -15,10 +15,7 @@ class Conversations extends StatefulWidget {
 
 class _ConversationsState extends State<Conversations> {
   void handleOpenChatDetail() {
-    Get.to(
-      () => ChatDetailScreen(),
-      transition: Transition.cupertinoDialog,
-    );
+    Get.toNamed(Routes.chatDetail);
   }
 
   @override

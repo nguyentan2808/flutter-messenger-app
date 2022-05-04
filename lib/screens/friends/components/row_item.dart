@@ -1,26 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/constants/routes_constant.dart';
 
 import '../../../constants/theme_constant.dart';
-import '../../../controllers/users_controller.dart';
 import '../../../models/user_model.dart';
-import '../../profile/profile_screen.dart';
 
 class RowItem extends StatelessWidget {
-  RowItem({
+  const RowItem({
     Key? key,
     required this.user,
   }) : super(key: key);
   final UserModel user;
-  final UsersController _usersController = Get.find<UsersController>();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const ProfileScreen(),
-            arguments: user, transition: Transition.rightToLeftWithFade);
+        Get.toNamed(Routes.profile, arguments: user);
       },
       child: Padding(
         padding: const EdgeInsets.all(kDefaultPadding * 3 / 4),

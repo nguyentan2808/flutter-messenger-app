@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../components/facebook_button.dart';
+import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
 import '../../../models/user_model.dart';
-import '../../edit_profile/edit_profile_screen.dart';
 
 class ProfileActions extends StatelessWidget {
   const ProfileActions({Key? key, required this.user, required this.isMe})
@@ -38,11 +38,7 @@ class ProfileActions extends StatelessWidget {
                       icon: Icons.edit_rounded,
                       isActive: true,
                       onPressed: () {
-                        Get.to(
-                          () => EditProfileScreen(),
-                          arguments: user,
-                          transition: Transition.cupertinoDialog,
-                        );
+                        Get.toNamed(Routes.editProfile, arguments: user);
                       },
                     )
                   : Row(

@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lab6/screens/forgot_password/forgot_password.dart';
+import 'package:lab6/constants/routes_constant.dart';
 
 import '../constants/theme_constant.dart';
 import '../controllers/auth_controller.dart';
-import 'home/home_screen.dart';
-import 'sign_up/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -91,10 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.to(
-              () => const SignUpScreen(),
-              transition: Transition.rightToLeftWithFade,
-            ),
+            onTap: () => Get.toNamed(Routes.signUp),
             child: Text(
               ' Sign Up',
               style: TextStyle(
@@ -158,10 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: kDefaultRadius / 2,
         );
-        Get.to(
-          () => HomeScreen(),
-          transition: Transition.cupertinoDialog,
-        );
+        Get.toNamed(Routes.home);
       }
     }
 
@@ -210,10 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             )),
         GestureDetector(
-          onTap: () => Get.to(
-            () => ForgotPasswordScreen(),
-            transition: Transition.rightToLeftWithFade,
-          ),
+          onTap: () => Get.toNamed(Routes.forgotPassword),
           child: const Text(
             "Forgot Password?",
             style: TextStyle(decoration: TextDecoration.underline),

@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/constants/routes_constant.dart';
 import 'package:lab6/models/user_model.dart';
 
 import '../../../constants/theme_constant.dart';
-import '../profile_screen.dart';
 
 class ProfileFriends extends StatefulWidget {
   const ProfileFriends({Key? key, required this.user}) : super(key: key);
@@ -82,10 +82,9 @@ class ProfileFriendsState extends State<ProfileFriends> {
             UserModel currentUser = users[index];
             return GestureDetector(
               onTap: () {
-                Get.to(
-                  () => const ProfileScreen(),
+                Get.toNamed(
+                  Routes.profile,
                   arguments: currentUser,
-                  transition: Transition.rightToLeftWithFade,
                   preventDuplicates: false,
                 );
               },

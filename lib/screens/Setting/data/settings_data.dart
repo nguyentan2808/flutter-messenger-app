@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../change_password/change_password.dart';
-import '../../profile/profile_screen.dart';
+import '../../../constants/routes_constant.dart';
 import '../models/item_model.dart';
-import '../components/theme_mode_screen.dart';
-import '../components/language_screen.dart';
 
 List<ItemModel> listAppSettings = [
   ItemModel(
@@ -14,10 +11,7 @@ List<ItemModel> listAppSettings = [
     subTitle: 'Turn off',
     isNavigation: true,
     handleClick: () {
-      Get.to(
-        () => const ThemeModeScreen(),
-        transition: Transition.rightToLeftWithFade,
-      );
+      Get.toNamed(Routes.themeSetting);
     },
   ),
   ItemModel(
@@ -27,10 +21,7 @@ List<ItemModel> listAppSettings = [
     subTitle: 'Change app language',
     isNavigation: false,
     handleClick: () {
-      Get.to(
-        () => const LanguagesScreen(),
-        transition: Transition.rightToLeftWithFade,
-      );
+      Get.toNamed(Routes.languageSetting);
     },
   ),
   ItemModel(
@@ -40,10 +31,7 @@ List<ItemModel> listAppSettings = [
     subTitle: 'User information settings',
     isNavigation: false,
     handleClick: () {
-      Get.to(
-        () => const ProfileScreen(),
-        transition: Transition.rightToLeftWithFade,
-      );
+      Get.toNamed(Routes.profile);
     },
   ),
 ];
@@ -107,10 +95,7 @@ List<ItemModel> listOthersSettings = [
     subTitle: 'Lorem ipsum dolor sit amet',
     isNavigation: false,
     handleClick: () {
-      Get.to(
-        () => const ChangePasswordScreen(),
-        transition: Transition.rightToLeftWithFade,
-      );
+      Get.toNamed(Routes.changePassword);
     },
   ),
   ItemModel(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/constants/routes_constant.dart';
 import 'package:lab6/constants/theme_constant.dart';
 import '../../controllers/auth_controller.dart';
-import '../profile/profile_screen.dart';
 import 'data/settings_data.dart';
 import 'models/item_model.dart';
 
@@ -56,10 +56,7 @@ class ProfilePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(
-        () => const ProfileScreen(),
-        transition: Transition.cupertinoDialog,
-      ),
+      onTap: () => Get.toNamed(Routes.profile),
       child: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Column(
