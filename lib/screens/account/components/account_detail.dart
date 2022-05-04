@@ -82,9 +82,16 @@ class DetailRow extends StatelessWidget {
             ),
           ],
         ),
-        Text(
-          content,
-          style: const TextStyle(fontSize: 15.0),
+        const SizedBox(width: kDefaultPadding),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              content,
+              style: const TextStyle(
+                  fontSize: 15.0, overflow: TextOverflow.ellipsis),
+            ),
+          ),
         ),
       ],
     );

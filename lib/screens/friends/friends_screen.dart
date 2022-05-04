@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:md2_tab_indicator/md2_tab_indicator.dart';
 
 import '../../constant.dart';
+import 'components/friends_tab.dart';
 
 class FriendsScreen extends StatelessWidget {
   const FriendsScreen({Key? key}) : super(key: key);
@@ -29,17 +28,10 @@ class FriendsScreen extends StatelessWidget {
               Text('Friends'),
             ],
           ),
-          bottom: TabBar(
+          bottom: const TabBar(
             indicatorPadding:
-                const EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
-            indicator: MD2Indicator(
-              indicatorHeight: 5,
-              indicatorColor: Get.isDarkMode
-                  ? Theme.of(context).primaryColor
-                  : Colors.white,
-              indicatorSize: MD2IndicatorSize.normal,
-            ),
-            tabs: const [
+                EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
+            tabs: [
               Tab(text: "Friends"),
               Tab(text: "People"),
             ],
@@ -47,7 +39,7 @@ class FriendsScreen extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Icon(Icons.directions_transit),
+            FriendsTab(),
             Icon(Icons.directions_bike),
           ],
         ),

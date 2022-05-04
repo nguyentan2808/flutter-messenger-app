@@ -1,12 +1,20 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lab6/models/user_model.dart';
 
 import '../../../constant.dart';
+import '../../../controllers/users_controller.dart';
+import '../account_screen.dart';
 
 class AccountFriends extends StatelessWidget {
-  const AccountFriends({Key? key, required this.user}) : super(key: key);
+  AccountFriends({Key? key, required this.user}) : super(key: key);
 
   final UserModel user;
+
+  final UsersController _usersController = Get.find<UsersController>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,124 +50,48 @@ class AccountFriends extends StatelessWidget {
             ],
           ),
         ),
-        GridView.count(
-          // primary: false,
+        GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: kDefaultPadding / 2 + 2,
+            mainAxisSpacing: kDefaultPadding / 2 + 2,
+            crossAxisCount: 3,
+            childAspectRatio: (0.9),
+          ),
+          itemCount: 6,
           shrinkWrap: true,
-          crossAxisSpacing: kDefaultPadding / 2 + 2,
-          mainAxisSpacing: kDefaultPadding / 2 + 2,
-          crossAxisCount: 3,
-          childAspectRatio: (0.9),
           physics: const NeverScrollableScrollPhysics(),
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      'assets/images/avatar2.jpg',
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.center,
+          itemBuilder: (context, index) {
+            UserModel currentUser = _usersController
+                .users[Random().nextInt(_usersController.users.length - 1)];
+            return GestureDetector(
+              onTap: () {
+                Get.to(
+                  () => const AccountScreen(),
+                  arguments: currentUser,
+                  transition: Transition.rightToLeftWithFade,
+                  preventDuplicates: false,
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: CachedNetworkImage(
+                        imageUrl: currentUser.avatar as String,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: 200,
+                        alignment: Alignment.center,
+                      ),
                     ),
                   ),
-                ),
-                const Text("Nguyen Tan"),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      'assets/images/avatar2.jpg',
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                const Text("Nguyen Tan"),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      'assets/images/avatar2.jpg',
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                const Text("Nguyen Tan"),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      'assets/images/avatar2.jpg',
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                const Text("Nguyen Tan"),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      'assets/images/avatar2.jpg',
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                const Text("Nguyen Tan"),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(
-                      'assets/images/avatar2.jpg',
-                      fit: BoxFit.cover,
-                      height: 200,
-                      width: 200,
-                      alignment: Alignment.center,
-                    ),
-                  ),
-                ),
-                const Text("Nguyen Tan"),
-              ],
-            ),
-          ],
+                  Text(currentUser.name),
+                ],
+              ),
+            );
+          },
         ),
       ],
     );
