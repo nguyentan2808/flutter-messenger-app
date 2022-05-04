@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,8 +21,9 @@ class AccountImages extends StatelessWidget {
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
-            child: Image.asset(
-              'assets/images/avatar2.jpg',
+            child: CachedNetworkImage(
+              imageUrl: user.coverPhoto as String,
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -34,20 +36,24 @@ class AccountImages extends StatelessWidget {
           left: 10,
           child: Stack(
             children: [
-              Container(
-                width: Get.width / 3,
-                height: Get.width / 3,
-                decoration: BoxDecoration(
-                  color: const Color(0xff7c94b6),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/avatar.jpg'),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(100.0)),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 3.0,
+              CachedNetworkImage(
+                imageUrl: user.avatar as String,
+                imageBuilder: (context, imageProvider) => Container(
+                  width: Get.width / 3,
+                  height: Get.width / 3,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff7c94b6),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
+                    ),
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(100.0)),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 3.0,
+                    ),
                   ),
                 ),
               ),
