@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lab6/constant.dart';
+import '../../controllers/auth_controller.dart';
 import '../account/account_screen.dart';
 import 'data/settings_data.dart';
 import 'models/item_model.dart';
@@ -21,14 +22,10 @@ class _SettingScreenState extends State<SettingScreen> {
         title: Row(
           children: const [
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: kDefaultPadding / 2,
-              ),
+              padding: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
               child: CircleAvatar(
                 radius: 18,
-                backgroundImage: AssetImage(
-                  'assets/images/avatar.jpg',
-                ),
+                backgroundImage: AssetImage('assets/images/avatar.jpg'),
               ),
             ),
             SizedBox(width: kDefaultPadding),
@@ -40,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const AccountPreview(),
+            AccountPreview(),
             SettingSection(title: "Apps", list: listAppSettings),
             SettingSection(title: "Preference", list: listPreferenceSettings),
             SettingSection(title: "Other", list: listOthersSettings),
@@ -52,8 +49,9 @@ class _SettingScreenState extends State<SettingScreen> {
 }
 
 class AccountPreview extends StatelessWidget {
-  const AccountPreview({Key? key}) : super(key: key);
-  final name = "Nguyễn Tân";
+  AccountPreview({Key? key}) : super(key: key);
+
+  final AuthController _authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +94,7 @@ class AccountPreview extends StatelessWidget {
             ),
             const SizedBox(height: kDefaultPadding / 2),
             Text(
-              name,
+              _authController.user.value.name,
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
             )
           ],

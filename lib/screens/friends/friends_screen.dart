@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constant.dart';
 import 'components/friends_tab.dart';
@@ -28,10 +29,12 @@ class FriendsScreen extends StatelessWidget {
               Text('Friends'),
             ],
           ),
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorPadding:
-                EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
-            tabs: [
+                const EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
+            indicatorColor:
+                Get.isDarkMode ? Theme.of(context).primaryColor : Colors.indigo,
+            tabs: const [
               Tab(text: "Friends"),
               Tab(text: "People"),
             ],

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lab6/screens/forgot_password/forgot_password.dart';
 
 import '../constant.dart';
+import '../controllers/auth_controller.dart';
 import 'home/home_screen.dart';
 import 'sign_up/sign_up_screen.dart';
 
@@ -22,10 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  final _authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -149,6 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
   ElevatedButton buildLoginButton() {
     void _handleClick() {
       if (_formKey.currentState!.validate()) {
+        _authController.login();
+
         Get.snackbar(
           "Login",
           "Login successfully to ${_phoneController.text}",
