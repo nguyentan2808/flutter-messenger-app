@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lab6/constant.dart';
 import 'package:lab6/models/user_model.dart';
-import 'package:lab6/screens/account/components/account_friends.dart';
 
 import '../../controllers/auth_controller.dart';
-import 'components/account_actions.dart';
-import 'components/account_detail.dart';
-import 'components/account_images.dart';
+import 'components/profile_actions.dart';
+import 'components/profile_detail.dart';
+import 'components/profile_friends.dart';
+import 'components/profile_images.dart';
 
-class AccountScreen extends StatefulWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<AccountScreen> createState() => _AccountScreenState();
+  State<ProfileScreen> createState() => ProfileScreenState();
 }
 
-class _AccountScreenState extends State<AccountScreen> {
+class ProfileScreenState extends State<ProfileScreen> {
   final AuthController _authController = Get.find<AuthController>();
 
   UserModel? user = Get.arguments;
@@ -42,12 +42,12 @@ class _AccountScreenState extends State<AccountScreen> {
             padding: const EdgeInsets.all(kDefaultPadding * 2 / 3),
             child: Column(
               children: [
-                AccountImages(user: user as UserModel),
-                AccountActions(user: user as UserModel, isMe: isMe),
+                ProfileImages(user: user as UserModel),
+                ProfileActions(user: user as UserModel, isMe: isMe),
                 Divider(color: Colors.grey[400]),
-                AccountDetail(user: user as UserModel),
+                ProfileDetail(user: user as UserModel),
                 Divider(color: Colors.grey[400]),
-                AccountFriends(user: user as UserModel)
+                ProfileFriends(user: user as UserModel)
               ],
             ),
           ),

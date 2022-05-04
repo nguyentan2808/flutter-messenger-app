@@ -6,18 +6,18 @@ import 'package:get/get.dart';
 import 'package:lab6/models/user_model.dart';
 
 import '../../../constant.dart';
-import '../account_screen.dart';
+import '../profile_screen.dart';
 
-class AccountFriends extends StatefulWidget {
-  const AccountFriends({Key? key, required this.user}) : super(key: key);
+class ProfileFriends extends StatefulWidget {
+  const ProfileFriends({Key? key, required this.user}) : super(key: key);
 
   final UserModel user;
 
   @override
-  State<AccountFriends> createState() => _AccountFriendsState();
+  State<ProfileFriends> createState() => ProfileFriendsState();
 }
 
-class _AccountFriendsState extends State<AccountFriends> {
+class ProfileFriendsState extends State<ProfileFriends> {
   List<UserModel> users = [];
 
   @override
@@ -83,7 +83,7 @@ class _AccountFriendsState extends State<AccountFriends> {
             return GestureDetector(
               onTap: () {
                 Get.to(
-                  () => const AccountScreen(),
+                  () => const ProfileScreen(),
                   arguments: currentUser,
                   transition: Transition.rightToLeftWithFade,
                   preventDuplicates: false,

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../constant.dart';
 import '../../../controllers/users_controller.dart';
 import '../../../models/user_model.dart';
-import '../../account/account_screen.dart';
+import '../../profile/profile_screen.dart';
 
 class RowItem extends StatelessWidget {
   RowItem({
@@ -19,7 +19,7 @@ class RowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const AccountScreen(),
+        Get.to(() => const ProfileScreen(),
             arguments: user, transition: Transition.rightToLeftWithFade);
       },
       child: Padding(

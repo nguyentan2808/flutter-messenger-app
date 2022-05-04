@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import '../../../models/user_model.dart';
 
-class AccountImages extends StatelessWidget {
-  const AccountImages({Key? key, required this.user}) : super(key: key);
+class ProfileImages extends StatelessWidget {
+  const ProfileImages({Key? key, required this.user}) : super(key: key);
 
   final UserModel user;
 

@@ -6,8 +6,8 @@ import '../../../constant.dart';
 import '../../../models/user_model.dart';
 import '../../edit_profile/edit_profile_screen.dart';
 
-class AccountActions extends StatelessWidget {
-  const AccountActions({Key? key, required this.user, required this.isMe})
+class ProfileActions extends StatelessWidget {
+  const ProfileActions({Key? key, required this.user, required this.isMe})
       : super(key: key);
 
   final UserModel user;

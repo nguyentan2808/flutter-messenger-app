@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../account/account_screen.dart';
 import '../../change_password/change_password.dart';
+import '../../profile/profile_screen.dart';
 import '../models/item_model.dart';
 import '../components/theme_mode_screen.dart';
 import '../components/language_screen.dart';
@@ -41,7 +41,7 @@ List<ItemModel> listAppSettings = [
     isNavigation: false,
     handleClick: () {
       Get.to(
-        () => const AccountScreen(),
+        () => const ProfileScreen(),
         transition: Transition.rightToLeftWithFade,
       );
     },

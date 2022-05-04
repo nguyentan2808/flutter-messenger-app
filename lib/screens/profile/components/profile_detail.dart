@@ -3,8 +3,8 @@ import 'package:lab6/models/user_model.dart';
 
 import '../../../constant.dart';
 
-class AccountDetail extends StatelessWidget {
-  const AccountDetail({Key? key, required this.user}) : super(key: key);
+class ProfileDetail extends StatelessWidget {
+  const ProfileDetail({Key? key, required this.user}) : super(key: key);
 
   final UserModel user;
 
