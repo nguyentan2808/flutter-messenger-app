@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../constant.dart';
+import '../../constants/theme_constant.dart';
 import '../login_screen.dart';
 import '../onboarding/onboarding_screen.dart';
 

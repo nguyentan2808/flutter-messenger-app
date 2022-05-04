@@ -1,7 +1,7 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constant.dart';
+import 'package:lab6/constants/theme_constant.dart';
 
 class ItemModel {
   String src;

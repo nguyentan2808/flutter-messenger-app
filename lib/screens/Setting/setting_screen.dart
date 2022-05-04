@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constant.dart';
+import 'package:lab6/constants/theme_constant.dart';
 import '../../controllers/auth_controller.dart';
 import '../profile/profile_screen.dart';
 import 'data/settings_data.dart';

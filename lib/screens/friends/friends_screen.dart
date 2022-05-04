@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant.dart';
+import '../../constants/theme_constant.dart';
 import 'components/friends_tab.dart';
 
 class FriendsScreen extends StatelessWidget {

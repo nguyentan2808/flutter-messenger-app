@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab6/screens/forgot_password/forgot_password.dart';
 
-import '../constant.dart';
+import '../constants/theme_constant.dart';
 import '../controllers/auth_controller.dart';
 import 'home/home_screen.dart';
 import 'sign_up/sign_up_screen.dart';
@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final _authController = Get.put(AuthController());
+  final _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {

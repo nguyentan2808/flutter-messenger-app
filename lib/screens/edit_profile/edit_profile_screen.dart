@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:lab6/components/facebook_button.dart';
 import 'package:lab6/models/user_model.dart';
 
-import '../../constant.dart';
+import '../../constants/theme_constant.dart';
 
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);

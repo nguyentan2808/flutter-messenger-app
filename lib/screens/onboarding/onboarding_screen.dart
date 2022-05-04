@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../../constant.dart';
+import '../../constants/theme_constant.dart';
 import '../login_screen.dart';
 import 'data/pages_view.dart';
 import 'models/page_view_model.dart';

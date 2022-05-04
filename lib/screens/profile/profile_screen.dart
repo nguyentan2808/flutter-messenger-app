@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constant.dart';
+import 'package:lab6/constants/theme_constant.dart';
 import 'package:lab6/models/user_model.dart';
 
 import '../../controllers/auth_controller.dart';

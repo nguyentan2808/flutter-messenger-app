@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/constant.dart';
+import 'package:lab6/constants/theme_constant.dart';
 
 class InputField extends StatefulWidget {
   const InputField({
