@@ -43,7 +43,6 @@ List<ItemModel> listPreferenceSettings = [
     title: 'Message request',
     subTitle: 'Accept or decline',
     isNavigation: false,
-    handleClick: () {},
   ),
   ItemModel(
     icon: Icons.notifications,
@@ -51,7 +50,6 @@ List<ItemModel> listPreferenceSettings = [
     title: 'Notifications and sounds',
     subTitle: 'Sounds settings',
     isNavigation: false,
-    handleClick: () {},
   ),
   ItemModel(
     icon: Icons.store,
@@ -59,7 +57,6 @@ List<ItemModel> listPreferenceSettings = [
     title: 'Archived chats',
     subTitle: 'Conversation have been archived',
     isNavigation: false,
-    handleClick: () {},
   ),
   ItemModel(
     icon: Icons.privacy_tip,
@@ -67,7 +64,6 @@ List<ItemModel> listPreferenceSettings = [
     title: 'Privacy',
     subTitle: 'Privacy policy',
     isNavigation: false,
-    handleClick: () {},
   ),
 ];
 
@@ -78,7 +74,6 @@ List<ItemModel> listOthersSettings = [
     title: 'Help',
     subTitle: 'Help center',
     isNavigation: true,
-    handleClick: () {},
   ),
   ItemModel(
     icon: Icons.warning,
@@ -86,7 +81,6 @@ List<ItemModel> listOthersSettings = [
     title: 'Report',
     subTitle: 'Send us a report',
     isNavigation: false,
-    handleClick: () {},
   ),
   ItemModel(
     icon: Icons.password,

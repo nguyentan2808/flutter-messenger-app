@@ -144,17 +144,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   ElevatedButton buildLoginButton() {
     void _handleClick() {
-      if (_formKey.currentState!.validate()) {
-        _authController.login();
+      // if (_formKey.currentState!.validate()) {
+      //   _authController.login();
 
-        Get.snackbar(
-          "Login",
-          "Login successfully to ${_phoneController.text}",
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: kDefaultRadius / 2,
-        );
-        Get.toNamed(Routes.home);
-      }
+      //   Get.snackbar(
+      //     "Login",
+      //     "Login successfully to ${_phoneController.text}",
+      //     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      //     borderRadius: kDefaultRadius / 2,
+      //   );
+      //   Get.toNamed(Routes.home);
+      // }
+
+      _authController.login();
+      Get.toNamed(Routes.home);
     }
 
     return ElevatedButton(

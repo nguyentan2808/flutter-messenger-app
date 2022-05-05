@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../models/user_model.dart';
 
 class AuthController extends GetxController {
-  final user = (null as UserModel).obs;
+  final user = UserModel("", "", "", "", "", "", "", "").obs;
 
   UserModel get getUser => user.value;
 

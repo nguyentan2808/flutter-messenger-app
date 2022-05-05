@@ -6,13 +6,14 @@ class ItemModel {
   String title;
   String subTitle;
   bool isNavigation;
-  VoidCallback handleClick;
+  VoidCallback? handleClick;
 
-  ItemModel(
-      {required this.icon,
-      required this.iconColor,
-      required this.title,
-      required this.subTitle,
-      required this.isNavigation,
-      required this.handleClick});
+  ItemModel({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.subTitle,
+    required this.isNavigation,
+    this.handleClick,
+  });
 }

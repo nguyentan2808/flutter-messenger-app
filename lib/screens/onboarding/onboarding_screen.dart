@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:lab6/constants/routes_constant.dart';
 
 import '../../constants/theme_constant.dart';
-import '../login_screen.dart';
 import 'data/pages_view.dart';
 import 'models/page_view_model.dart';
 
@@ -18,8 +18,7 @@ class OnboardingScreen extends StatelessWidget {
       pages: pages.map((page) => buildPageView(page)).toList(),
       onDone: () {
         GetStorage().write("isOnboardingDone", true);
-        Get.offAll(() => const LoginScreen(),
-            transition: Transition.rightToLeftWithFade);
+        Get.offAllNamed(Routes.login);
       },
       showBackButton: true,
       back: const Icon(Icons.arrow_back_sharp),
