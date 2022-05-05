@@ -3,6 +3,7 @@ class Routes {
   static const signUp = "/signUp";
   static const home = "/home";
   static const chatDetail = "/chatDetail";
+  static const chatOptions = "/chatOptions";
   static const changePassword = "/changePassword";
   static const forgotPassword = "/forgotPassword";
   static const profile = "/profile";

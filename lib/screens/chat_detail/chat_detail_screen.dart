@@ -1,58 +1,47 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'components/app_bar.dart';
-import 'components/body.dart';
+import 'components/input_field.dart';
+import 'components/message_display.dart';
+import 'data/theme_color_list_data.dart';
 
 class ChatDetailScreen extends StatefulWidget {
-  ChatDetailScreen({Key? key}) : super(key: key);
-
-  final List themeList = [
-    Colors.indigo,
-    Colors.blue,
-    Colors.green,
-    Colors.red,
-    Colors.orange,
-    Colors.purple,
-    Colors.pink,
-    Colors.teal,
-    Colors.cyan,
-    Colors.lightBlue,
-    Colors.lightGreen,
-    Colors.amber,
-    Colors.deepOrange,
-  ];
+  const ChatDetailScreen({Key? key}) : super(key: key);
 
   @override
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
 }
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
-  int themeIndex = 0;
+  String theme = "indigo";
 
-  void handleChangeTheme() {
-    setState(() {
-      if (themeIndex == widget.themeList.length - 1) {
-        themeIndex = 0;
-        return;
-      }
-      themeIndex = themeIndex + 1;
-    });
+  void handleChangeTheme(String newValue) {
+    // int randomIndex = Random().nextInt(listThemeColor.length - 1);
+    // final key = listThemeColor.keys.elementAt(randomIndex);
+
+    setState(() => theme = newValue);
   }
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        primaryColor: widget.themeList[themeIndex],
+        primaryColor: listThemeColor[theme],
         colorScheme: ColorScheme.light(
-            primary: widget.themeList[themeIndex],
-            secondary: widget.themeList[themeIndex]),
+          primary: listThemeColor[theme] as Color,
+          secondary: listThemeColor[theme] as Color,
+        ),
       ),
       child: Scaffold(
-        appBar: ChatDetailAppBar(
-          handleChangeTheme: handleChangeTheme,
+        appBar: ChatDetailAppBar(handleChangeTheme: handleChangeTheme),
+        body: Column(
+          children: const [
+            MessageDisplay(),
+            InputField(),
+          ],
         ),
-        body: const Body(),
       ),
     );
   }

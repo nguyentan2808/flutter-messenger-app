@@ -7,6 +7,7 @@ import 'bindings/login_binding.dart';
 import 'constants/routes_constant.dart';
 import 'screens/change_password/change_password.dart';
 import 'screens/chat_detail/chat_detail_screen.dart';
+import 'screens/chat_detail/components/options_screen.dart';
 import 'screens/edit_profile/edit_profile_screen.dart';
 import 'screens/forgot_password/forgot_password.dart';
 import 'screens/home/home_screen.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => GestureDetector(
         onTap: () => _handleFocus(context),
         child: GetMaterialApp(
@@ -91,8 +92,14 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(
               name: Routes.chatDetail,
-              page: () => ChatDetailScreen(),
+              page: () => const ChatDetailScreen(),
               transition: Transition.cupertinoDialog,
+            ),
+            GetPage(
+              name: Routes.chatOptions,
+              page: () => ChatOptionsScreen(),
+              transition: Transition.rightToLeftWithFade,
+              transitionDuration: const Duration(microseconds: 100),
             ),
             GetPage(
               name: Routes.profile,
