@@ -27,7 +27,7 @@ class MessageDisplay extends StatelessWidget {
 }
 
 class Message extends StatefulWidget {
-  Message({
+  const Message({
     Key? key,
     required this.isMe,
   }) : super(key: key);

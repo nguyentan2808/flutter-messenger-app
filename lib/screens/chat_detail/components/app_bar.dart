@@ -10,7 +10,7 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
   const ChatDetailAppBar({Key? key, required this.handleChangeTheme})
       : super(key: key);
 
-  final void handleChangeTheme;
+  final Function(String) handleChangeTheme;
 
   void _goToOptions() {
     UserModel user = Get.put(AuthController()).user.value;

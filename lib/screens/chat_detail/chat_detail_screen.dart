@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'components/app_bar.dart';
@@ -18,9 +16,6 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   String theme = "indigo";
 
   void handleChangeTheme(String newValue) {
-    // int randomIndex = Random().nextInt(listThemeColor.length - 1);
-    // final key = listThemeColor.keys.elementAt(randomIndex);
-
     setState(() => theme = newValue);
   }
 

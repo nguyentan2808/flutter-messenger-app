@@ -222,8 +222,6 @@ class ChatOptionsScreen extends StatelessWidget {
                           (entry) => ListTile(
                             onTap: () {
                               handleChangeTheme(entry.key);
-                              Get.closeAllSnackbars();
-                              Get.back();
                               buildSnackBarChangeColor(entry);
                             },
                             title: Text(capitalize(entry.key)),
@@ -257,9 +255,10 @@ class ChatOptionsScreen extends StatelessWidget {
       borderColor: item.value,
       borderWidth: 2,
       borderRadius: kDefaultRadius,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       duration: const Duration(seconds: 2),
       margin: const EdgeInsets.all(kDefaultPadding / 2),
+      animationDuration: const Duration(milliseconds: 500),
     );
   }
 }
