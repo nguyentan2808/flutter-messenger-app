@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constants/routes_constant.dart';
 import 'package:lab6/constants/theme_constant.dart';
-import 'package:lab6/screens/splash/splash.dart';
 import 'package:lab6/services/i18n_service.dart';
 
 class LanguagesScreen extends StatefulWidget {

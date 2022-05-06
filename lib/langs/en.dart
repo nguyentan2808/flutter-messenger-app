@@ -52,9 +52,9 @@ const Map<String, String> en = {
   "vi": "Vietnamese",
   "en": "English - United States",
   /* Settings screen */
-  "setting_options_app": "App",
-  "setting_options_preference": "Preference",
-  "setting_options_other": "Others",
+  "setting_app": "App",
+  "setting_preference": "Preference",
+  "setting_other": "Others",
   "setting_title": "Settings",
   "setting_dark_mode": "Dark mode",
   "setting_dark_mode_desc": "Turn off",

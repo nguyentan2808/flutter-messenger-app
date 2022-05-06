@@ -65,7 +65,7 @@ class Conversation extends StatelessWidget {
             Opacity(
               opacity: 0.8,
               child: Text(
-                "conversation_time".trParams({'time': '3m'}),
+                "conversation_time".trParams({'time': '3'}),
                 style: const TextStyle(
                   fontSize: 12,
                 ),

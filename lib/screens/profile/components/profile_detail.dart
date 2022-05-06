@@ -83,7 +83,7 @@ class DetailRow extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: kDefaultPadding),
+        const SizedBox(width: kDefaultPadding * 3),
         Expanded(
           child: Align(
             alignment: Alignment.centerRight,
