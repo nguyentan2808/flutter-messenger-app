@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lab6/constants/theme_constant.dart';
 import 'package:lab6/services/theme_service.dart';
 
@@ -39,12 +40,12 @@ class _ThemeModeScreenState extends State<ThemeModeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dark mode"),
+        title: Text("dark_mode".tr),
       ),
       body: Column(
         children: [
           ListTile(
-            title: const Text('Dark mode'),
+            title: Text("dark_mode".tr),
             trailing: Radio(
               value: 'dark',
               groupValue: _mode,
@@ -53,7 +54,7 @@ class _ThemeModeScreenState extends State<ThemeModeScreen> {
             onTap: () => handleChangeMode('dark'),
           ),
           ListTile(
-            title: const Text('Light mode'),
+            title: Text("light_mode".tr),
             trailing: Radio(
               value: 'light',
               groupValue: _mode,
@@ -62,7 +63,7 @@ class _ThemeModeScreenState extends State<ThemeModeScreen> {
             onTap: () => handleChangeMode('light'),
           ),
           ListTile(
-            title: const Text('System'),
+            title: Text("system_mode".tr),
             trailing: Radio(
               value: 'system',
               groupValue: _mode,
@@ -73,7 +74,7 @@ class _ThemeModeScreenState extends State<ThemeModeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: Text(
-              "If system is selected, the app will automatically adjust your appearance based on your device's system settings.",
+              "system_mode_desc".tr,
               style: TextStyle(
                   color: Theme.of(context)
                       .textTheme

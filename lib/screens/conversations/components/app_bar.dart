@@ -18,11 +18,11 @@ class CustomAppBar extends StatelessWidget {
           ? Theme.of(context).scaffoldBackgroundColor
           : Theme.of(context).primaryColor,
       child: Row(children: [
-        FillOutlineButton(press: () {}, text: "Recent Message"),
+        FillOutlineButton(press: () {}, text: "conversation_recent".tr),
         const SizedBox(width: 8),
         FillOutlineButton(
           press: () {},
-          text: "Active",
+          text: "conversation_active".tr,
           isFilled: false,
         )
       ]),

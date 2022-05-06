@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lab6/models/user_model.dart';
 
 import '../../../constants/theme_constant.dart';
@@ -15,31 +16,31 @@ class ProfileDetail extends StatelessWidget {
       child: Column(
         children: [
           DetailRow(
-            title: 'User name',
+            title: "profile_username".tr,
             content: "@" + user.username,
             icon: Icons.person,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
-            title: 'Name',
+            title: "profile_name".tr,
             content: user.name,
             icon: Icons.verified_user_rounded,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
-            title: 'Email',
+            title: "profile_email".tr,
             content: user.email,
             icon: Icons.email,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
-            title: 'Phone',
+            title: "profile_phone".tr,
             content: user.phone,
             icon: Icons.phone,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
-            title: 'Status',
+            title: "profile_status".tr,
             content: user.status ?? "",
             icon: Icons.edit,
           ),

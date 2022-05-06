@@ -157,7 +157,7 @@ class MessageStatus extends StatelessWidget {
         height: isShowDetail ? null : 0.0,
         padding: EdgeInsets.only(left: isMe ? 0 : 42, right: isMe ? 28 : 0),
         child: Text(
-          isMe ? "Đã gửi" : "Đã xem",
+          isMe ? "chat_detail_sended".tr : "chat_detail_seen".tr,
           style: const TextStyle(fontSize: 11),
           textAlign: TextAlign.end,
         ),

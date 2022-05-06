@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lab6/constants/routes_constant.dart';
 
-import '../constants/theme_constant.dart';
-import '../controllers/auth_controller.dart';
+import '../../constants/theme_constant.dart';
+import '../../controllers/auth_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -40,9 +40,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
-                        "Login Details",
-                        style: TextStyle(
+                      Text(
+                        "login_desc".tr,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
                         ),
@@ -78,11 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Opacity(
+          Opacity(
             opacity: 0.6,
             child: Text(
-              "Don't have account?",
-              style: TextStyle(
+              "login_dont_have_account".tr,
+              style: const TextStyle(
                 fontSize: 13,
               ),
               textAlign: TextAlign.center,
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
           GestureDetector(
             onTap: () => Get.toNamed(Routes.signUp),
             child: Text(
-              ' Sign Up',
+              'login_signup'.tr,
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 13,
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(kDefaultPadding * 0.5),
             child: Text(
-              "Or sign in with",
+              "login_or".tr,
               style: GoogleFonts.outfit(
                 fontSize: 12,
                 textStyle: const TextStyle(fontWeight: FontWeight.w500),
@@ -172,9 +172,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
       onPressed: _handleClick,
-      child: const Text(
-        "Login",
-        style: TextStyle(color: Colors.white),
+      child: Text(
+        "login_login".tr,
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
@@ -199,16 +199,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) => setState(() => isRemember = value!),
                   ),
                 ),
-                const Text(
-                  "Remember Me",
+                Text(
+                  "login_remember".tr,
                 ),
               ],
             )),
         GestureDetector(
           onTap: () => Get.toNamed(Routes.forgotPassword),
-          child: const Text(
-            "Forgot Password?",
-            style: TextStyle(decoration: TextDecoration.underline),
+          child: Text(
+            "login_forgot".tr,
+            style: const TextStyle(decoration: TextDecoration.underline),
           ),
         ),
       ],
@@ -253,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
         contentPadding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
         hintStyle: const TextStyle(fontSize: 16),
-        hintText: "Username or Phone Number",
+        hintText: "login_username".tr,
       ),
     );
   }
@@ -283,7 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
         contentPadding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
         hintStyle: const TextStyle(fontSize: 16),
-        hintText: "Password",
+        hintText: "login_password".tr,
       ),
     );
   }

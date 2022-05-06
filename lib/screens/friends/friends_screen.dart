@@ -15,8 +15,8 @@ class FriendsScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Row(
-            children: const [
-              Padding(
+            children: [
+              const Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: kDefaultPadding / 2,
                 ),
@@ -25,18 +25,17 @@ class FriendsScreen extends StatelessWidget {
                   backgroundImage: AssetImage('assets/images/avatar.jpg'),
                 ),
               ),
-              SizedBox(width: kDefaultPadding),
-              Text('Friends'),
+              const SizedBox(width: kDefaultPadding),
+              Text('friends_title'.tr),
             ],
           ),
           bottom: TabBar(
             indicatorPadding:
                 const EdgeInsets.symmetric(horizontal: kDefaultPadding * 2),
-            indicatorColor:
-                Get.isDarkMode ? Theme.of(context).primaryColor : Colors.indigo,
-            tabs: const [
-              Tab(text: "Friends"),
-              Tab(text: "People"),
+            indicatorColor: Colors.white,
+            tabs: [
+              Tab(text: "friends_friend_tab".tr),
+              Tab(text: "friends_people_tab".tr),
             ],
           ),
         ),

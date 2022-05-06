@@ -13,15 +13,15 @@ class ChangePasswordScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(kDefaultRadius / 2),
           ),
-          title: const Text('Go back'),
-          content: const Text('Your changes will be lost, are you sure?'),
+          title: Text("dialog_title_go_back".tr),
+          content: Text("dialog_content_go_back".tr),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text("dialog_button_go_back".tr),
               onPressed: () => Get.back(),
             ),
             TextButton(
-              child: const Text('Back'),
+              child: Text("dialog_button_cancel".tr),
               onPressed: () {
                 Get.back();
                 Get.back();
@@ -40,7 +40,7 @@ class ChangePasswordScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Change Password'),
+          title: Text("change_password_title".tr),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -60,16 +60,16 @@ class ChangePasswordScreen extends StatelessWidget {
                 const SizedBox(
                   height: kDefaultPadding,
                 ),
-                const EditRow(
-                  name: 'Password',
+                EditRow(
+                  name: "change_password_old_password".tr,
                   defaultValue: "123456789",
                 ),
-                const EditRow(
-                  name: 'New password',
+                EditRow(
+                  name: "change_password_new_password".tr,
                   defaultValue: "123456789",
                 ),
-                const EditRow(
-                  name: 'Confirm password',
+                EditRow(
+                  name: "change_password_confirm_password".tr,
                   defaultValue: "123456789",
                 ),
                 const SizedBox(
@@ -80,7 +80,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     FaceBookButton(
-                      text: "Cancel",
+                      text: "change_password_cancel".tr,
                       icon: Icons.cancel,
                       isActive: false,
                       onPressed: _confirmGoBack,
@@ -89,7 +89,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       width: kDefaultPadding / 2,
                     ),
                     FaceBookButton(
-                      text: "Save",
+                      text: "change_password_save".tr,
                       icon: Icons.save,
                       isActive: true,
                       onPressed: () {},

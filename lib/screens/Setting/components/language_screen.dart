@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/constants/routes_constant.dart';
 import 'package:lab6/constants/theme_constant.dart';
+import 'package:lab6/screens/splash/splash.dart';
 import 'package:lab6/services/i18n_service.dart';
 
 class LanguagesScreen extends StatefulWidget {
@@ -29,6 +31,8 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
     setState(() {
       _language = newValue;
     });
+
+    // Get.offAllNamed(Routes.splash);
   }
 
   @override
@@ -40,7 +44,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
       body: Column(
         children: [
           ListTile(
-            title: const Text('Tiếng Việt'),
+            title: Text("vi".tr),
             trailing: Radio(
               value: 'vi',
               groupValue: _language,
@@ -49,7 +53,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
             onTap: () => _handleChangeLanguage('vi'),
           ),
           ListTile(
-            title: const Text('English - United States'),
+            title: Text("en".tr),
             trailing: Radio(
               value: 'en',
               groupValue: _language,
@@ -58,7 +62,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
             onTap: () => _handleChangeLanguage('en'),
           ),
           ListTile(
-            title: const Text('Hệ thống'),
+            title: Text("system_mode".tr),
             trailing: Radio(
               value: 'system',
               groupValue: _language,
@@ -69,7 +73,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: Text(
-              "If system is selected, the app will automatically adjust your appearance based on your device's system settings.",
+              "system_mode_desc".tr,
               style: TextStyle(
                   color: Theme.of(context)
                       .textTheme

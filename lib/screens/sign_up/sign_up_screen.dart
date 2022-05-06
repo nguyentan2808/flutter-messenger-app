@@ -12,8 +12,8 @@ class SignUpScreen extends StatelessWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Sign Up',
+          title: Text(
+            'signup'.tr,
           ),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           foregroundColor: Theme.of(context).textTheme.bodyText1?.color,
@@ -24,16 +24,17 @@ class SignUpScreen extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: [
-                const Text(
-                  'Complete Profile',
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                Text(
+                  'signup_title'.tr,
+                  style: const TextStyle(
+                      fontSize: 26, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: kDefaultPadding / 2),
                 SizedBox(
                   width: Get.width * 0.6,
-                  child: const Text(
-                    "Complete your profile to get started with modern chat app.🚀",
+                  child: Text(
+                    'signup_subtitle'.tr,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -56,9 +57,9 @@ class SignUpScreen extends StatelessWidget {
                   opacity: 0.8,
                   child: SizedBox(
                     width: Get.width * 0.8,
-                    child: const Text(
-                      "By continuing, you agree to our Terms of Service and Privacy Policy",
-                      style: TextStyle(
+                    child: Text(
+                      "singup_terms_confirm".tr,
+                      style: const TextStyle(
                         fontSize: 12,
                       ),
                       textAlign: TextAlign.center,
@@ -91,11 +92,11 @@ class SignUpScreen extends StatelessWidget {
             color: Colors.white,
           ),
           Row(
-            children: const [
-              SizedBox(width: kDefaultPadding / 2),
+            children: [
+              const SizedBox(width: kDefaultPadding / 2),
               Text(
-                "Sign up",
-                style: TextStyle(
+                "signup".tr,
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
@@ -111,7 +112,7 @@ class SignUpScreen extends StatelessWidget {
     return TextField(
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        labelText: 'Name',
+        labelText: "signup_name".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
@@ -127,7 +128,7 @@ class SignUpScreen extends StatelessWidget {
     return TextField(
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        labelText: 'Email',
+        labelText: "signup_email".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.email, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
@@ -142,7 +143,7 @@ class SignUpScreen extends StatelessWidget {
     return TextField(
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        labelText: 'Phone',
+        labelText: "signup_phone".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.phone, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
@@ -192,7 +193,7 @@ class _BirthDayTextFieldState extends State<BirthDayTextField> {
       },
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        labelText: 'Birthday',
+        labelText: "signup_birthday".tr,
         prefixIcon:
             Icon(Icons.date_range, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
@@ -220,7 +221,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       textInputAction: TextInputAction.next,
       obscureText: !isShowPassword,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: "signup_password".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
@@ -261,7 +262,7 @@ class _ConfirmPasswordTextFieldState extends State<ConfirmPasswordTextField> {
       textInputAction: TextInputAction.next,
       obscureText: !isShowPassword,
       decoration: InputDecoration(
-        labelText: 'Confirm Password',
+        labelText: "signup_confirm_password".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon:
             Icon(Icons.confirmation_num, color: Theme.of(context).primaryColor),

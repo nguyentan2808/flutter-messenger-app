@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomNavigation extends StatelessWidget {
   final int selectedIndex;
@@ -15,25 +16,25 @@ class BottomNavigation extends StatelessWidget {
       selectedItemColor: Theme.of(context).primaryColor,
       currentIndex: selectedIndex,
       onTap: handleChangeIndex,
-      items: const <BottomNavigationBarItem>[
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+          icon: const Icon(Icons.home),
+          label: 'bottom_home'.tr,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.people_alt),
-          label: 'Friends',
+          icon: const Icon(Icons.people_alt),
+          label: 'bottom_friends'.tr,
         ),
         // BottomNavigationBarItem(
         //   icon: Icon(Icons.collections),
         //   label: 'Story',
         // ),
         BottomNavigationBarItem(
-          icon: CircleAvatar(
+          icon: const CircleAvatar(
             radius: 13,
             backgroundImage: AssetImage('assets/images/avatar.jpg'),
           ),
-          label: 'Profile',
+          label: 'bottom_settings'.tr,
         ),
       ],
     );

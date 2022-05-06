@@ -11,7 +11,7 @@ import 'screens/chat_detail/components/options_screen.dart';
 import 'screens/edit_profile/edit_profile_screen.dart';
 import 'screens/forgot_password/forgot_password.dart';
 import 'screens/home/home_screen.dart';
-import 'screens/login_screen.dart';
+import 'screens/login_screen/login_screen.dart';
 import 'screens/onboarding/onboarding_screen.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/setting/components/language_screen.dart';

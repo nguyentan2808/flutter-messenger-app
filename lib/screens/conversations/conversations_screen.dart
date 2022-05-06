@@ -29,8 +29,8 @@ class _ConversationsState extends State<Conversations> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Row(
-          children: const [
-            Padding(
+          children: [
+            const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: kDefaultPadding / 2,
               ),
@@ -41,8 +41,8 @@ class _ConversationsState extends State<Conversations> {
                 ),
               ),
             ),
-            SizedBox(width: kDefaultPadding),
-            Text('Chats'),
+            const SizedBox(width: kDefaultPadding),
+            Text('conversation_title'.tr),
           ],
         ),
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],

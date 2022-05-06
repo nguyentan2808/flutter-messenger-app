@@ -46,20 +46,21 @@ class ProfileFriendsState extends State<ProfileFriends> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    "Friends",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    "profile_friends".tr,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    "479 friends",
-                    style: TextStyle(fontSize: 14),
+                    "profile_total_friend".trParams({"total": "479"}),
+                    style: const TextStyle(fontSize: 14),
                   )
                 ],
               ),
-              const Text(
-                "View all",
-                style: TextStyle(
+              Text(
+                "profile_friends_view_all".tr,
+                style: const TextStyle(
                   color: Colors.blue,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

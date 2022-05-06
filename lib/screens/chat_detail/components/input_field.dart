@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lab6/constants/theme_constant.dart';
 
 class InputField extends StatefulWidget {
@@ -128,7 +129,7 @@ class _InputFieldState extends State<InputField> {
                     hintStyle: TextStyle(
                         fontSize:
                             Theme.of(context).textTheme.bodyText1!.fontSize),
-                    hintText: 'Type your message',
+                    hintText: 'chat_detail_type_message'.tr,
                     border: InputBorder.none),
               ),
             ),

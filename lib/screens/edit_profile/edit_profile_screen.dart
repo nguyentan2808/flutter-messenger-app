@@ -16,15 +16,15 @@ class EditProfileScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(kDefaultRadius / 2),
           ),
-          title: const Text('Go back'),
-          content: const Text('Your changes will be lost, are you sure?'),
+          title: Text("dialog_title_go_back".tr),
+          content: Text("dialog_content_go_back".tr),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: Text("dialog_button_go_back".tr),
               onPressed: () => Get.back(),
             ),
             TextButton(
-              child: const Text('Back'),
+              child: Text('dialog_button_cancel'.tr),
               onPressed: () {
                 Get.back();
                 Get.back();
@@ -43,7 +43,7 @@ class EditProfileScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Edit Profile'),
+          title: Text('profile_edit'.tr),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -64,22 +64,22 @@ class EditProfileScreen extends StatelessWidget {
                   height: kDefaultPadding,
                 ),
                 EditRow(
-                  name: 'Name',
+                  name: "profile_name".tr,
                   defaultValue: user.name,
                   type: TextInputType.text,
                 ),
                 EditRow(
-                  name: 'Email',
+                  name: "profile_email".tr,
                   defaultValue: user.email,
                   type: TextInputType.emailAddress,
                 ),
                 EditRow(
-                  name: 'Phone',
+                  name: "profile_phone".tr,
                   defaultValue: user.phone,
                   type: TextInputType.number,
                 ),
                 EditRow(
-                  name: 'Status',
+                  name: "profile_status".tr,
                   defaultValue: user.status ?? "",
                   type: TextInputType.text,
                 ),
@@ -91,7 +91,7 @@ class EditProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     FaceBookButton(
-                      text: "Cancel",
+                      text: "profile_cancel".tr,
                       icon: Icons.cancel,
                       isActive: false,
                       onPressed: _confirmGoBack,
@@ -100,7 +100,7 @@ class EditProfileScreen extends StatelessWidget {
                       width: kDefaultPadding / 2,
                     ),
                     FaceBookButton(
-                      text: "Save",
+                      text: "profile_save".tr,
                       icon: Icons.save,
                       isActive: true,
                       onPressed: () {},

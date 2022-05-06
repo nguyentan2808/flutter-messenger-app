@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/theme_constant.dart';
 import '../models/item_model.dart';
@@ -33,11 +34,11 @@ class SettingRow extends StatelessWidget {
         ),
       ),
       trailing: const Icon(Icons.navigate_next),
-      title: Text(item.title),
+      title: Text(item.title.tr),
       subtitle: Opacity(
         opacity: isEnable ? 1 : 0.5,
         child: Text(
-          item.subTitle,
+          item.subTitle.tr,
           style: TextStyle(
               color: Theme.of(context).textTheme.bodyText1?.color,
               fontSize: 12),

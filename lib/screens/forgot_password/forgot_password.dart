@@ -15,7 +15,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forgot Password'),
+        title: Text('forgot_title'.tr),
         foregroundColor: Theme.of(context).textTheme.bodyText1?.color,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
@@ -65,11 +65,11 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Opacity(
+        Opacity(
           opacity: 0.6,
           child: Text(
-            "Remember password? ",
-            style: TextStyle(
+            "forgot_back_desc".tr,
+            style: const TextStyle(
               fontSize: 13,
             ),
             textAlign: TextAlign.center,
@@ -93,7 +93,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return MaterialButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          Get.snackbar("Forgot password",
+          Get.snackbar("forgot_title".tr,
               "Email sent successfully to ${_controller.text}");
         }
       },
@@ -105,16 +105,16 @@ class ForgotPasswordScreen extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(
+        children: [
+          const Icon(
             Icons.search,
             size: 20,
             color: Colors.white,
           ),
-          SizedBox(width: kDefaultPadding / 2),
+          const SizedBox(width: kDefaultPadding / 2),
           Text(
-            "Submit",
-            style: TextStyle(
+            "forgot_submit".tr,
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
@@ -127,15 +127,15 @@ class ForgotPasswordScreen extends StatelessWidget {
   Column buildTitle() {
     return Column(
       children: [
-        const Text(
-          "Forgot Password",
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+        Text(
+          "forgot_title".tr,
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: kDefaultPadding / 2),
         SizedBox(
           width: Get.width * 0.75,
-          child: const Text(
-            "Enter your email to reset your password, we will send you a link to reset your password",
+          child: Text(
+            "forgot_subtitle".tr,
             textAlign: TextAlign.center,
           ),
         ),
@@ -160,7 +160,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       textInputAction: TextInputAction.done,
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
-        labelText: 'Phone Number',
+        labelText: "forgot_phone_number".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),

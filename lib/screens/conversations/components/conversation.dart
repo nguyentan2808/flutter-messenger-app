@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Conversation extends StatelessWidget {
   const Conversation({Key? key, required this.onPress, required this.index})
@@ -61,11 +62,11 @@ class Conversation extends StatelessWidget {
                 ),
               ),
             ),
-            const Opacity(
+            Opacity(
               opacity: 0.8,
               child: Text(
-                "3m ago",
-                style: TextStyle(
+                "conversation_time".trParams({'time': '3m'}),
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),

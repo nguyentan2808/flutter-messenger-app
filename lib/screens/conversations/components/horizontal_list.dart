@@ -9,7 +9,7 @@ class HorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 96,
+      height: 100,
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
@@ -74,11 +74,12 @@ class AddMorePeople extends StatelessWidget {
               color: Colors.black87,
             ),
           ),
-          const Text(
-            "Add new people",
+          Text(
+            "conversation_add".tr,
             maxLines: 2,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12, overflow: TextOverflow.ellipsis),
+            style:
+                const TextStyle(fontSize: 12, overflow: TextOverflow.ellipsis),
           ),
         ],
       ),

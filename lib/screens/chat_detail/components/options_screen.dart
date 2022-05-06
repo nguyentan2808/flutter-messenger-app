@@ -33,33 +33,48 @@ class ChatOptionsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildCircleOption(Icons.call, "Call"),
+                buildCircleOption(Icons.call, "chat_detail_options_call".tr),
                 const SizedBox(width: kDefaultPadding * 2),
-                buildCircleOption(Icons.video_call, "Video"),
+                buildCircleOption(
+                    Icons.video_call, "chat_detail_options_video".tr),
                 const SizedBox(width: kDefaultPadding * 2),
-                buildCircleOption(Icons.person, "Profile"),
+                buildCircleOption(
+                    Icons.person, "chat_detail_options_profile".tr),
                 const SizedBox(width: kDefaultPadding * 2),
-                buildCircleOption(Icons.notifications, "Mute"),
+                buildCircleOption(
+                    Icons.notifications, "chat_detail_options_mute".tr),
               ],
             ),
             const SizedBox(height: kDefaultPadding),
             Column(
               children: [
-                buildRowOption(Icons.thermostat, "Theme", () {
+                buildRowOption(Icons.thermostat, "chat_detail_options_theme".tr,
+                    () {
                   buildChangeThemeDialog(context);
                 }),
-                buildRowOption(Icons.nordic_walking, "Nick names", () {}),
-                buildGroupTitle(context, "More actions"),
-                buildRowOption(Icons.image, "View media and files", () {}),
-                buildRowOption(Icons.search, "Search in conversation", () {}),
                 buildRowOption(
-                    Icons.notifications, "Notification and sounds", () {}),
-                buildRowOption(Icons.lock, "Go to secret conversation", () {}),
-                buildRowOption(Icons.group, "Create group chat with", () {}),
-                buildGroupTitle(context, "Privacy"),
-                buildRowOption(Icons.wifi_off, "Restrict", () {}),
-                buildRowOption(Icons.block, "Block", () {}),
-                buildRowOption(Icons.report, "Report", () {}),
+                    Icons.color_lens, "chat_detail_options_nickname".tr, () {}),
+                buildGroupTitle(context, "chat_detail_options_more".tr),
+                buildRowOption(
+                    Icons.image, "chat_detail_options_media".tr, () {}),
+                buildRowOption(
+                    Icons.search, "chat_detail_options_search".tr, () {}),
+                buildRowOption(
+                    Icons.notifications, "chat_detail_options_sound".tr, () {}),
+                buildRowOption(
+                    Icons.lock, "chat_detail_options_secret".tr, () {}),
+                buildRowOption(
+                    Icons.group,
+                    "chat_detail_options_create_group"
+                        .trParams({"name": "Nguyen Tan 2"}),
+                    () {}),
+                buildGroupTitle(context, "chat_detail_options_privacy".tr),
+                buildRowOption(
+                    Icons.wifi_off, "chat_detail_options_restrict".tr, () {}),
+                buildRowOption(
+                    Icons.block, "chat_detail_options_block".tr, () {}),
+                buildRowOption(
+                    Icons.report, "chat_detail_options_report".tr, () {}),
               ],
             )
           ],
@@ -197,7 +212,7 @@ class ChatOptionsScreen extends StatelessWidget {
           child: Column(
             children: [
               ListTile(
-                title: const Text("Customize your chat"),
+                title: Text("chat_detail_options_customize".tr),
                 trailing: GestureDetector(
                   onTap: () => Get.back(),
                   child: Container(
@@ -248,8 +263,9 @@ class ChatOptionsScreen extends StatelessWidget {
 
   void buildSnackBarChangeColor(item) {
     Get.snackbar(
-      "Theme changed",
-      "Your theme has been changed to ${capitalize(item.key)}",
+      "chat_detail_options_snack_bar_title".tr,
+      "chat_detail_options_snack_bar_desc"
+          .trParams({"color": capitalize(item.key)}),
       backgroundColor: item.value,
       colorText: Colors.white,
       borderColor: item.value,

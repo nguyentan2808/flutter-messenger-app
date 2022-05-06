@@ -34,7 +34,7 @@ class ProfileActions extends StatelessWidget {
               flex: 20,
               child: isMe
                   ? FaceBookButton(
-                      text: "Edit profile",
+                      text: "profile_edit".tr,
                       icon: Icons.edit_rounded,
                       isActive: true,
                       onPressed: () {
@@ -45,7 +45,7 @@ class ProfileActions extends StatelessWidget {
                       children: [
                         Expanded(
                           child: FaceBookButton(
-                            text: "Thêm bạn bè",
+                            text: "profile_add_friend".tr,
                             icon: Icons.person_add,
                             isActive: true,
                             onPressed: () {},
@@ -54,7 +54,7 @@ class ProfileActions extends StatelessWidget {
                         const SizedBox(width: kDefaultPadding / 2),
                         Expanded(
                           child: FaceBookButton(
-                            text: "Nhắn tin",
+                            text: "profile_message".tr,
                             icon: Icons.send,
                             isActive: false,
                             onPressed: () {},

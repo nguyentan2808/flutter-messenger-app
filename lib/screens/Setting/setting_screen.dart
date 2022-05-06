@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'components/profile_preview.dart';
 import 'components/setting_appbar.dart';
@@ -21,9 +22,10 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           children: [
             ProfilePreview(),
-            SettingSection(title: "Apps", list: listAppSettings),
-            SettingSection(title: "Preference", list: listPreferenceSettings),
-            SettingSection(title: "Other", list: listOthersSettings),
+            SettingSection(title: "setting_app".tr, list: listAppSettings),
+            SettingSection(
+                title: "setting_preference".tr, list: listPreferenceSettings),
+            SettingSection(title: "setting_other".tr, list: listOthersSettings),
           ],
         ),
       ),

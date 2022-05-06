@@ -51,17 +51,19 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'Nguyen Tan',
                   style: TextStyle(fontSize: 16),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 2.0),
+                  padding: const EdgeInsets.only(top: 2.0),
                   child: Text(
-                    'Active 10m ago',
-                    style:
-                        TextStyle(fontSize: 11, fontWeight: FontWeight.normal),
+                    'chat_detail_offline'.trParams({
+                      'time': '10m',
+                    }),
+                    style: const TextStyle(
+                        fontSize: 11, fontWeight: FontWeight.normal),
                   ),
                 )
               ],

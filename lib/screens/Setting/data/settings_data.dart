@@ -7,8 +7,8 @@ List<ItemModel> listAppSettings = [
   ItemModel(
     icon: Icons.dark_mode,
     iconColor: Colors.black,
-    title: 'Dark mode',
-    subTitle: 'Turn off',
+    title: 'setting_dark_mode',
+    subTitle: "setting_dark_mode_desc",
     isNavigation: true,
     handleClick: () {
       Get.toNamed(Routes.themeSetting);
@@ -17,8 +17,8 @@ List<ItemModel> listAppSettings = [
   ItemModel(
     icon: Icons.translate,
     iconColor: Colors.indigo,
-    title: 'Languages',
-    subTitle: 'Change app language',
+    title: "languages",
+    subTitle: "setting_language_desc",
     isNavigation: false,
     handleClick: () {
       Get.toNamed(Routes.languageSetting);
@@ -27,8 +27,8 @@ List<ItemModel> listAppSettings = [
   ItemModel(
     icon: Icons.person,
     iconColor: Colors.green,
-    title: 'Account',
-    subTitle: 'User information settings',
+    title: "setting_account",
+    subTitle: "setting_account_desc",
     isNavigation: false,
     handleClick: () {
       Get.toNamed(Routes.profile);
@@ -40,29 +40,29 @@ List<ItemModel> listPreferenceSettings = [
   ItemModel(
     icon: Icons.store,
     iconColor: Colors.cyan,
-    title: 'Message request',
-    subTitle: 'Accept or decline',
+    title: "setting_message_request",
+    subTitle: "setting_message_request_desc",
     isNavigation: false,
   ),
   ItemModel(
     icon: Icons.notifications,
     iconColor: Colors.amber,
-    title: 'Notifications and sounds',
-    subTitle: 'Sounds settings',
+    title: "setting_notification",
+    subTitle: "setting_notification_desc",
     isNavigation: false,
   ),
   ItemModel(
     icon: Icons.store,
     iconColor: Colors.purple,
-    title: 'Archived chats',
-    subTitle: 'Conversation have been archived',
+    title: "setting_archive",
+    subTitle: "setting_archive_desc",
     isNavigation: false,
   ),
   ItemModel(
     icon: Icons.privacy_tip,
     iconColor: Colors.deepPurpleAccent,
-    title: 'Privacy',
-    subTitle: 'Privacy policy',
+    title: "setting_privacy",
+    subTitle: "setting_privacy_desc",
     isNavigation: false,
   ),
 ];
@@ -71,22 +71,22 @@ List<ItemModel> listOthersSettings = [
   ItemModel(
     icon: Icons.help,
     iconColor: Colors.green,
-    title: 'Help',
-    subTitle: 'Help center',
+    title: "setting_help",
+    subTitle: "setting_help_desc",
     isNavigation: true,
   ),
   ItemModel(
     icon: Icons.warning,
     iconColor: Colors.deepOrange,
-    title: 'Report',
-    subTitle: 'Send us a report',
+    title: "setting_report",
+    subTitle: "setting_report_desc",
     isNavigation: false,
   ),
   ItemModel(
     icon: Icons.password,
     iconColor: Colors.indigo,
-    title: 'Change password',
-    subTitle: 'Lorem ipsum dolor sit amet',
+    title: "setting_change_password",
+    subTitle: "setting_change_password_desc",
     isNavigation: false,
     handleClick: () {
       Get.toNamed(Routes.changePassword);
@@ -95,8 +95,8 @@ List<ItemModel> listOthersSettings = [
   ItemModel(
     icon: Icons.exit_to_app,
     iconColor: Colors.grey,
-    title: 'Logout',
-    subTitle: 'Exit your account',
+    title: "setting_logout",
+    subTitle: "setting_logout_desc",
     isNavigation: false,
     handleClick: () {},
   ),
