@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'bindings/chat_detail_binding.dart';
 import 'bindings/login_binding.dart';
 import 'constants/routes_constant.dart';
 import 'screens/change_password/change_password.dart';
@@ -93,6 +94,7 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: Routes.chatDetail,
               page: () => const ChatDetailScreen(),
+              binding: ChatDetailBinding(),
               transition: Transition.cupertinoDialog,
             ),
             GetPage(

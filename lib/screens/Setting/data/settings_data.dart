@@ -98,6 +98,8 @@ List<ItemModel> listOthersSettings = [
     title: "setting_logout",
     subTitle: "setting_logout_desc",
     isNavigation: false,
-    handleClick: () {},
+    handleClick: () {
+      Get.offAllNamed(Routes.login);
+    },
   ),
 ];

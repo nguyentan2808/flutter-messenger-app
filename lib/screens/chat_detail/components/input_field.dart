@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/controllers/messages_controller.dart';
+import 'package:lab6/screens/chat_detail/models/message_model.dart';
 
 import '../../../constants/theme_constant.dart';
 
 class InputField extends StatefulWidget {
   const InputField({
     Key? key,
+    required this.scrollController,
   }) : super(key: key);
+
+  final ScrollController scrollController;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -134,13 +139,32 @@ class _InputFieldState extends State<InputField> {
                     border: InputBorder.none),
               ),
             ),
-            Icon(
-              Icons.send,
-              color: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .color
-                  ?.withOpacity(0.5),
+            GestureDetector(
+              onTap: () {
+                String value = inputController.text;
+                Get.put(MessagesController()).messages.insert(
+                      0,
+                      MessageModel(
+                        "1",
+                        "2",
+                        "nguyentan2808",
+                        value,
+                        "",
+                        MessageType.text,
+                        null,
+                        false,
+                        "15 THG 4 10:42",
+                      ),
+                    );
+              },
+              child: Icon(
+                Icons.send,
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .color
+                    ?.withOpacity(0.5),
+              ),
             ),
           ]),
         ),

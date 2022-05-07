@@ -59,7 +59,7 @@ class SignUpScreen extends StatelessWidget {
                   child: SizedBox(
                     width: Get.width * 0.8,
                     child: Text(
-                      "singup_terms_confirm".tr,
+                      "signup_terms_confirm".tr,
                       style: const TextStyle(
                         fontSize: 12,
                       ),

@@ -117,6 +117,7 @@ const Map<String, String> en = {
   "chat_detail_type_message": "Type your message...",
   "chat_detail_seen": "Seen",
   "chat_detail_sended": "Sended",
+  "chat_detail_unsent": "Message have been unsent",
 
   /* Chat detail options */
   "chat_detail_options_call": "Call",

@@ -115,6 +115,7 @@ const Map<String, String> vi = {
   "chat_detail_type_message": "Nhập tin nhắn...",
   "chat_detail_seen": "Đã xem",
   "chat_detail_sended": "Đã gửi",
+  "chat_detail_unsent": "Tin nhắn đã bị thu hồi",
 
   /* Chat detail options */
   "chat_detail_options_call": "Gọi",

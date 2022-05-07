@@ -19,6 +19,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     setState(() => theme = newValue);
   }
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -32,9 +34,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       child: Scaffold(
         appBar: ChatDetailAppBar(handleChangeTheme: handleChangeTheme),
         body: Column(
-          children: const [
-            MessageDisplay(),
-            InputField(),
+          children: [
+            MessageDisplay(scrollController: _scrollController),
+            InputField(scrollController: _scrollController),
           ],
         ),
       ),
