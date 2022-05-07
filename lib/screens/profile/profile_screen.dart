@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constants/theme_constant.dart';
-import 'package:lab6/models/user_model.dart';
 
+import '../../constants/theme_constant.dart';
 import '../../controllers/auth_controller.dart';
+import '../../models/user_model.dart';
 import 'components/profile_actions.dart';
 import 'components/profile_detail.dart';
 import 'components/profile_friends.dart';

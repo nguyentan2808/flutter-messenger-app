@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:lab6/models/user_model.dart';
+
+import '../models/user_model.dart';
 
 class UsersController extends GetxController {
   var users = <UserModel>[].obs;

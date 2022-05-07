@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/controllers/users_controller.dart';
 
+import '../../../controllers/users_controller.dart';
 import 'row_item.dart';
 
 class FriendsTab extends StatefulWidget {

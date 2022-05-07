@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/models/user_model.dart';
 
 import '../../../constants/theme_constant.dart';
+import '../../../models/user_model.dart';
 
 class ProfileDetail extends StatelessWidget {
   const ProfileDetail({Key? key, required this.user}) : super(key: key);

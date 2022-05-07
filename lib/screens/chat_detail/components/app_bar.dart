@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constants/routes_constant.dart';
-import 'package:lab6/constants/theme_constant.dart';
-import 'package:lab6/controllers/auth_controller.dart';
 
+import '../../../constants/routes_constant.dart';
+import '../../../constants/theme_constant.dart';
+import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
 
 class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {

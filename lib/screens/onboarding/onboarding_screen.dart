@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:lab6/constants/routes_constant.dart';
 
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 import 'data/pages_view.dart';
 import 'models/page_view_model.dart';

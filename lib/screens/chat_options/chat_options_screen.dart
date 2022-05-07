@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/models/user_model.dart';
 
 import '../../../constants/theme_constant.dart';
+import '../../models/user_model.dart';
 import 'components/app_bar.dart';
 import 'components/circle_option.dart';
 import 'components/group_title.dart';

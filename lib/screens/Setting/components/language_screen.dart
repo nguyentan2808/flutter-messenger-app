@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constants/theme_constant.dart';
-import 'package:lab6/services/i18n_service.dart';
+
+import '../../../constants/theme_constant.dart';
+import '../../../services/i18n_service.dart';
 
 class LanguagesScreen extends StatefulWidget {
   const LanguagesScreen({Key? key}) : super(key: key);

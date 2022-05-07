@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lab6/components/facebook_button.dart';
-import 'package:lab6/models/user_model.dart';
 
+import '../../components/facebook_button.dart';
 import '../../constants/theme_constant.dart';
+import '../../models/user_model.dart';
 
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
