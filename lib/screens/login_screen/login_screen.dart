@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lab6/services/google_signin_service.dart';
 
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
@@ -294,7 +295,9 @@ class SocialButtons extends StatelessWidget {
 
   final double spacing = 14.0;
 
-  void _handleGoogleLogin() {}
+  Future _handleGoogleLogin() async {
+    final user = await GoogleSignInService.login();
+  }
 
   void _handleFacebookLogin() {}
 
