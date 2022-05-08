@@ -96,7 +96,7 @@ class ProfileFriendsState extends State<ProfileFriends> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: CachedNetworkImage(
-                        imageUrl: currentUser.avatar as String,
+                        imageUrl: currentUser.avatar,
                         fit: BoxFit.cover,
                         height: 200,
                         width: 200,

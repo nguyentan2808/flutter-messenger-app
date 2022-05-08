@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lab6/components/error_notification.dart';
 import 'package:lab6/services/google_signin_service.dart';
 
 import '../../constants/routes_constant.dart';
@@ -21,8 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  final _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: kDefaultPadding),
                       buildDivider(),
                       const SizedBox(height: kDefaultPadding),
-                      const SocialButtons(),
+                      SocialButtons(),
                       const SizedBox(height: kDefaultPadding),
                       buildSignUpButton(context),
                     ],
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
       //   Get.toNamed(Routes.home);
       // }
 
-      _authController.login();
+      // _authController.login();
       Get.toNamed(Routes.home);
     }
 
@@ -291,20 +291,66 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 class SocialButtons extends StatelessWidget {
-  const SocialButtons({Key? key}) : super(key: key);
-
-  final double spacing = 14.0;
-
-  Future _handleGoogleLogin() async {
-    final user = await GoogleSignInService.login();
-  }
+  SocialButtons({Key? key}) : super(key: key);
+  final _authController = Get.find<AuthController>();
 
   void _handleFacebookLogin() {}
 
   void _handleAppleLogin() {}
 
+  showLoaderDialog(BuildContext context) {
+    Widget alert = WillPopScope(
+        child: AlertDialog(
+          elevation: 3,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          contentPadding: const EdgeInsets.all(kDefaultPadding),
+          content: Row(
+            children: [
+              SizedBox(
+                height: 40,
+                width: 40,
+                child: SpinKitSpinningLines(
+                  duration: const Duration(milliseconds: 2000),
+                  color: Theme.of(context).primaryColor,
+                  size: 36,
+                ),
+              ),
+              const SizedBox(width: kDefaultPadding),
+              const Text("Login..."),
+            ],
+          ),
+        ),
+        onWillPop: () async => false);
+
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) => alert,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future _handleGoogleLogin() async {
+      try {
+        final idToken = await GoogleSignInService.getTokenId();
+
+        if (idToken != null) {
+          showLoaderDialog(context);
+
+          await _authController.loginBE(idToken);
+          Get.back();
+
+          Get.offAllNamed(Routes.home);
+          pushNotify(context, "Notification", "Login successfully.");
+        }
+      } catch (e) {
+        Get.back();
+        pushNotify(context, "Error", "Something went wrong. Please try again.");
+      }
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -316,7 +362,7 @@ class SocialButtons extends StatelessWidget {
           ),
           onTap: _handleGoogleLogin,
         ),
-        SizedBox(width: spacing),
+        const SizedBox(width: kDefaultPadding),
         InkWell(
           child: SvgPicture.asset(
             'assets/images/facebook_svg.svg',
@@ -325,7 +371,7 @@ class SocialButtons extends StatelessWidget {
           borderRadius: BorderRadius.circular(100.0),
           onTap: _handleFacebookLogin,
         ),
-        SizedBox(width: spacing),
+        const SizedBox(width: kDefaultPadding),
         InkWell(
           child: SvgPicture.asset(
             'assets/images/apple_svg.svg',

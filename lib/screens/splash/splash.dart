@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lab6/controllers/auth_controller.dart';
+import 'package:lab6/models/user_model.dart';
 
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
@@ -15,9 +17,18 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool isLoading = false;
 
-  @override
-  void initState() {
-    super.initState();
+  final AuthController _authController = Get.put(AuthController());
+
+  void loadUserFromStorage() {
+    var jsonUser = GetStorage().read("user");
+    if (jsonUser != null) {
+      UserModel user = UserModel.fromJson(jsonUser);
+
+      _authController.user.value = user;
+    }
+  }
+
+  Future navigateToHome() async {
     String initScreen;
     bool? isOnboardingDone = GetStorage().read("isOnboardingDone");
 
@@ -36,6 +47,14 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(milliseconds: 2000),
       () => Get.offAllNamed(initScreen),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadUserFromStorage();
+    navigateToHome();
   }
 
   @override

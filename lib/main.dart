@@ -2,8 +2,10 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lab6/bindings/profile_binding.dart';
 
 import 'bindings/chat_detail_binding.dart';
+import 'bindings/initial_binding.dart';
 import 'bindings/login_binding.dart';
 import 'constants/routes_constant.dart';
 import 'screens/change_password/change_password.dart';
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
       builder: (context) => GestureDetector(
         onTap: () => _handleFocus(context),
         child: GetMaterialApp(
+          initialBinding: InitialBinding(),
           debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
           themeMode: ThemeService().theme,
@@ -106,6 +109,7 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: Routes.profile,
               page: () => const ProfileScreen(),
+              binding: ProfileBinding(),
               transition: Transition.rightToLeftWithFade,
             ),
             GetPage(

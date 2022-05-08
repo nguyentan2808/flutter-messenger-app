@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,21 +9,37 @@ import '../../../controllers/auth_controller.dart';
 class ProfilePreview extends StatelessWidget {
   ProfilePreview({Key? key}) : super(key: key);
 
-  final AuthController _authController = Get.put(AuthController());
+  final AuthController _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Get.toNamed(Routes.profile),
-      child: Padding(
-        padding: const EdgeInsets.all(kDefaultPadding),
-        child: Column(
-          children: [
-            Stack(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(top: kDefaultPadding),
+            width: Get.width * 1 / 4,
+            child: Stack(
               children: [
-                CircleAvatar(
-                  backgroundImage: const AssetImage('assets/images/avatar.jpg'),
-                  radius: Get.width * 1 / 8,
+                CachedNetworkImage(
+                  imageUrl: _authController.user.value.avatar == ""
+                      ? kDefaultAvatarUrl
+                      : _authController.user.value.avatar,
+                  imageBuilder: (context, imageProvider) => CircleAvatar(
+                    backgroundImage: imageProvider,
+                    radius: Get.width * 1 / 8,
+                  ),
+                  placeholder: (context, url) => Center(
+                    child: CircleAvatar(
+                      radius: Get.width * 1 / 8,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Center(
+                    child: CircleAvatar(
+                      radius: Get.width * 1 / 8,
+                    ),
+                  ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -46,13 +63,13 @@ class ProfilePreview extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: kDefaultPadding / 2),
-            Text(
-              _authController.user.value.name,
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-            )
-          ],
-        ),
+          ),
+          const SizedBox(height: kDefaultPadding / 2),
+          Text(
+            _authController.user.value.name,
+            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+          )
+        ],
       ),
     );
   }

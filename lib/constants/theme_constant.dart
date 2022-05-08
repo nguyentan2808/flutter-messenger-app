@@ -9,3 +9,6 @@ const kErrorColor = Color(0xFFF03738);
 
 const kDefaultPadding = 16.0;
 const kDefaultRadius = 16.0;
+
+const kDefaultAvatarUrl =
+    "https://logowik.com/content/uploads/images/flutter5786.jpg";

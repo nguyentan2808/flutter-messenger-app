@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants/theme_constant.dart';
 import '../../../models/user_model.dart';
 
 class ProfileImages extends StatelessWidget {
@@ -17,19 +18,20 @@ class ProfileImages extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: Get.width / 12),
           child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: CachedNetworkImage(
-              imageUrl: user.coverPhoto as String,
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-              alignment: Alignment.center,
-            ),
-          ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: user.coverPhoto as String,
+                errorWidget: (context, url, error) => Container(
+                    color: Colors.grey[200],
+                    child: const Icon(Icons.image_outlined)),
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+                alignment: Alignment.center,
+              )),
         ),
         Positioned(
           bottom: 0,
@@ -37,7 +39,7 @@ class ProfileImages extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
-                imageUrl: user.avatar as String,
+                imageUrl: user.avatar == "" ? kDefaultAvatarUrl : user.avatar,
                 imageBuilder: (context, imageProvider) => Container(
                   width: Get.width / 3,
                   height: Get.width / 3,
@@ -50,10 +52,7 @@ class ProfileImages extends StatelessWidget {
                     ),
                     borderRadius:
                         const BorderRadius.all(Radius.circular(100.0)),
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 3.0,
-                    ),
+                    border: Border.all(color: Colors.white, width: 3.0),
                   ),
                 ),
               ),

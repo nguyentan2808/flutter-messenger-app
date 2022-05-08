@@ -26,7 +26,7 @@ class RowItem extends StatelessWidget {
             Stack(
               children: [
                 CachedNetworkImage(
-                  imageUrl: user.avatar as String,
+                  imageUrl: user.avatar,
                   placeholder: (context, url) => const CircleAvatar(
                       radius: 20, backgroundColor: Colors.grey),
                   imageBuilder: (context, imageProvider) => CircleAvatar(

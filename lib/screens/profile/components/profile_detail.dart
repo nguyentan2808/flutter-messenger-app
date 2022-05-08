@@ -87,11 +87,20 @@ class DetailRow extends StatelessWidget {
         Expanded(
           child: Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              content,
-              style: const TextStyle(
-                  fontSize: 15.0, overflow: TextOverflow.ellipsis),
-            ),
+            child: content != ""
+                ? Text(
+                    content,
+                    style: const TextStyle(
+                        fontSize: 15.0, overflow: TextOverflow.ellipsis),
+                  )
+                : const Text(
+                    "(No data)",
+                    style: TextStyle(
+                      fontSize: 13.0,
+                      overflow: TextOverflow.ellipsis,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
           ),
         ),
       ],

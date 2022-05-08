@@ -6,10 +6,11 @@ part "user_model.g.dart";
 class UserModel {
   String username;
   String phone;
+  @JsonKey(name: '_id', defaultValue: "")
   String id;
   String name;
   String email;
-  String? avatar;
+  String avatar;
   String? coverPhoto;
   String? status;
 
@@ -19,7 +20,7 @@ class UserModel {
     required this.name,
     required this.email,
     required this.phone,
-    this.avatar,
+    required this.avatar,
     this.coverPhoto,
     this.status,
   });
@@ -37,4 +38,11 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  @override
+  String toString() {
+    return 'id: $id, username: $username, name: $name, email: $email, phone: $phone, avatar: $avatar, coverPhoto: $coverPhoto, status: $status';
+  }
 }
