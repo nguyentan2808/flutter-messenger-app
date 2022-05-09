@@ -11,8 +11,7 @@ class GoogleSignInService {
     return tokenId;
   }
 
-  static Future signOut() async {
-    print("call");
+  Future signOut() async {
     await googleSignIn.disconnect();
   }
 

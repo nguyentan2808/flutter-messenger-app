@@ -7,8 +7,7 @@ import '../models/item_model.dart';
 import 'setting_row.dart';
 
 class AppSection extends StatelessWidget {
-  const AppSection({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const AppSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class AppSection extends StatelessWidget {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: Text(
-              title,
+              "setting_app".tr,
               style: const TextStyle(color: Colors.grey, fontSize: 14.0),
             ),
           ),

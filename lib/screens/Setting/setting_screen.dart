@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:lab6/screens/setting/components/other_section.dart';
+import 'package:lab6/screens/setting/components/preference_section.dart';
 
+import 'components/app_section.dart';
 import 'components/profile_preview.dart';
 import 'components/setting_appbar.dart';
-import 'components/setting_section.dart';
-import 'data/settings_data.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -20,12 +20,11 @@ class _SettingScreenState extends State<SettingScreen> {
       appBar: const SettingAppBar(),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            const ProfilePreview(),
-            SettingSection(title: "setting_app".tr, list: listAppSettings),
-            SettingSection(
-                title: "setting_preference".tr, list: listPreferenceSettings),
-            SettingSection(title: "setting_other".tr, list: listOthersSettings),
+          children: const [
+            ProfilePreview(),
+            AppSection(),
+            PreferenceSection(),
+            OtherSection()
           ],
         ),
       ),

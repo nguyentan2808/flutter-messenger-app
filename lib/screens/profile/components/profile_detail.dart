@@ -17,31 +17,31 @@ class ProfileDetail extends StatelessWidget {
         children: [
           DetailRow(
             title: "profile_username".tr,
-            content: "@" + user.username,
+            text: "@" + user.username,
             icon: Icons.person,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
             title: "profile_name".tr,
-            content: user.name,
+            text: user.name,
             icon: Icons.verified_user_rounded,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
             title: "profile_email".tr,
-            content: user.email,
+            text: user.email,
             icon: Icons.email,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
             title: "profile_phone".tr,
-            content: user.phone,
+            text: user.phone,
             icon: Icons.phone,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
           DetailRow(
             title: "profile_status".tr,
-            content: user.status ?? "",
+            text: user.status,
             icon: Icons.edit,
           ),
           const SizedBox(height: kDefaultPadding * 1.3),
@@ -53,14 +53,11 @@ class ProfileDetail extends StatelessWidget {
 
 class DetailRow extends StatelessWidget {
   const DetailRow(
-      {Key? key,
-      required this.title,
-      required this.content,
-      required this.icon})
+      {Key? key, required this.title, required this.text, required this.icon})
       : super(key: key);
 
   final String title;
-  final String content;
+  final String? text;
   final IconData icon;
 
   @override
@@ -87,9 +84,9 @@ class DetailRow extends StatelessWidget {
         Expanded(
           child: Align(
             alignment: Alignment.centerRight,
-            child: content != ""
+            child: text != null
                 ? Text(
-                    content,
+                    text as String,
                     style: const TextStyle(
                         fontSize: 15.0, overflow: TextOverflow.ellipsis),
                   )

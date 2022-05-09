@@ -1,75 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lab6/providers/auth_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:lab6/components/loader_dialog.dart';
+import 'package:lab6/services/auth_service.dart';
 
 import '../../../components/error_notification.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
-import '../../../controllers/auth_controller.dart';
-import '../../../services/google_signin_service.dart';
 
 class SocialButtons extends StatelessWidget {
-  SocialButtons({Key? key}) : super(key: key);
+  const SocialButtons({Key? key}) : super(key: key);
 
   void _handleFacebookLogin() {}
 
   void _handleAppleLogin() {}
 
-  showLoaderDialog(BuildContext context) {
-    Widget alert = WillPopScope(
-        child: AlertDialog(
-          elevation: 3,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          contentPadding: const EdgeInsets.all(kDefaultPadding),
-          content: Row(
-            children: [
-              SizedBox(
-                height: 40,
-                width: 40,
-                child: SpinKitSpinningLines(
-                  duration: const Duration(milliseconds: 2000),
-                  color: Theme.of(context).primaryColor,
-                  size: 36,
-                ),
-              ),
-              const SizedBox(width: kDefaultPadding),
-              const Text("Login..."),
-            ],
-          ),
-        ),
-        onWillPop: () async => false);
-
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (BuildContext context) => alert,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     Future _handleGoogleLogin() async {
-      // pushNotify(context, "Error", "Something went wrong. Please try again.");
-
       try {
-        final idToken = await GoogleSignInService.getTokenId();
+        LoaderDialog.show(context);
+        await AuthService().googleLogin(context);
+        LoaderDialog.hide();
 
-        if (idToken != null) {
-          showLoaderDialog(context);
-
-          await context.read<Auth>().googleLogin(idToken);
-          Get.back();
-
-          Get.offAllNamed(Routes.home);
-          pushNotify(context, "Notification", "Login successfully.");
-        }
-      } catch (e) {
-        Get.back();
-        pushNotify(context, "Error", "Something went wrong. Please try again.");
+        Get.offAllNamed(Routes.home);
+      } catch (error) {
+        LoaderDialog.hide();
+        NotificationDialog.show(context, "Error", "Something went wrong");
       }
     }
 
