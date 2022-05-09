@@ -2,11 +2,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/bindings/profile_binding.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
-import 'bindings/chat_detail_binding.dart';
-import 'bindings/initial_binding.dart';
-import 'bindings/login_binding.dart';
 import 'constants/routes_constant.dart';
 import 'screens/change_password/change_password.dart';
 import 'screens/chat_options/chat_options_screen.dart';
@@ -28,9 +26,12 @@ import 'theme.dart';
 void main() async {
   await GetStorage.init();
 
-  runApp(
-    const MyApp(),
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => Auth()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -50,7 +51,6 @@ class MyApp extends StatelessWidget {
       builder: (context) => GestureDetector(
         onTap: () => _handleFocus(context),
         child: GetMaterialApp(
-          initialBinding: InitialBinding(),
           debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
           themeMode: ThemeService().theme,
@@ -71,7 +71,6 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: Routes.login,
               page: () => const LoginScreen(),
-              binding: LoginBinding(),
               transition: Transition.fadeIn,
             ),
             GetPage(
@@ -97,7 +96,6 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: Routes.chatDetail,
               page: () => const ChatDetailScreen(),
-              binding: ChatDetailBinding(),
               transition: Transition.cupertinoDialog,
             ),
             GetPage(
@@ -109,7 +107,6 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: Routes.profile,
               page: () => const ProfileScreen(),
-              binding: ProfileBinding(),
               transition: Transition.rightToLeftWithFade,
             ),
             GetPage(

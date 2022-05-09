@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/theme_constant.dart';
-import '../../controllers/auth_controller.dart';
 import '../../models/user_model.dart';
+import '../../providers/auth_provider.dart';
 import 'components/profile_actions.dart';
 import 'components/profile_detail.dart';
 import 'components/profile_friends.dart';
@@ -17,21 +18,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
-  final AuthController _authController = Get.find<AuthController>();
-
   UserModel? user = Get.arguments;
   bool isMe = false;
 
   @override
-  void initState() {
-    super.initState();
-
-    user ??= _authController.getUser;
-    isMe = user!.username == _authController.getUser.username;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    user ??= context.read<Auth>().user;
+    isMe = context.watch<Auth>().user?.username == user?.username;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(user!.name),

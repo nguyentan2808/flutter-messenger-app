@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../components/error_notification.dart';
 import '../../../constants/routes_constant.dart';
@@ -11,7 +13,6 @@ import '../../../services/google_signin_service.dart';
 
 class SocialButtons extends StatelessWidget {
   SocialButtons({Key? key}) : super(key: key);
-  final _authController = Get.find<AuthController>();
 
   void _handleFacebookLogin() {}
 
@@ -52,24 +53,24 @@ class SocialButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future _handleGoogleLogin() async {
-      pushNotify(context, "Error", "Something went wrong. Please try again.");
+      // pushNotify(context, "Error", "Something went wrong. Please try again.");
 
-      // try {
-      //   final idToken = await GoogleSignInService.getTokenId();
+      try {
+        final idToken = await GoogleSignInService.getTokenId();
 
-      //   if (idToken != null) {
-      //     showLoaderDialog(context);
+        if (idToken != null) {
+          showLoaderDialog(context);
 
-      //     await _authController.loginBE(idToken);
-      //     Get.back();
+          await context.read<Auth>().googleLogin(idToken);
+          Get.back();
 
-      //     Get.offAllNamed(Routes.home);
-      //     pushNotify(context, "Notification", "Login successfully.");
-      //   }
-      // } catch (e) {
-      //   Get.back();
-      //   pushNotify(context, "Error", "Something went wrong. Please try again.");
-      // }
+          Get.offAllNamed(Routes.home);
+          pushNotify(context, "Notification", "Login successfully.");
+        }
+      } catch (e) {
+        Get.back();
+        pushNotify(context, "Error", "Something went wrong. Please try again.");
+      }
     }
 
     return Row(

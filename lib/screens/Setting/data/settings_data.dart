@@ -103,8 +103,6 @@ List<ItemModel> listOthersSettings = [
     subTitle: "setting_logout_desc",
     isNavigation: false,
     handleClick: () {
-      Get.put(AuthController()).user.value =
-          UserModel("", "", "", "", "", "", "", "");
       GetStorage().remove("user");
       Get.offAllNamed(Routes.login);
 

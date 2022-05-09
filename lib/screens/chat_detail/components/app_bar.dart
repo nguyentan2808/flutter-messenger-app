@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
-import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
+import '../../../providers/auth_provider.dart';
 
 class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
   const ChatDetailAppBar({Key? key, required this.handleChangeTheme})
@@ -12,8 +13,8 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
 
   final Function(String) handleChangeTheme;
 
-  void _goToOptions() {
-    UserModel user = Get.put(AuthController()).user.value;
+  void _goToOptions(BuildContext context) {
+    UserModel? user = context.read<Auth>().user;
     Get.toNamed(Routes.chatOptions, arguments: [user, handleChangeTheme]);
   }
 
@@ -24,7 +25,7 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 1,
       automaticallyImplyLeading: true,
       title: GestureDetector(
-        onTap: _goToOptions,
+        onTap: () => _goToOptions(context),
         child: Row(
           children: [
             Stack(children: [
@@ -91,7 +92,7 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
           )
         ]),
         IconButton(
-          onPressed: _goToOptions,
+          onPressed: () => _goToOptions(context),
           icon: const Icon(Icons.info_rounded, size: 24),
         ),
       ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/controllers/auth_controller.dart';
 import 'package:lab6/controllers/messages_controller.dart';
+import 'package:lab6/providers/auth_provider.dart';
 import 'package:lab6/screens/chat_detail/models/message_model.dart';
+import 'package:provider/provider.dart';
 
 import 'message.dart';
 
@@ -17,8 +18,6 @@ class MessageDisplay extends StatefulWidget {
 }
 
 class _MessageDisplayState extends State<MessageDisplay> {
-  final AuthController _authController = Get.put(AuthController());
-
   final MessagesController _messagesController = Get.put(MessagesController());
 
   @override
@@ -45,7 +44,7 @@ class _MessageDisplayState extends State<MessageDisplay> {
           itemBuilder: (context, index) {
             final MessageModel message = _messagesController.messages[index];
             final bool isMe =
-                message.sender == _authController.user.value.username;
+                message.sender == context.read<Auth>().user!.username;
             bool isShowAvatar;
 
             if (index == 0) {

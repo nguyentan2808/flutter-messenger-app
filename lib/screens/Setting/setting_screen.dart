@@ -21,7 +21,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ProfilePreview(),
+            const ProfilePreview(),
             SettingSection(title: "setting_app".tr, list: listAppSettings),
             SettingSection(
                 title: "setting_preference".tr, list: listPreferenceSettings),

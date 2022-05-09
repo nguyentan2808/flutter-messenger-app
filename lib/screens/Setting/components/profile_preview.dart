@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
-import '../../../controllers/auth_controller.dart';
 
 class ProfilePreview extends StatelessWidget {
-  ProfilePreview({Key? key}) : super(key: key);
-
-  final AuthController _authController = Get.find<AuthController>();
+  const ProfilePreview({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +22,9 @@ class ProfilePreview extends StatelessWidget {
             child: Stack(
               children: [
                 CachedNetworkImage(
-                  imageUrl: _authController.user.value.avatar == ""
+                  imageUrl: context.watch<Auth>().user?.avatar == ""
                       ? kDefaultAvatarUrl
-                      : _authController.user.value.avatar,
+                      : context.watch<Auth>().user?.avatar as String,
                   imageBuilder: (context, imageProvider) => CircleAvatar(
                     backgroundImage: imageProvider,
                     radius: Get.width * 1 / 8,
@@ -66,7 +65,7 @@ class ProfilePreview extends StatelessWidget {
           ),
           const SizedBox(height: kDefaultPadding / 2),
           Text(
-            _authController.user.value.name,
+            context.select((Auth auth) => auth.user!.name),
             style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
           )
         ],

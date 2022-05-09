@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/controllers/auth_controller.dart';
 import 'package:lab6/models/user_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
+import '../../providers/auth_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,14 +18,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool isLoading = false;
 
-  final AuthController _authController = Get.put(AuthController());
-
   void loadUserFromStorage() {
     var jsonUser = GetStorage().read("user");
     if (jsonUser != null) {
       UserModel user = UserModel.fromJson(jsonUser);
 
-      _authController.user.value = user;
+      context.read<Auth>().setUser(user);
     }
   }
 
