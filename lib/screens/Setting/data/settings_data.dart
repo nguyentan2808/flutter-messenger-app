@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lab6/controllers/auth_controller.dart';
+import 'package:lab6/services/google_signin_service.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../models/user_model.dart';
 import '../models/item_model.dart';
@@ -106,6 +107,8 @@ List<ItemModel> listOthersSettings = [
           UserModel("", "", "", "", "", "", "", "");
       GetStorage().remove("user");
       Get.offAllNamed(Routes.login);
+
+      GoogleSignInService.signOut();
     },
   ),
 ];

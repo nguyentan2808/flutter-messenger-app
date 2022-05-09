@@ -18,7 +18,7 @@ class UsersController extends GetxController {
 
       users.value = _users;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("Error.001 $e");
     }
   }
 }

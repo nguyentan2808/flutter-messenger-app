@@ -30,14 +30,14 @@ class ChatOptionsScreen extends StatelessWidget {
               children: [
                 CircleOption(
                     icon: Icons.call, text: "chat_detail_options_call".tr),
-                const SizedBox(width: kDefaultPadding * 2),
+                const SizedBox(width: kDefaultPadding * 1.75),
                 CircleOption(
                     icon: Icons.video_call,
                     text: "chat_detail_options_video".tr),
-                const SizedBox(width: kDefaultPadding * 2),
+                const SizedBox(width: kDefaultPadding * 1.75),
                 CircleOption(
                     icon: Icons.person, text: "chat_detail_options_profile".tr),
-                const SizedBox(width: kDefaultPadding * 2),
+                const SizedBox(width: kDefaultPadding * 1.75),
                 CircleOption(
                     icon: Icons.notifications,
                     text: "chat_detail_options_mute".tr),

@@ -13,5 +13,12 @@ void pushNotify(BuildContext context, String title, String body) {
     duration: const Duration(seconds: 2),
     margin: const EdgeInsets.all(kDefaultPadding / 2),
     animationDuration: const Duration(milliseconds: 500),
+    mainButton: TextButton(
+      onPressed: () => Get.back(),
+      child: const Icon(
+        Icons.close,
+        color: Colors.black,
+      ),
+    ),
   );
 }

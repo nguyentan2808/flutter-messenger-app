@@ -24,7 +24,6 @@ class I18nService extends Translations {
   }
 
   void _saveToStorage(String lang) {
-    debugPrint("Saved: lang: $lang");
     _storage.write('lang', lang);
   }
 
@@ -41,8 +40,6 @@ class I18nService extends Translations {
     if (systemLanguageCode != null) {
       changeLocale(systemLanguageCode);
     }
-
-    debugPrint("Set to: $systemLanguageCode");
   }
 
   @override
