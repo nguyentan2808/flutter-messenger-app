@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: kDefaultPadding),
                       const CustomDivider(),
                       const SizedBox(height: kDefaultPadding),
-                      SocialButtons(),
+                      const SocialButtons(),
                       const SizedBox(height: kDefaultPadding),
                       const SignUpButton(),
                     ],

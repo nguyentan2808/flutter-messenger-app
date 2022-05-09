@@ -23,7 +23,7 @@ class ProfileImages extends StatelessWidget {
                 topRight: Radius.circular(10),
               ),
               child: CachedNetworkImage(
-                imageUrl: user.coverPhoto as String,
+                imageUrl: user.coverPhoto,
                 errorWidget: (context, url, error) => Container(
                     color: Colors.grey[200],
                     child: const Icon(Icons.image_outlined)),

@@ -80,7 +80,7 @@ class EditProfileScreen extends StatelessWidget {
                 ),
                 EditRow(
                   name: "profile_status".tr,
-                  defaultValue: user.status ?? "",
+                  defaultValue: user.status,
                   type: TextInputType.text,
                 ),
                 const SizedBox(

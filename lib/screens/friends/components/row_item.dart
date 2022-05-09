@@ -67,7 +67,7 @@ class RowItem extends StatelessWidget {
                           padding:
                               const EdgeInsets.only(right: kDefaultPadding),
                           child: Text(
-                            user.status as String,
+                            user.status,
                             style: const TextStyle(
                                 color: Colors.grey,
                                 overflow: TextOverflow.ellipsis),

@@ -57,7 +57,7 @@ class DetailRow extends StatelessWidget {
       : super(key: key);
 
   final String title;
-  final String? text;
+  final String text;
   final IconData icon;
 
   @override
@@ -84,9 +84,9 @@ class DetailRow extends StatelessWidget {
         Expanded(
           child: Align(
             alignment: Alignment.centerRight,
-            child: text != null
+            child: text != ""
                 ? Text(
-                    text as String,
+                    text,
                     style: const TextStyle(
                         fontSize: 15.0, overflow: TextOverflow.ellipsis),
                   )

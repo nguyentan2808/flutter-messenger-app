@@ -6,13 +6,13 @@ part "user_model.g.dart";
 class UserModel {
   String username;
   String phone;
-  @JsonKey(name: '_id', defaultValue: "")
+  @JsonKey(name: '_id')
   String id;
   String name;
   String email;
   String avatar;
-  String? coverPhoto;
-  String? status;
+  String coverPhoto;
+  String status;
 
   UserModel.fromMock({
     required this.id,
@@ -21,8 +21,8 @@ class UserModel {
     required this.email,
     required this.phone,
     required this.avatar,
-    this.coverPhoto,
-    this.status,
+    required this.coverPhoto,
+    required this.status,
   });
 
   UserModel(
