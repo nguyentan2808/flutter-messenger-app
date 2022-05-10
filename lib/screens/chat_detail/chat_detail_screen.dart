@@ -35,7 +35,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         appBar: ChatDetailAppBar(handleChangeTheme: handleChangeTheme),
         body: Column(
           children: [
-            MessageDisplay(scrollController: _scrollController),
+            const MessageDisplay(),
             InputField(scrollController: _scrollController),
           ],
         ),

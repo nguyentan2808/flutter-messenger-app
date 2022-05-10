@@ -73,7 +73,7 @@ class _ProfileActionsState extends State<ProfileActions> {
                                 )
                               : relationship == Relationship.pending
                                   ? FaceBookButton(
-                                      text: "Hủy lời mời",
+                                      text: "profile_cancel_request".tr,
                                       icon: Icons.cancel,
                                       isActive: true,
                                       onPressed: () {
@@ -83,7 +83,7 @@ class _ProfileActionsState extends State<ProfileActions> {
                                       },
                                     )
                                   : FaceBookButton(
-                                      text: "Bạn bè",
+                                      text: "profile_friends".tr,
                                       icon: Icons.check,
                                       isActive: true,
                                       onPressed: () {
@@ -100,7 +100,7 @@ class _ProfileActionsState extends State<ProfileActions> {
                             text: "profile_message".tr,
                             icon: Icons.send,
                             isActive: false,
-                            onPressed: () {},
+                            onPressed: () => Get.toNamed(Routes.chatDetail),
                           ),
                         )
                       ],

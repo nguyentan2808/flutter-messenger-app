@@ -3,11 +3,18 @@ import 'package:get/get.dart';
 
 import '../../../constants/theme_constant.dart';
 
-class PasswordTextField extends StatelessWidget {
+class PasswordTextField extends StatefulWidget {
   const PasswordTextField({Key? key, required this.controller})
       : super(key: key);
 
   final TextEditingController controller;
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool isShow = false;
 
   String? _validator(String? value) {
     if (value == null || value.isEmpty) {
@@ -21,7 +28,8 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      controller: widget.controller,
+      obscureText: !isShow,
       validator: _validator,
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -34,8 +42,21 @@ class PasswordTextField extends StatelessWidget {
         ),
         contentPadding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
-        hintStyle: const TextStyle(fontSize: 16),
-        hintText: "login_password".tr,
+        hintStyle: const TextStyle(fontSize: 14),
+        hintText: "*********",
+        labelText: "login_password".tr,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: IconButton(
+          icon: Icon(
+            isShow ? Icons.visibility_off : Icons.visibility,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: () {
+            setState(() {
+              isShow = !isShow;
+            });
+          },
+        ),
       ),
     );
   }

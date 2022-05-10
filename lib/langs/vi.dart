@@ -97,6 +97,7 @@ const Map<String, String> vi = {
   "profile_edit": "Chỉnh sửa trang cá nhân",
   "profile_total_friend": "@total bạn bè",
   "profile_add_friend": "Thêm bạn",
+  "profile_cancel_request": "Hủy lời mời",
   "profile_message": "Nhắn tin",
   "profile_username": "Tên đăng nhập",
   "profile_name": "Họ tên",

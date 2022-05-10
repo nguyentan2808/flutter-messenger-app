@@ -26,7 +26,7 @@ class CustomDivider extends StatelessWidget {
             padding: const EdgeInsets.all(kDefaultPadding * 0.5),
             child: Text(
               "login_or".tr,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
             ),
           ),
           Expanded(

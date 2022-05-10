@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/components/notification.dart';
+import 'package:lab6/services/auth_service.dart';
 
+import '../../components/loader_dialog.dart';
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 import 'components/custom_divider.dart';
 import 'components/illustration.dart';
@@ -22,6 +26,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+  }
+
+  Future _handleLogin() async {
+    if (_formKey.currentState!.validate()) {
+      AuthService().loginWithMockData(context);
+
+      LoaderDialog.show(context);
+
+      await Future.delayed(const Duration(milliseconds: 1400));
+      LoaderDialog.hide();
+
+      NotificationDialog.show(context, 'Login', 'Login success');
+
+      Get.offAllNamed(Routes.home);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,19 +73,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: kDefaultPadding),
+                      const SizedBox(height: kDefaultPadding * 1.5),
                       UsernameTextField(controller: _phoneController),
-                      const SizedBox(height: kDefaultPadding),
+                      const SizedBox(height: kDefaultPadding * 1.5),
                       PasswordTextField(controller: _passwordController),
-                      const SizedBox(height: kDefaultPadding),
+                      const SizedBox(height: kDefaultPadding * 1.5),
                       const RememberForgot(),
-                      const SizedBox(height: kDefaultPadding),
-                      const LoginButton(),
-                      const SizedBox(height: kDefaultPadding),
+                      const SizedBox(height: kDefaultPadding * 1.5),
+                      LoginButton(onPress: _handleLogin),
+                      const SizedBox(height: kDefaultPadding * 1.5),
                       const CustomDivider(),
-                      const SizedBox(height: kDefaultPadding),
+                      const SizedBox(height: kDefaultPadding * 1.5),
                       const SocialButtons(),
-                      const SizedBox(height: kDefaultPadding),
+                      const SizedBox(height: kDefaultPadding * 1.5),
                       const SignUpButton(),
                     ],
                   ),

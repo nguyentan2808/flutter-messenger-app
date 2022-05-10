@@ -52,7 +52,10 @@ class ProfileImages extends StatelessWidget {
                     ),
                     borderRadius:
                         const BorderRadius.all(Radius.circular(100.0)),
-                    border: Border.all(color: Colors.white, width: 3.0),
+                    border: Border.all(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      width: 3.0,
+                    ),
                   ),
                 ),
               ),

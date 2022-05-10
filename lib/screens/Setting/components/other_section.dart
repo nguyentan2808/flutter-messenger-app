@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lab6/services/auth_service.dart';
 
-import '../../../components/error_notification.dart';
+import '../../../components/notification.dart';
+import '../../../components/loader_dialog.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
 import '../models/item_model.dart';
@@ -63,7 +64,10 @@ class OtherSection extends StatelessWidget {
               subTitle: "setting_logout_desc",
               isNavigation: false,
               handleClick: () async {
+                LoaderDialog.show(context);
+
                 await AuthService().logOut(context);
+                LoaderDialog.hide();
                 NotificationDialog.show(
                     context, "Logout", "Logout successfully");
 

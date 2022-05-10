@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../constants/theme_constant.dart';
 
 class LoaderDialog {
-  static void show(BuildContext context) {
+  static void show(BuildContext context, [String? title]) {
     Widget alert = WillPopScope(
         child: AlertDialog(
           elevation: 3,
@@ -24,7 +24,7 @@ class LoaderDialog {
                 ),
               ),
               const SizedBox(width: kDefaultPadding),
-              const Text("Login..."),
+              Text(title ?? "Login..."),
             ],
           ),
         ),

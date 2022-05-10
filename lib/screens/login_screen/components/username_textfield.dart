@@ -34,8 +34,10 @@ class UsernameTextField extends StatelessWidget {
         ),
         contentPadding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
-        hintStyle: const TextStyle(fontSize: 16),
-        hintText: "login_username".tr,
+        hintStyle: const TextStyle(fontSize: 14),
+        hintText: "Ex: johndoe123",
+        labelText: "profile_username".tr,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );
   }

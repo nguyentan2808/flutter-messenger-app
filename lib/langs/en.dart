@@ -96,8 +96,9 @@ const Map<String, String> en = {
 
   /* Profile */
   "profile_title": "Profile",
-  "profile_username": "User name",
+  "profile_username": "Username",
   "profile_edit": "Edit profile",
+  "profile_cancel_request": "Cancel request",
   "profile_total_friend": "@total friends",
   "profile_add_friend": "Add friends",
   "profile_message": "Send Message",

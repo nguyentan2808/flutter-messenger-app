@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:lab6/components/loader_dialog.dart';
 import 'package:lab6/services/auth_service.dart';
 
-import '../../../components/error_notification.dart';
+import '../../../components/notification.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
 
@@ -22,11 +22,12 @@ class SocialButtons extends StatelessWidget {
         LoaderDialog.show(context);
         await AuthService().googleLogin(context);
         LoaderDialog.hide();
+        NotificationDialog.show(context, "Login", "Login successfully");
 
         Get.offAllNamed(Routes.home);
       } catch (error) {
         LoaderDialog.hide();
-        NotificationDialog.show(context, "Error", "Something went wrong");
+        NotificationDialog.show(context, "Error", error.toString());
       }
     }
 

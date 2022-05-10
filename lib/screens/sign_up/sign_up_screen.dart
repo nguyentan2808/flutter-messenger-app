@@ -1,11 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lab6/services/auth_service.dart';
 
 import '../../constants/theme_constant.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPassController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _birthdayController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _confirmPassController.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _birthdayController.dispose();
+  }
+
+  void _handleSignUp() {
+    if (_formKey.currentState!.validate()) {
+      final username = _usernameController.text;
+      final password = _passwordController.text;
+      final name = _nameController.text;
+      final email = _emailController.text;
+      final phone = _phoneController.text;
+      final birthday = _birthdayController.text;
+
+      try {
+        AuthService().signUp(
+          context,
+          username: username,
+          password: password,
+          name: name,
+          email: email,
+          phone: phone,
+          birthday: birthday,
+        );
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +68,7 @@ class SignUpScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'signup'.tr,
+            'signup_submit'.tr,
           ),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           foregroundColor: Theme.of(context).textTheme.bodyText1?.color,
@@ -23,59 +77,76 @@ class SignUpScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(kDefaultPadding),
             width: double.infinity,
-            child: Column(
-              children: [
-                Text(
-                  'signup_title'.tr,
-                  style: const TextStyle(
-                      fontSize: 26, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: kDefaultPadding / 2),
-                SizedBox(
-                  width: Get.width * 0.6,
-                  child: Text(
-                    'signup_subtitle'.tr,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Text(
+                    'signup_title'.tr,
+                    style: const TextStyle(
+                        fontSize: 26, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(height: kDefaultPadding * 2.5),
-                buildNameTextField(context),
-                const SizedBox(height: kDefaultPadding * 1.5),
-                buildEmailTextField(context),
-                const SizedBox(height: kDefaultPadding * 1.5),
-                buildPhoneTextField(context),
-                const SizedBox(height: kDefaultPadding * 1.5),
-                const BirthDayTextField(),
-                const SizedBox(height: kDefaultPadding * 1.5),
-                const PasswordTextField(),
-                const SizedBox(height: kDefaultPadding * 1.5),
-                const ConfirmPasswordTextField(),
-                const SizedBox(height: kDefaultPadding * 1.5),
-                buildSignUpButton(context),
-                const SizedBox(height: kDefaultPadding * 2.5),
-                Opacity(
-                  opacity: 0.8,
-                  child: SizedBox(
-                    width: Get.width * 0.8,
+                  const SizedBox(height: kDefaultPadding / 2),
+                  SizedBox(
+                    width: Get.width * 0.6,
                     child: Text(
-                      "signup_terms_confirm".tr,
-                      style: const TextStyle(
-                        fontSize: 12,
-                      ),
+                      'signup_subtitle'.tr,
                       textAlign: TextAlign.center,
                     ),
                   ),
-                )
-              ],
+                  const SizedBox(height: kDefaultPadding * 2.5),
+                  UsernameTextField(
+                    controller: _usernameController,
+                  ),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  PasswordTextField(controller: _passwordController),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  ConfirmPasswordTextField(
+                    controller: _confirmPassController,
+                    passwordController: _passwordController,
+                  ),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  NameTextField(controller: _nameController),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  EmailTextField(controller: _emailController),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  PhoneTextField(controller: _phoneController),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  BirthDayTextField(controller: _birthdayController),
+                  const SizedBox(height: kDefaultPadding * 1.5),
+                  SignUpButton(onPress: _handleSignUp),
+                  const SizedBox(height: kDefaultPadding * 2.5),
+                  Opacity(
+                    opacity: 0.8,
+                    child: SizedBox(
+                      width: Get.width * 0.8,
+                      child: Text(
+                        "signup_terms_confirm".tr,
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+}
 
-  MaterialButton buildSignUpButton(BuildContext context) {
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({Key? key, required this.onPress}) : super(key: key);
+
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
@@ -83,7 +154,7 @@ class SignUpScreen extends StatelessWidget {
       padding: const EdgeInsets.all(kDefaultPadding),
       elevation: 0,
       color: Theme.of(context).primaryColor,
-      onPressed: () {},
+      onPressed: onPress,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -108,9 +179,62 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  TextField buildNameTextField(BuildContext context) {
-    return TextField(
+class UsernameTextField extends StatelessWidget {
+  const UsernameTextField({Key? key, required this.controller})
+      : super(key: key);
+
+  final TextEditingController controller;
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your username';
+    } else if (value.length < 8) {
+      return 'Username must be at least 8 characters';
+    }
+
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: _validator,
+      controller: controller,
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        labelText: "profile_username".tr,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        prefixIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
+        hintStyle: const TextStyle(fontSize: 14),
+        hintText: "Ex: johndoe123",
+      ),
+    );
+  }
+}
+
+class NameTextField extends StatelessWidget {
+  const NameTextField({Key? key, required this.controller}) : super(key: key);
+
+  final TextEditingController controller;
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your Name';
+    }
+
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      validator: _validator,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: "signup_name".tr,
@@ -124,9 +248,28 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  TextField buildEmailTextField(BuildContext context) {
-    return TextField(
+class EmailTextField extends StatelessWidget {
+  const EmailTextField({Key? key, required this.controller}) : super(key: key);
+
+  final TextEditingController controller;
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    } else if (!value.contains("@")) {
+      return 'Please enter valid email';
+    }
+
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      validator: _validator,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: "signup_email".tr,
@@ -139,10 +282,29 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  TextField buildPhoneTextField(BuildContext context) {
-    return TextField(
+class PhoneTextField extends StatelessWidget {
+  const PhoneTextField({Key? key, required this.controller}) : super(key: key);
+
+  final TextEditingController controller;
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone';
+    } else if (value.length < 8) {
+      return 'Please enter valid phone number';
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      validator: _validator,
       textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: "signup_phone".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -158,25 +320,34 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class BirthDayTextField extends StatefulWidget {
-  const BirthDayTextField({Key? key}) : super(key: key);
+  const BirthDayTextField({Key? key, required this.controller})
+      : super(key: key);
+
+  final TextEditingController controller;
 
   @override
   State<BirthDayTextField> createState() => _BirthDayTextFieldState();
 }
 
 class _BirthDayTextFieldState extends State<BirthDayTextField> {
-  TextEditingController controller = TextEditingController();
-
   @override
   void initState() {
-    controller.text = "";
+    widget.controller.text = "";
     super.initState();
+  }
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your Birthday';
+    }
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      validator: _validator,
+      controller: widget.controller,
       textInputAction: TextInputAction.next,
       readOnly: true,
       onTap: () async {
@@ -189,7 +360,7 @@ class _BirthDayTextFieldState extends State<BirthDayTextField> {
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
 
-          setState(() => controller.text = formattedDate);
+          setState(() => widget.controller.text = formattedDate);
         }
       },
       decoration: InputDecoration(
@@ -208,7 +379,19 @@ class _BirthDayTextFieldState extends State<BirthDayTextField> {
 }
 
 class PasswordTextField extends StatefulWidget {
-  const PasswordTextField({Key? key}) : super(key: key);
+  const PasswordTextField({Key? key, required this.controller})
+      : super(key: key);
+
+  final TextEditingController controller;
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    } else if (value.length < 8) {
+      return 'Password must be at least 8 characters';
+    }
+    return null;
+  }
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -218,7 +401,9 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   bool isShowPassword = false;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: widget.controller,
+      validator: widget._validator,
       textInputAction: TextInputAction.next,
       obscureText: !isShowPassword,
       decoration: InputDecoration(
@@ -247,7 +432,24 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 }
 
 class ConfirmPasswordTextField extends StatefulWidget {
-  const ConfirmPasswordTextField({Key? key}) : super(key: key);
+  const ConfirmPasswordTextField(
+      {Key? key, required this.controller, required this.passwordController})
+      : super(key: key);
+
+  final TextEditingController passwordController;
+  final TextEditingController controller;
+
+  String? _validator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    } else if (value.length < 8) {
+      return 'Password must be at least 8 characters';
+    } else if (passwordController.text != value) {
+      return 'Password does not match';
+    }
+
+    return null;
+  }
 
   @override
   State<ConfirmPasswordTextField> createState() =>
@@ -259,7 +461,9 @@ class _ConfirmPasswordTextFieldState extends State<ConfirmPasswordTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: widget.controller,
+      validator: widget._validator,
       textInputAction: TextInputAction.next,
       obscureText: !isShowPassword,
       decoration: InputDecoration(

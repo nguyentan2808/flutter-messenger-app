@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(
               name: Routes.forgotPassword,
-              page: () => ForgotPasswordScreen(),
+              page: () => const ForgotPasswordScreen(),
               transition: Transition.rightToLeftWithFade,
             ),
             GetPage(
