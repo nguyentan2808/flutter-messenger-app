@@ -1,4 +1,4 @@
-# lab6
+# Midterm project Advanced mobile development subject (Flutter)
 
 A new Flutter project.
 
