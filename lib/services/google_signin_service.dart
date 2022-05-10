@@ -4,15 +4,24 @@ class GoogleSignInService {
   static final GoogleSignIn googleSignIn = GoogleSignIn();
 
   static Future<String?> getTokenId() async {
-    GoogleSignInAccount? user = await googleSignIn.signIn();
-    final auth = await user?.authentication;
-    final tokenId = auth?.idToken;
+    try {
+      GoogleSignInAccount? user = await googleSignIn.signIn();
 
-    return tokenId;
+      if (user == null) return null;
+
+      final auth = await user.authentication;
+      final tokenId = auth.idToken;
+
+      return tokenId;
+    } catch (e) {
+      throw Exception("Google sign in error");
+    }
   }
 
   Future signOut() async {
-    await googleSignIn.disconnect();
+    if (await googleSignIn.isSignedIn()) {
+      await googleSignIn.disconnect();
+    }
   }
 
   // static void printWrapped(String text) {
