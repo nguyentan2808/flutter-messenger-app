@@ -74,6 +74,7 @@ class AuthService {
     await googleService.signOut();
     context.read<Auth>().setUser(null);
     localStorage.remove("user");
+    localStorage.remove("token");
   }
 }
 
