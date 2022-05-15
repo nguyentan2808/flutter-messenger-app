@@ -12,6 +12,7 @@ import 'google_signin_service.dart';
 class AuthService {
   static final GoogleSignInService googleService = GoogleSignInService();
   static API api = API();
+  static GetStorage localStorage = GetStorage();
 
   Future<void> googleLogin(BuildContext context) async {
     final idToken = await GoogleSignInService.getTokenId();
@@ -20,7 +21,7 @@ class AuthService {
       var response = await api.googleLogin(idToken);
 
       var user = UserModel.fromJson(response.data['user']);
-      GetStorage().write("user", user.toJson()); //Save user to local storage
+      localStorage.write("user", user.toJson()); //Save user to local storage
 
       context.read<Auth>().setUser(user);
     } else {
@@ -47,10 +48,17 @@ class AuthService {
     );
   }
 
-  Future<void> logOut(BuildContext context) async {
-    await googleService.signOut();
-    context.read<Auth>().setUser(null);
-    GetStorage().remove("user");
+  Future<void> localLogin(
+      BuildContext context, String username, String password) async {
+    var response = await api.localLogin(username: username, password: password);
+
+    String token = response.data['token'];
+
+    var user = UserModel.fromJson(response.data['user']);
+    localStorage.write("user", user.toJson());
+    localStorage.write("token", token);
+
+    context.read<Auth>().setUser(user);
   }
 
   void loginWithMockData(BuildContext context) {
@@ -61,4 +69,15 @@ class AuthService {
     var user = UserModel.fromJson(decode['user']);
     context.read<Auth>().setUser(user);
   }
+
+  Future<void> logOut(BuildContext context) async {
+    await googleService.signOut();
+    context.read<Auth>().setUser(null);
+    localStorage.remove("user");
+  }
+}
+
+String jwtDecode(String code) {
+  String normalizedSource = base64Url.normalize(code.split(".")[1]);
+  return utf8.decode(base64Url.decode(normalizedSource));
 }

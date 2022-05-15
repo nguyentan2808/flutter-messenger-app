@@ -35,17 +35,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future _handleLogin() async {
-    if (_formKey.currentState!.validate()) {
-      AuthService().loginWithMockData(context);
+    try {
+      if (_formKey.currentState!.validate()) {
+        LoaderDialog.show(context);
 
-      LoaderDialog.show(context);
+        await AuthService().localLogin(
+            context, _phoneController.text, _passwordController.text);
 
-      await Future.delayed(const Duration(milliseconds: 1400));
+        LoaderDialog.hide();
+
+        NotificationDialog.show(context, 'Login', 'Login success');
+
+        Get.offAllNamed(Routes.home);
+      }
+    } catch (error) {
       LoaderDialog.hide();
-
-      NotificationDialog.show(context, 'Login', 'Login success');
-
-      Get.offAllNamed(Routes.home);
+      NotificationDialog.show(context, "Error", error.toString());
     }
   }
 

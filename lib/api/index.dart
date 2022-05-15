@@ -11,7 +11,7 @@ class API {
 
       return response;
     } catch (error) {
-      throw ("Server error");
+      throw ("Some thing went wrong!");
     }
   }
 
@@ -35,9 +35,27 @@ class API {
       return response;
     } catch (error) {
       if (error is DioError) {
-        throw (error.response?.data['message'] ?? "Server error");
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
       }
       throw "Some thing went wrong!";
+    }
+  }
+
+  Future localLogin({
+    required String username,
+    required String password,
+  }) async {
+    try {
+      var response = await dio.post('/auth/login/local', data: {
+        'username': username,
+        'password': password,
+      });
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      // throw "Some thing went wrong!";
     }
   }
 }
