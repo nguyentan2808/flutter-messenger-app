@@ -4,21 +4,24 @@ import 'package:get/get.dart';
 import '../constants/theme_constant.dart';
 
 class NotificationDialog {
-  static void show(BuildContext context, String title, String body) {
+  static void show(BuildContext context, String title, String body,
+      {bool isPrimary = false, int duration = 3000}) {
     Get.snackbar(
       title,
       body,
       borderWidth: 2,
+      backgroundColor: isPrimary ? Theme.of(context).primaryColor : null,
+      colorText: isPrimary ? Colors.white : Colors.black,
       borderRadius: kDefaultRadius / 2,
       snackPosition: SnackPosition.TOP,
-      duration: const Duration(seconds: 2),
+      duration: Duration(milliseconds: duration),
       margin: const EdgeInsets.all(kDefaultPadding / 2),
-      animationDuration: const Duration(milliseconds: 500),
+      animationDuration: const Duration(milliseconds: 400),
       mainButton: TextButton(
         onPressed: () => Get.back(),
-        child: const Icon(
+        child: Icon(
           Icons.close,
-          color: Colors.black,
+          color: isPrimary ? Colors.white : Colors.black,
         ),
       ),
     );
