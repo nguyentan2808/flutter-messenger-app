@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/models/user_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
+import '../../helpers/jwt_helper.dart';
+import '../../models/user_model.dart';
 import '../../providers/auth_provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -29,10 +32,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future navigateToHome() async {
     String initScreen;
-    bool? isOnboardingDone = GetStorage().read("isOnboardingDone");
+    GetStorage localStorage = GetStorage();
+    bool? isOnboardingDone = localStorage.read("isOnboardingDone");
+    String? token = localStorage.read("token");
 
     if (isOnboardingDone == null || !isOnboardingDone) {
       initScreen = Routes.onboarding;
+    } else if (token != null && token.isNotEmpty) {
+      String userString = JWTHelper.decode(token);
+      UserModel user = UserModel.fromJson(jsonDecode(userString));
+      context.read<Auth>().setUser(user);
+
+      initScreen = Routes.home;
     } else {
       initScreen = Routes.login;
     }
