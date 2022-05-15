@@ -17,7 +17,7 @@ class AuthService {
     final idToken = await GoogleSignInService.getTokenId();
 
     if (idToken != null) {
-      var response = await api.login(idToken);
+      var response = await api.googleLogin(idToken);
 
       var user = UserModel.fromJson(response.data['user']);
       GetStorage().write("user", user.toJson()); //Save user to local storage
@@ -37,9 +37,7 @@ class AuthService {
     required String phone,
     required String birthday,
   }) async {
-    print("$username, $password, $name, $email, $phone, $birthday");
-
-    var response = await api.signUp(
+    await api.signUp(
       username: username,
       password: password,
       name: name,
@@ -47,8 +45,6 @@ class AuthService {
       phone: phone,
       birthday: birthday,
     );
-
-    print(response);
   }
 
   Future<void> logOut(BuildContext context) async {

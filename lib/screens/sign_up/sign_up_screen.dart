@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lab6/services/auth_service.dart';
 
+import '../../components/notification.dart';
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -36,33 +38,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _birthdayController.dispose();
   }
 
-  void _handleSignUp() {
-    if (_formKey.currentState!.validate()) {
-      final username = _usernameController.text;
-      final password = _passwordController.text;
-      final name = _nameController.text;
-      final email = _emailController.text;
-      final phone = _phoneController.text;
-      final birthday = _birthdayController.text;
-
-      try {
-        AuthService().signUp(
-          context,
-          username: username,
-          password: password,
-          name: name,
-          email: email,
-          phone: phone,
-          birthday: birthday,
-        );
-      } catch (e) {
-        print(e);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    Future _handleSignUp() async {
+      try {
+        if (_formKey.currentState!.validate()) {
+          final username = _usernameController.text;
+          final password = _passwordController.text;
+          final name = _nameController.text;
+          final email = _emailController.text;
+          final phone = _phoneController.text;
+          final birthday = _birthdayController.text;
+
+          await AuthService().signUp(
+            context,
+            username: username,
+            password: password,
+            name: name,
+            email: email,
+            phone: phone,
+            birthday: birthday,
+          );
+
+          NotificationDialog.show(context, "Sign Up",
+              'Sign up successfully. You will go back login page in 5 seconds',
+              isPrimary: true, duration: 3000);
+
+          Future.delayed(const Duration(seconds: 5), () {
+            Get.offAllNamed(Routes.login);
+          });
+        }
+      } catch (error) {
+        NotificationDialog.show(context, "Error", error.toString());
+      }
+    }
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
