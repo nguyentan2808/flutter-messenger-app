@@ -21,6 +21,9 @@ class GoogleSignInService {
   Future signOut() async {
     if (await googleSignIn.isSignedIn()) {
       await googleSignIn.disconnect();
+    } else {
+      /* This case for improve UX when user don't login by google account */
+      await Future.delayed(const Duration(seconds: 1));
     }
   }
 
