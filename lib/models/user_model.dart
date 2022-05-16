@@ -13,17 +13,18 @@ class UserModel {
   String avatar;
   String coverPhoto;
   String status;
+  bool isLocal;
 
-  UserModel.fromMock({
-    required this.id,
-    required this.username,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.avatar,
-    required this.coverPhoto,
-    required this.status,
-  });
+  UserModel.fromMock(
+      {required this.id,
+      required this.username,
+      required this.name,
+      required this.email,
+      required this.phone,
+      required this.avatar,
+      required this.coverPhoto,
+      required this.status,
+      required this.isLocal});
 
   UserModel(
     this.id,
@@ -34,6 +35,7 @@ class UserModel {
     this.avatar,
     this.coverPhoto,
     this.status,
+    this.isLocal,
   );
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

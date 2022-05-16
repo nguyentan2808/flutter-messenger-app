@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 import '../../../components/notification.dart';
 import '../../../components/loader_dialog.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../services/auth_service.dart';
 import '../models/item_model.dart';
 import 'setting_row.dart';
 
@@ -51,9 +53,9 @@ class OtherSection extends StatelessWidget {
               title: "setting_change_password",
               subTitle: "setting_change_password_desc",
               isNavigation: false,
-              handleClick: () {
-                Get.toNamed(Routes.changePassword);
-              },
+              handleClick: context.watch<Auth>().user!.isLocal
+                  ? () => Get.toNamed(Routes.changePassword)
+                  : null,
             ),
           ),
           SettingRow(

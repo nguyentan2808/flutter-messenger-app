@@ -15,6 +15,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       json['avatar'] as String,
       json['coverPhoto'] as String,
       json['status'] as String,
+      json['isLocal'] as bool,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -26,4 +27,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'avatar': instance.avatar,
       'coverPhoto': instance.coverPhoto,
       'status': instance.status,
+      'isLocal': instance.isLocal,
     };
