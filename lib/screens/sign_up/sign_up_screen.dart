@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:lab6/services/auth_service.dart';
 
 import '../../components/notification.dart';
-import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -60,13 +59,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             birthday: birthday,
           );
 
-          NotificationDialog.show(context, "Sign Up",
-              'Sign up successfully. You will go back login page in 5 seconds',
+          NotificationDialog.show(context, "Sign Up", 'Sign up successfully...',
               isPrimary: true, duration: 3000);
-
-          Future.delayed(const Duration(seconds: 5), () {
-            Get.offAllNamed(Routes.login);
-          });
         }
       } catch (error) {
         NotificationDialog.show(context, "Error", error.toString());
@@ -286,7 +280,8 @@ class EmailTextField extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.email, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),
-        contentPadding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
+        contentPadding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
         hintStyle: const TextStyle(fontSize: 14),
         hintText: "Ex: john@doe.com",
       ),

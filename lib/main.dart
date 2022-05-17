@@ -6,7 +6,7 @@ import 'package:lab6/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/routes_constant.dart';
-import 'screens/change_password/change_password.dart';
+import 'screens/change_password/change_password_screen.dart';
 import 'screens/chat_options/chat_options_screen.dart';
 import 'screens/chat_detail/chat_detail_screen.dart';
 import 'screens/edit_profile/edit_profile_screen.dart';

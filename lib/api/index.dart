@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
 
 class API {
-  static var dio = Dio(BaseOptions(
-      baseUrl: 'http://10.0.2.2:5000/api/', connectTimeout: 1000 * 5));
+  static var dio = Dio(
+    BaseOptions(
+      baseUrl: 'http://10.0.2.2:5000/api/',
+      connectTimeout: 1000 * 5,
+    ),
+  );
 
   Future googleLogin(String idToken) async {
     try {
@@ -55,7 +59,26 @@ class API {
       if (error is DioError) {
         throw (error.response?.data['message'] ?? "Some thing went wrong!");
       }
-      // throw "Some thing went wrong!";
+    }
+  }
+
+  Future changePassword({
+    required String username,
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      var response = await dio.put('/auth/change-password', data: {
+        "username": username,
+        'oldPassword': oldPassword,
+        'newPassword': newPassword,
+      });
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
     }
   }
 }

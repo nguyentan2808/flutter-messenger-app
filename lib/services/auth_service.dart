@@ -61,6 +61,19 @@ class AuthService {
     context.read<Auth>().setUser(user);
   }
 
+  Future<void> changePassword(
+    BuildContext context,
+    String username,
+    String oldPassword,
+    String newPassword,
+  ) async {
+    await api.changePassword(
+      username: username,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    );
+  }
+
   void loginWithMockData(BuildContext context) {
     const json =
         '{"user":{"_id":"6278e416261473307cb3bcec","username":"nguyentan08.it","name":"Tân Nguyễn Xuân","email":"nguyentan08.it@gmail.com","phone":"","status":"","gender":"male","avatar":"https://lh3.googleusercontent.com/a-/AOh14GjpGe4CWZxlPMm6T3AnsOrm0cGzSFHf7sd7JvgD=s96-c","coverPhoto":"","isPrivate":false,"createdAt":"2022-05-09T09:51:18.073Z","updatedAt":"2022-05-09T09:51:18.073Z","__v":0}}';
