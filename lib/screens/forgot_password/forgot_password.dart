@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../components/loader_dialog.dart';
+import '../../components/notification.dart';
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
+import '../../services/auth_service.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -17,6 +19,24 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _controller = TextEditingController();
+
+  Future _handleSubmit() async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        String username = _controller.text;
+        LoaderDialog.show(context, 'Sending email...');
+
+        String email = await AuthService().forgotPassword(context, username);
+
+        LoaderDialog.hide();
+
+        Get.toNamed(Routes.otpForm, arguments: email);
+      }
+    } catch (e) {
+      LoaderDialog.hide();
+      NotificationDialog.show(context, 'Error', e.toString());
+    }
+  }
 
   @override
   void dispose() {
@@ -104,14 +124,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   MaterialButton buildSubmitButton(BuildContext context) {
     return MaterialButton(
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          // Get.snackbar("forgot_title".tr,
-          //     "Email sent successfully to ${_controller.text}");
-
-          Get.toNamed(Routes.otpForm);
-        }
-      },
+      onPressed: _handleSubmit,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
@@ -171,9 +184,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return TextFormField(
       controller: _controller,
       validator: _validator,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
-      textInputAction: TextInputAction.done,
-      keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         labelText: "forgot_phone_number".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,

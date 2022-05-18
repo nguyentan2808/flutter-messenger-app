@@ -8,7 +8,16 @@ import 'components/input_group.dart';
 import 'components/text_group.dart';
 
 class OTPFormScreen extends StatelessWidget {
-  const OTPFormScreen({Key? key}) : super(key: key);
+  OTPFormScreen({Key? key}) : super(key: key);
+
+  final String email = Get.arguments;
+
+  final _formKey = GlobalKey<FormState>();
+
+  final _firstDigitController = TextEditingController();
+  final _secondDigitController = TextEditingController();
+  final _thirdDigitController = TextEditingController();
+  final _fourthDigitController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +30,20 @@ class OTPFormScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(kDefaultPadding),
         child: Column(
-          children: const [
-            TextGroup(),
-            SizedBox(height: kDefaultPadding * 1.5),
-            InputGroup(),
-            SizedBox(height: kDefaultPadding / 4),
-            CountDownResend(),
-            Spacer(),
-            ActionGroup()
+          children: [
+            TextGroup(email: email),
+            const SizedBox(height: kDefaultPadding * 1.5),
+            InputGroup(
+              formKey: _formKey,
+              firstDigitController: _firstDigitController,
+              secondDigitController: _secondDigitController,
+              thirdDigitController: _thirdDigitController,
+              fourthDigitController: _fourthDigitController,
+            ),
+            const SizedBox(height: kDefaultPadding / 4),
+            const CountDownResend(),
+            const Spacer(),
+            const ActionGroup()
           ],
         ),
       ),

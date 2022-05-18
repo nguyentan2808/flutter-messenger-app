@@ -16,6 +16,7 @@ import 'screens/login_screen/login_screen.dart';
 import 'screens/onboarding/onboarding_screen.dart';
 import 'screens/otp_form/otp_form_screen.dart';
 import 'screens/profile/profile_screen.dart';
+import 'screens/reset_password/reset_password_screen.dart';
 import 'screens/setting/components/language_screen.dart';
 import 'screens/setting/components/theme_mode_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
@@ -127,7 +128,12 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(
               name: Routes.otpForm,
-              page: () => const OTPFormScreen(),
+              page: () => OTPFormScreen(),
+              transition: Transition.rightToLeftWithFade,
+            ),
+            GetPage(
+              name: Routes.resetPassword,
+              page: () => ResetPassword(),
               transition: Transition.rightToLeftWithFade,
             ),
           ],

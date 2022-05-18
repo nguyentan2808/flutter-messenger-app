@@ -81,4 +81,50 @@ class API {
       throw "Some thing went wrong!";
     }
   }
+
+  Future forgotPassword(String username) async {
+    try {
+      var response = await dio.post('/auth/forgot-password', data: {
+        'username': username,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future verifyOTP(int otp) async {
+    try {
+      var response = await dio.post('/auth/verify-otp', data: {
+        'otp': otp,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future resetPassword(String username, String newPassword) async {
+    try {
+      var response = await dio.post('/auth/reset-password', data: {
+        "username": username,
+        'newPassword': newPassword,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
 }

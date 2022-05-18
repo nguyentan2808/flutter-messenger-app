@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import '../../../constants/theme_constant.dart';
 
 class TextGroup extends StatelessWidget {
-  const TextGroup({Key? key}) : super(key: key);
+  const TextGroup({Key? key, required this.email}) : super(key: key);
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,9 @@ class TextGroup extends StatelessWidget {
         const SizedBox(height: kDefaultPadding / 2),
         Row(
           children: [
-            const Text(
-              "+tanpro01635147801@gmail.com ",
-              style: TextStyle(fontWeight: FontWeight.w600),
+            Text(
+              "$email ",
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
             Text(
               "otp_change_username".tr,

@@ -13,4 +13,5 @@ class Routes {
   static const themeSetting = '/themeSetting';
   static const languageSetting = '/languageSetting';
   static const otpForm = '/otpForm';
+  static const resetPassword = '/resetPassword';
 }
