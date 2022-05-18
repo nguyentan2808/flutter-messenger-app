@@ -39,6 +39,15 @@ const Map<String, String> vi = {
   "forgot_back": "Quay lại",
   "forgot_back_desc": "Nhớ mật khẩu?",
 
+  /* OTP Form */
+  "otp_app_bar": "Xác thực OTP",
+  "otp_title": "Mã xác nhận",
+  "otp_desc": "Chúng tôi đã gửi một email xác nhận đến",
+  "otp_resend": "Gửi lại",
+  "otp_confirm": "Xác nhận",
+  "otp_resend_count_down": "Gửi lại sau ",
+  "otp_change_username": "Thay đổi email",
+
   /* Dark mode */
   "dark_mode": "Chế độ tối",
   "light_mode": "Chế độ sáng",

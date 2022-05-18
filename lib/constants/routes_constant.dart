@@ -12,4 +12,5 @@ class Routes {
   static const onboarding = '/onboarding';
   static const themeSetting = '/themeSetting';
   static const languageSetting = '/languageSetting';
+  static const otpForm = '/otpForm';
 }

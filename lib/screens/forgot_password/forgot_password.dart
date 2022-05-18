@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -105,8 +106,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return MaterialButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
-          Get.snackbar("forgot_title".tr,
-              "Email sent successfully to ${_controller.text}");
+          // Get.snackbar("forgot_title".tr,
+          //     "Email sent successfully to ${_controller.text}");
+
+          Get.toNamed(Routes.otpForm);
         }
       },
       shape: RoundedRectangleBorder(

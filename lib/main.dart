@@ -2,10 +2,10 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/routes_constant.dart';
+import 'providers/auth_provider.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/chat_options/chat_options_screen.dart';
 import 'screens/chat_detail/chat_detail_screen.dart';
@@ -14,6 +14,7 @@ import 'screens/forgot_password/forgot_password.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/login_screen/login_screen.dart';
 import 'screens/onboarding/onboarding_screen.dart';
+import 'screens/otp_form/otp_form_screen.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/setting/components/language_screen.dart';
 import 'screens/setting/components/theme_mode_screen.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => GestureDetector(
         onTap: () => _handleFocus(context),
         child: GetMaterialApp(
@@ -122,6 +123,11 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: Routes.languageSetting,
               page: () => const LanguagesScreen(),
+              transition: Transition.rightToLeftWithFade,
+            ),
+            GetPage(
+              name: Routes.otpForm,
+              page: () => const OTPFormScreen(),
               transition: Transition.rightToLeftWithFade,
             ),
           ],

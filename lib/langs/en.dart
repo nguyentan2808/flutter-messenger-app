@@ -40,6 +40,15 @@ const Map<String, String> en = {
   "forgot_back": "Back to Login",
   "forgot_back_desc": "Remember your password? ",
 
+  /* OTP Form */
+  "otp_app_bar": "OTP Form",
+  "otp_title": "Verification code",
+  "otp_desc": "We have send the code verification to ",
+  "otp_resend": "Resend",
+  "otp_confirm": "Confirm",
+  "otp_resend_count_down": "Resend code after ",
+  "otp_change_username": "Change email",
+
   /* Dark mode */
   "dark_mode": "Dark Mode",
   "light_mode": "Light Mode",
