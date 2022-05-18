@@ -127,4 +127,36 @@ class API {
       throw "Some thing went wrong!";
     }
   }
+
+  Future updateAvatar(String username, String avatar) async {
+    try {
+      var response = await dio.put('/auth/update', data: {
+        "username": username,
+        'avatar': avatar,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future updateCoverPhoto(String username, String coverPhoto) async {
+    try {
+      var response = await dio.put('/auth/update', data: {
+        "username": username,
+        'coverPhoto': coverPhoto,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
 }

@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => GestureDetector(
         onTap: () => _handleFocus(context),
         child: GetMaterialApp(
@@ -142,3 +142,102 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+
+// /// This is a reimplementation of the default Flutter application using provider + [ChangeNotifier].
+
+// void main() {
+//   runApp(
+//     /// Providers are above [MyApp] instead of inside it, so that tests
+//     /// can use [MyApp] while mocking the providers
+//     MultiProvider(
+//       providers: [
+//         ChangeNotifierProvider(create: (_) => Counter()),
+//       ],
+//       child: const MyApp(),
+//     ),
+//   );
+// }
+
+// /// Mix-in [DiagnosticableTreeMixin] to have access to [debugFillProperties] for the devtool
+// // ignore: prefer_mixin
+// class Counter with ChangeNotifier, DiagnosticableTreeMixin {
+//   int _count = 0;
+
+//   int get count => _count;
+
+//   void increment() {
+//     _count++;
+//     notifyListeners();
+//   }
+
+//   /// Makes `Counter` readable inside the devtools by listing all of its properties
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatelessWidget {
+//   const MyHomePage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Example'),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisSize: MainAxisSize.min,
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             const Text('You have pushed the button this many times:'),
+//             Count(
+//               count: context.watch<Counter>().count,
+//             ),
+//           ],
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         key: const Key('increment_floatingActionButton'),
+//         onPressed: () => context.read<Counter>().increment(),
+//         tooltip: 'Increment',
+//         child: const Icon(Icons.add),
+//       ),
+//     );
+//   }
+// }
+
+// class Count extends StatelessWidget {
+//   const Count({Key? key, required this.count}) : super(key: key);
+
+//   final int count;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Text(
+//           count.toString(),
+//           key: const Key('counterState'),
+//           style: Theme.of(context).textTheme.headline4,
+//         ),
+//         ElevatedButton(
+//           onPressed: () => context.read<Counter>().increment(),
+//           child: const Text('Increment'),
+//         ),
+//       ],
+//     );
+//   }
+// }

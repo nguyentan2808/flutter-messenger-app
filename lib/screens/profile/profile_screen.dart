@@ -23,7 +23,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    user ??= context.read<Auth>().user;
+    user ??= context.watch<Auth>().user;
     isMe = context.watch<Auth>().user?.username == user?.username;
 
     return Scaffold(
@@ -36,7 +36,7 @@ class ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(kDefaultPadding * 2 / 3),
             child: Column(
               children: [
-                ProfileImages(user: user as UserModel),
+                ProfileImages(user: user as UserModel, isMe: isMe),
                 ProfileActions(user: user as UserModel, isMe: isMe),
                 Divider(color: Colors.grey[400]),
                 ProfileDetail(user: user as UserModel),

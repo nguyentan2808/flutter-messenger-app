@@ -21,14 +21,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool isLoading = false;
 
-  void loadUserFromStorage() {
-    var jsonUser = GetStorage().read("user");
-    if (jsonUser != null) {
-      UserModel user = UserModel.fromJson(jsonUser);
+  // void loadUserFromStorage() {
+  //   var jsonUser = GetStorage().read("user");
+  //   if (jsonUser != null) {
+  //     UserModel user = UserModel.fromJson(jsonUser);
 
-      context.read<Auth>().setUser(user);
-    }
-  }
+  //     context.read<Auth>().setUser(user);
+  //   }
+  // }
 
   Future navigateToHome() async {
     String initScreen;
@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    loadUserFromStorage();
+    // loadUserFromStorage();
     navigateToHome();
   }
 

@@ -173,7 +173,7 @@ class ConfirmFieldState extends State<ConfirmField> {
       textInputAction: TextInputAction.next,
       obscureText: !isShowPassword,
       decoration: InputDecoration(
-        labelText: "signup_password".tr,
+        labelText: "signup_confirm_password".tr,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: Icon(Icons.lock, color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(100.0)),

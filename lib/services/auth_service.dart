@@ -104,6 +104,35 @@ class AuthService {
     await api.resetPassword(username, newPassword);
   }
 
+  Future<void> updateAvatar(
+    BuildContext context,
+    String username,
+    String avatar,
+  ) async {
+    var response = await api.updateAvatar(username, avatar);
+    String token = response.data['token'];
+
+    context.read<Auth>().setAvatar(avatar);
+
+    localStorage.write("user", context.read<Auth>().user!.toJson());
+    localStorage.write("token", token);
+  }
+
+  Future<void> updateCoverPhoto(
+    BuildContext context,
+    String username,
+    String coverPhoto,
+  ) async {
+    var response = await api.updateCoverPhoto(username, coverPhoto);
+    String token = response.data['token'];
+
+    // TODO: update new user from decode instead of update only avatar
+    context.read<Auth>().setCoverPhoto(coverPhoto);
+
+    localStorage.write("user", context.read<Auth>().user!.toJson());
+    localStorage.write("token", token);
+  }
+
   void loginWithMockData(BuildContext context) {
     const json =
         '{"user":{"_id":"6278e416261473307cb3bcec","username":"nguyentan08.it","name":"Tân Nguyễn Xuân","email":"nguyentan08.it@gmail.com","phone":"","status":"","gender":"male","avatar":"https://lh3.googleusercontent.com/a-/AOh14GjpGe4CWZxlPMm6T3AnsOrm0cGzSFHf7sd7JvgD=s96-c","coverPhoto":"","isPrivate":false,"createdAt":"2022-05-09T09:51:18.073Z","updatedAt":"2022-05-09T09:51:18.073Z","__v":0}}';
