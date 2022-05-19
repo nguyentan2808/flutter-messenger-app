@@ -159,4 +159,17 @@ class API {
       throw "Some thing went wrong!";
     }
   }
+
+  Future fetchAllUser() async {
+    try {
+      var response = await dio.get('/user');
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
 }

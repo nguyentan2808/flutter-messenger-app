@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/users_controller.dart';
+import '../../../api/index.dart';
+import '../../../components/notification.dart';
+import '../../../models/user_model.dart';
 import 'row_item.dart';
 
 class FriendsTab extends StatefulWidget {
@@ -12,36 +14,50 @@ class FriendsTab extends StatefulWidget {
 }
 
 class _FriendsTabState extends State<FriendsTab> {
-  final UsersController _usersController = Get.put(UsersController());
+  List<UserModel> users = [];
+
+  Future fetchUsers() async {
+    try {
+      var response = await API().fetchAllUser();
+      var usersJSON = response.data['users'];
+
+      List<UserModel> result = [];
+
+      for (int i = 0; i < usersJSON.length; i++) {
+        result.add(UserModel.fromJson(usersJSON[i]));
+      }
+
+      setState(() => users = result);
+    } catch (error) {
+      NotificationDialog.show(context, "Error", error.toString());
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _usersController.fetchUsers();
+    fetchUsers();
   }
 
   Future _onRefresh() async {
-    _usersController.fetchUsers();
+    API().fetchAllUser();
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: Get.height,
-      child: Obx(
-        () => _usersController.users.isNotEmpty
-            ? RefreshIndicator(
-                onRefresh: _onRefresh,
-                child: ListView.builder(
-                  itemCount: _usersController.users.length,
-                  itemBuilder: (context, index) {
-                    final user = _usersController.users[index];
-                    return RowItem(user: user);
-                  },
-                ),
-              )
-            : const Center(child: CircularProgressIndicator()),
-      ),
+      child: users.isNotEmpty
+          ? RefreshIndicator(
+              onRefresh: _onRefresh,
+              child: ListView.builder(
+                itemCount: users.length,
+                itemBuilder: (context, index) {
+                  return RowItem(user: users[index]);
+                },
+              ),
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
