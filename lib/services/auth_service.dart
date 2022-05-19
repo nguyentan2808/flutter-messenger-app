@@ -144,7 +144,7 @@ class AuthService {
 
   Future<void> logOut(BuildContext context) async {
     await googleService.signOut();
-    context.read<Auth>().setUser(null);
+    context.read<Auth>().initUser(null);
     localStorage.remove("user");
     localStorage.remove("token");
   }

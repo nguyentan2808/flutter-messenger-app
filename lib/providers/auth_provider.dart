@@ -5,9 +5,11 @@ class Auth with ChangeNotifier {
   UserModel? _user;
   UserModel? get user => _user;
 
+  void initUser(user) => _user = user;
+
   void setUser(UserModel? user) {
     _user = user;
-    // notifyListeners();
+    notifyListeners();
   }
 
   void setAvatar(String url) {

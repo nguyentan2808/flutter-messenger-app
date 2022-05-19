@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else if (token != null && token.isNotEmpty) {
       String userString = JWTHelper.decode(token);
       UserModel user = UserModel.fromJson(jsonDecode(userString));
-      context.read<Auth>().setUser(user);
+      context.read<Auth>().initUser(user);
 
       initScreen = Routes.home;
     } else {
