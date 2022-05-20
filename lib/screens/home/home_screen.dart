@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:socket_io_client/socket_io_client.dart';
 import '../friends/friends_screen.dart';
 import '../setting/setting_screen.dart';
 import '../conversations/conversations_screen.dart';
@@ -19,6 +19,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
+
+  void connectToServer() {
+    try {
+      Socket socket = io('http://10.0.2.2:5000', <String, dynamic>{
+        'transports': ['websocket'],
+      });
+
+      socket.onConnect((_) {
+        print(socket.connected);
+        print(socket.id);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    connectToServer();
+  }
 
   void handleChangeIndex(int index) {
     setState(() {
