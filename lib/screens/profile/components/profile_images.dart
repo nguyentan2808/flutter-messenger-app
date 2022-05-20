@@ -24,16 +24,21 @@ class ProfileImages extends StatelessWidget {
     return SizedBox(
       height: Get.height / 3,
       child: Stack(
-        children: [CoverPhoto(user: user), Avatar(user: user, isMe: isMe)],
+        children: [
+          CoverPhoto(user: user, isMe: isMe),
+          Avatar(user: user, isMe: isMe)
+        ],
       ),
     );
   }
 }
 
 class CoverPhoto extends StatelessWidget {
-  const CoverPhoto({Key? key, required this.user}) : super(key: key);
+  const CoverPhoto({Key? key, required this.user, required this.isMe})
+      : super(key: key);
 
   final UserModel user;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +58,8 @@ class CoverPhoto extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () {
-        openPickerImage(context, handleChangeCoverPhoto);
-      },
+      onTap: () =>
+          isMe ? openPickerImage(context, handleChangeCoverPhoto) : null,
       child: Padding(
         padding: EdgeInsets.only(bottom: Get.width / 12),
         child: ClipRRect(
