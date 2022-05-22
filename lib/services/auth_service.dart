@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../api/index.dart';
 import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
+import '../providers/socket_provider.dart';
 import 'google_signin_service.dart';
 
 class AuthService {
@@ -24,6 +25,7 @@ class AuthService {
       localStorage.write("user", user.toJson()); //Save user to local storage
 
       context.read<Auth>().setUser(user);
+      context.read<SocketProvider>().initSocket(user.username);
     } else {
       throw ("Some thing went wrong");
     }
@@ -58,6 +60,7 @@ class AuthService {
     localStorage.write("user", user.toJson());
     localStorage.write("token", token);
 
+    context.read<SocketProvider>().initSocket(user.username);
     context.read<Auth>().setUser(user);
   }
 
@@ -145,6 +148,8 @@ class AuthService {
   Future<void> logOut(BuildContext context) async {
     await googleService.signOut();
     context.read<Auth>().initUser(null);
+    context.read<SocketProvider>().disconnect();
+
     localStorage.remove("user");
     localStorage.remove("token");
   }

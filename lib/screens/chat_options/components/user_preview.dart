@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/models/conversation_model.dart';
 
 import '../../../constants/theme_constant.dart';
-import '../../../models/user_model.dart';
 
 class UserPreview extends StatelessWidget {
-  const UserPreview({Key? key, required this.user}) : super(key: key);
+  const UserPreview({Key? key, required this.receiver}) : super(key: key);
 
-  final UserModel user;
+  final UserDetailModel receiver;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class UserPreview extends StatelessWidget {
         Stack(
           children: [
             CachedNetworkImage(
-              imageUrl: user.avatar,
+              imageUrl: receiver.avatar,
               imageBuilder: (context, imageProvider) => CircleAvatar(
                 backgroundImage: imageProvider,
                 radius: Get.width * 1 / 8,
@@ -49,7 +49,7 @@ class UserPreview extends StatelessWidget {
         ),
         const SizedBox(height: kDefaultPadding / 2),
         Text(
-          user.name,
+          receiver.name,
           style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
         )
       ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/models/conversation_model.dart';
 
 import '../../../constants/theme_constant.dart';
-import '../../models/user_model.dart';
 import 'components/app_bar.dart';
 import 'components/circle_option.dart';
 import 'components/group_title.dart';
@@ -13,7 +13,7 @@ import 'utils/open_change_theme_dialog.dart';
 class ChatOptionsScreen extends StatelessWidget {
   ChatOptionsScreen({Key? key}) : super(key: key);
 
-  final UserModel user = Get.arguments[0];
+  final UserDetailModel receiver = Get.arguments[0];
   final void Function(String) handleChangeTheme = Get.arguments[1];
 
   @override
@@ -23,7 +23,7 @@ class ChatOptionsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            UserPreview(user: user),
+            UserPreview(receiver: receiver),
             const SizedBox(height: kDefaultPadding * 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,37 +1,68 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/models/conversation_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
-import '../../../models/user_model.dart';
 import '../../../providers/auth_provider.dart';
 
-class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
-  const ChatDetailAppBar({Key? key, required this.handleChangeTheme})
+class ChatDetailAppBar extends StatefulWidget with PreferredSizeWidget {
+  const ChatDetailAppBar(
+      {Key? key, required this.handleChangeTheme, required this.conversation})
       : super(key: key);
 
   final Function(String) handleChangeTheme;
+  final ConversationModel conversation;
 
-  void _goToOptions(BuildContext context) {
-    UserModel? user = context.read<Auth>().user;
-    Get.toNamed(Routes.chatOptions, arguments: [user, handleChangeTheme]);
+  @override
+  State<ChatDetailAppBar> createState() => _ChatDetailAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
+  late UserDetailModel receiver;
+
+  void _goToOptions(UserDetailModel receiver) {
+    Get.toNamed(Routes.chatOptions,
+        arguments: [receiver, widget.handleChangeTheme]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.conversation.users.length == 2) {
+      if (widget.conversation.users[0].username ==
+          context.read<Auth>().user!.username) {
+        receiver = widget.conversation.users[1];
+      } else {
+        receiver = widget.conversation.users[0];
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print("receiver: ${receiver.username}, ${receiver.name},");
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
       elevation: 1,
       automaticallyImplyLeading: true,
       title: GestureDetector(
-        onTap: () => _goToOptions(context),
+        onTap: () => _goToOptions(receiver),
         child: Row(
           children: [
             Stack(children: [
-              const CircleAvatar(
-                radius: 16,
-                backgroundImage: AssetImage('assets/images/avatar.jpg'),
+              CachedNetworkImage(
+                imageUrl: receiver.avatar,
+                imageBuilder: (context, imageProvider) => CircleAvatar(
+                  radius: 16,
+                  backgroundImage: imageProvider,
+                ),
               ),
               Positioned(
                 right: 0,
@@ -53,9 +84,9 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Nguyen Tan',
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  receiver.name,
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 2.0),
@@ -92,13 +123,10 @@ class ChatDetailAppBar extends StatelessWidget with PreferredSizeWidget {
           )
         ]),
         IconButton(
-          onPressed: () => _goToOptions(context),
+          onPressed: () => _goToOptions(receiver),
           icon: const Icon(Icons.info_rounded, size: 24),
         ),
       ],
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
-import '../../helpers/jwt_helper.dart';
 import '../../models/user_model.dart';
 import '../../providers/auth_provider.dart';
 
@@ -21,28 +18,14 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool isLoading = false;
 
-  // void loadUserFromStorage() {
-  //   var jsonUser = GetStorage().read("user");
-  //   if (jsonUser != null) {
-  //     UserModel user = UserModel.fromJson(jsonUser);
-
-  //     context.read<Auth>().setUser(user);
-  //   }
-  // }
-
   Future navigateToHome() async {
     String initScreen;
-    GetStorage localStorage = GetStorage();
-    bool? isOnboardingDone = localStorage.read("isOnboardingDone");
-    String? token = localStorage.read("token");
+    bool? isOnboardingDone = GetStorage().read("isOnboardingDone");
+    UserModel? user = context.read<Auth>().user;
 
     if (isOnboardingDone == null || !isOnboardingDone) {
       initScreen = Routes.onboarding;
-    } else if (token != null && token.isNotEmpty) {
-      String userString = JWTHelper.decode(token);
-      UserModel user = UserModel.fromJson(jsonDecode(userString));
-      context.read<Auth>().initUser(user);
-
+    } else if (user != null) {
       initScreen = Routes.home;
     } else {
       initScreen = Routes.login;

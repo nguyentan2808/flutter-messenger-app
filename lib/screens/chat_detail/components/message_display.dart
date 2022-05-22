@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:lab6/controllers/messages_controller.dart';
-import 'package:lab6/screens/chat_detail/models/message_model.dart';
-
+import 'package:lab6/models/message_model.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:lab6/providers/messages_provider.dart';
+import 'package:provider/provider.dart';
 import 'message.dart';
 
 class MessageDisplay extends StatefulWidget {
@@ -13,32 +13,30 @@ class MessageDisplay extends StatefulWidget {
 }
 
 class _MessageDisplayState extends State<MessageDisplay> {
-  final MessagesController _messagesController = Get.put(MessagesController());
-
   @override
   Widget build(BuildContext context) {
+    List<MessageModel> messages = context.watch<MessageProvider>().messages;
+
     return Expanded(
-      child: Obx(
-        () => ListView.builder(
-          reverse: true,
-          itemCount: _messagesController.messages.length,
-          itemBuilder: (context, index) {
-            final MessageModel message = _messagesController.messages[index];
-            final bool isMe = message.sender == "nguyentan2808";
-            bool isShowAvatar;
+      child: ListView.builder(
+        reverse: true,
+        itemCount: messages.length,
+        itemBuilder: (context, index) {
+          final MessageModel message = messages[index];
+          final bool isMe =
+              message.sender == context.watch<Auth>().user!.username;
+          bool isShowAvatar;
 
-            if (index == 0) {
-              isShowAvatar = true;
-            } else {
-              final MessageModel nextMessage =
-                  _messagesController.messages[index - 1];
-              isShowAvatar = message.sender != nextMessage.sender;
-            }
+          if (index == 0) {
+            isShowAvatar = true;
+          } else {
+            final MessageModel nextMessage = messages[index - 1];
+            isShowAvatar = message.sender != nextMessage.sender;
+          }
 
-            return Message(
-                message: message, isMe: isMe, isShowAvatar: isShowAvatar);
-          },
-        ),
+          return Message(
+              message: message, isMe: isMe, isShowAvatar: isShowAvatar);
+        },
       ),
     );
   }

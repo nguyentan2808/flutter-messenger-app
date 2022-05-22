@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/api/index.dart';
+import 'package:lab6/components/notification.dart';
+import 'package:lab6/models/conversation_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../components/facebook_button.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
 import '../../../models/user_model.dart';
+import '../../../providers/auth_provider.dart';
 
 enum Relationship { friend, pending, none }
 
@@ -26,6 +31,19 @@ class _ProfileActionsState extends State<ProfileActions> {
   void initState() {
     super.initState();
     setState(() => relationship = Relationship.friend);
+  }
+
+  Future _handleOpenChat(UserModel user) async {
+    try {
+      String me = context.read<Auth>().user!.username;
+      var response = await API().fetchConversation(me, user.username);
+      var conversation =
+          ConversationModel.fromJson(response.data['conversation']);
+
+      Get.toNamed(Routes.chatDetail, arguments: conversation);
+    } catch (error) {
+      NotificationDialog.show(context, "Error", error.toString());
+    }
   }
 
   @override
@@ -100,7 +118,7 @@ class _ProfileActionsState extends State<ProfileActions> {
                             text: "profile_message".tr,
                             icon: Icons.send,
                             isActive: false,
-                            onPressed: () => Get.toNamed(Routes.chatDetail),
+                            onPressed: () => _handleOpenChat(widget.user),
                           ),
                         )
                       ],

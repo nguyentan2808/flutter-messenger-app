@@ -27,7 +27,9 @@ class _FriendsTabState extends State<FriendsTab> {
         result.add(UserModel.fromJson(usersJSON[i]));
       }
 
-      setState(() => users = result);
+      if (mounted) {
+        setState(() => users = result);
+      }
     } catch (error) {
       NotificationDialog.show(context, "Error", error.toString());
     }

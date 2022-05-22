@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/theme_constant.dart';
-import '../models/message_model.dart';
+import '../../../models/message_model.dart';
 
 class MessageContent extends StatelessWidget {
   const MessageContent({Key? key, required this.isMe, required this.message})
@@ -16,9 +16,9 @@ class MessageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        message.type != MessageType.text
+        !message.isText
             ? CachedNetworkImage(
-                imageUrl: message.mediaUrl,
+                imageUrl: message.content,
                 imageBuilder: (context, imageProvider) => Container(
                   width: Get.width * 0.4,
                   height: Get.width * 0.4,
@@ -34,7 +34,7 @@ class MessageContent extends StatelessWidget {
                     horizontal: 10, vertical: kDefaultPadding / 2),
                 constraints: BoxConstraints(maxWidth: Get.width * 0.6),
                 decoration: BoxDecoration(
-                    color: message.isUnSend
+                    color: !message.isText
                         ? Colors.transparent
                         : Theme.of(context)
                             .primaryColor
@@ -52,7 +52,7 @@ class MessageContent extends StatelessWidget {
                         color: Colors.black.withOpacity(0.1),
                       ),
                     ]),
-                child: message.isUnSend
+                child: !message.isText
                     ? Text(
                         "chat_detail_unsent".tr,
                         style: const TextStyle(
@@ -62,7 +62,7 @@ class MessageContent extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        message.text,
+                        message.content,
                         style: TextStyle(
                           color: Get.isDarkMode
                               ? Colors.white

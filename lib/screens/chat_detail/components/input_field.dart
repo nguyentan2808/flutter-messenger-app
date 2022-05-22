@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/controllers/messages_controller.dart';
-import 'package:lab6/screens/chat_detail/models/message_model.dart';
+import 'package:lab6/models/message_model.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:lab6/providers/messages_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/theme_constant.dart';
 
@@ -142,20 +144,10 @@ class _InputFieldState extends State<InputField> {
             GestureDetector(
               onTap: () {
                 String value = inputController.text;
-                Get.put(MessagesController()).messages.insert(
-                      0,
-                      MessageModel(
-                        "1",
-                        "2",
-                        "nguyentan2808",
-                        value,
-                        "",
-                        MessageType.text,
-                        null,
-                        false,
-                        "15 THG 4 10:42",
-                      ),
-                    );
+                MessageModel message = MessageModel(
+                    "Oke", context.read<Auth>().user!.username, value, true);
+
+                context.read<MessageProvider>().newMessage(message);
               },
               child: Icon(
                 Icons.send,

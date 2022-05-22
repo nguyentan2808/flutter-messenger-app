@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lab6/components/notification.dart';
+import 'package:lab6/providers/messages_provider.dart';
+import 'package:lab6/providers/socket_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/routes_constant.dart';
+import 'helpers/jwt_helper.dart';
+import 'models/user_model.dart';
 import 'providers/auth_provider.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/chat_options/chat_options_screen.dart';
@@ -31,18 +38,55 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => Auth()),
+      ChangeNotifierProvider(create: (_) => MessageProvider()),
+      ChangeNotifierProvider(create: (_) => SocketProvider()),
     ],
     child: const MyApp(),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   void _handleFocus(BuildContext context) {
     FocusScopeNode focus = FocusScope.of(context);
     if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
       FocusManager.instance.primaryFocus!.unfocus();
+    }
+  }
+
+  String? revivalUser() {
+    String? token = GetStorage().read("token");
+    if (token != null) {
+      String userString = JWTHelper.decode(token);
+      UserModel user = UserModel.fromJson(jsonDecode(userString));
+      context.read<Auth>().initUser(user);
+      return user.username;
+    }
+    return null;
+  }
+
+  void connectToServer(String username) {
+    try {
+      context.read<SocketProvider>().initSocket(username);
+    } catch (e) {
+      NotificationDialog.show(
+          context, "Error", "Can't connect to socket server");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    String? username = revivalUser();
+
+    if (username != null) {
+      connectToServer(username);
     }
   }
 

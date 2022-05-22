@@ -1,7 +1,7 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 
-import '../models/message_model.dart';
+import '../../../models/message_model.dart';
 import 'menu_reaction.dart';
 import 'message_avatar.dart';
 import 'message_content.dart';
