@@ -12,7 +12,7 @@ class MessageProvider with ChangeNotifier {
   }
 
   void newMessage(MessageModel newMessage) {
-    _messages.insert(0, newMessage);
+    _messages.add(newMessage);
 
     notifyListeners();
   }

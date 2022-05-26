@@ -49,7 +49,7 @@ class _MessageState extends State<Message> {
       child: GestureDetector(
         onTap: _handleShowDetail,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
           child: Row(
             mainAxisAlignment:
                 isMe ? MainAxisAlignment.end : MainAxisAlignment.start,

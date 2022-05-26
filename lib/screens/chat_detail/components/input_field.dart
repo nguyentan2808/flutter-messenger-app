@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/api/index.dart';
+import 'package:lab6/models/conversation_model.dart';
 import 'package:lab6/models/message_model.dart';
 import 'package:lab6/providers/auth_provider.dart';
 import 'package:lab6/providers/messages_provider.dart';
+import 'package:lab6/providers/socket_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/theme_constant.dart';
@@ -11,9 +14,15 @@ class InputField extends StatefulWidget {
   const InputField({
     Key? key,
     required this.scrollController,
+    required this.conversation,
+    required this.receiver,
+    required this.handleChangeConversation,
   }) : super(key: key);
 
   final ScrollController scrollController;
+  final ConversationModel? conversation;
+  final UserDetailModel? receiver;
+  final void Function(ConversationModel) handleChangeConversation;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -142,12 +151,43 @@ class _InputFieldState extends State<InputField> {
               ),
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 String value = inputController.text;
-                MessageModel message = MessageModel(
-                    "Oke", context.read<Auth>().user!.username, value, true);
+                String sender = context.read<Auth>().user!.username;
+                MessageModel message = MessageModel("Oke", sender, value, true);
+                inputController.text = "";
 
-                context.read<MessageProvider>().newMessage(message);
+                if (widget.conversation == null) {
+                  var response = await API().createConversation(
+                    context.read<Auth>().user!.username,
+                    widget.receiver!.username,
+                  );
+
+                  ConversationModel conversation =
+                      ConversationModel.fromJson(response.data["conversation"]);
+
+                  widget.handleChangeConversation(conversation);
+
+                  context.read<MessageProvider>().newMessage(message);
+                  context.read<SocketProvider>().socket.emit("new-message", {
+                    "conversationId": conversation.id,
+                    "content": value,
+                    "sender": sender,
+                    "receiver": conversation.users[0].username == sender
+                        ? conversation.users[1].username
+                        : conversation.users[0].username
+                  });
+                } else {
+                  context.read<MessageProvider>().newMessage(message);
+                  context.read<SocketProvider>().socket.emit("new-message", {
+                    "conversationId": widget.conversation!.id,
+                    "content": value,
+                    "sender": sender,
+                    "receiver": widget.conversation!.users[0].username == sender
+                        ? widget.conversation!.users[1].username
+                        : widget.conversation!.users[0].username
+                  });
+                }
               },
               child: Icon(
                 Icons.send,

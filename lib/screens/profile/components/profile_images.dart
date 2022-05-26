@@ -67,16 +67,26 @@ class CoverPhoto extends StatelessWidget {
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
           ),
-          child: CachedNetworkImage(
-            imageUrl: user.coverPhoto,
-            errorWidget: (context, url, error) => Container(
-                color: Colors.grey[200],
-                child: const Icon(Icons.image_outlined)),
-            fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-          ),
+          child: user.coverPhoto != ""
+              ? CachedNetworkImage(
+                  imageUrl: user.coverPhoto,
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.grey[200],
+                    child: const Icon(Icons.image_outlined),
+                  ),
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                )
+              : Center(
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    color: Colors.grey[200],
+                    child: const Icon(Icons.image_outlined),
+                  ),
+                ),
         ),
       ),
     );

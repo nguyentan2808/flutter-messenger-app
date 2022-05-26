@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/api/index.dart';
+import 'package:lab6/components/notification.dart';
+import 'package:lab6/models/conversation_model.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 import 'components/app_bar.dart';
@@ -14,13 +19,32 @@ class Conversations extends StatefulWidget {
 }
 
 class _ConversationsState extends State<Conversations> {
-  void handleOpenChatDetail() {
-    Get.toNamed(Routes.chatDetail);
+  List<ConversationModel> conversations = [];
+  bool isLoading = false;
+
+  Future fetchConversations() async {
+    try {
+      setState(() => isLoading = true);
+      var response =
+          await API().fetchAllConversation(context.read<Auth>().user!.username);
+      var conversationsJson = response.data['conversations'];
+      List<ConversationModel> temp = [];
+      for (int i = 0; i < conversationsJson.length; i++) {
+        temp.add(ConversationModel.fromJson(conversationsJson[i]));
+      }
+      setState(() => conversations = temp);
+      setState(() => isLoading = false);
+      return response;
+    } catch (error) {
+      setState(() => isLoading = false);
+      NotificationDialog.show(context, "Error", error.toString());
+    }
   }
 
   @override
   void initState() {
     super.initState();
+    fetchConversations();
   }
 
   @override
@@ -59,15 +83,16 @@ class _ConversationsState extends State<Conversations> {
         children: [
           const CustomAppBar(),
           Expanded(
-            child: ListView.builder(
-              itemCount: 20,
-              itemBuilder: (context, index) => index == 0
-                  ? const HorizontalList()
-                  : Conversation(
-                      onPress: () => handleOpenChatDetail(),
-                      index: index,
-                    ),
-            ),
+            child: isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : conversations.isEmpty
+                    ? const Center(child: Text("No conversations"))
+                    : ListView.builder(
+                        itemCount: conversations.length,
+                        itemBuilder: (context, index) => Conversation(
+                          conversation: conversations[index],
+                        ),
+                      ),
           )
         ],
       ),

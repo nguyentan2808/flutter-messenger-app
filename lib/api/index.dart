@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class API {
   static var dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.1.10:5000/api/',
+      baseUrl: 'http://192.168.1.5:5000/api/',
       connectTimeout: 1000 * 5,
     ),
   );
@@ -193,6 +193,38 @@ class API {
     try {
       var response = await dio.get('/message/all', queryParameters: {
         "conversationId": conversationId,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future fetchAllConversation(String username) async {
+    try {
+      var response =
+          await dio.get('/conversation/conversations', queryParameters: {
+        "username": username,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future createConversation(String sender, String receiver) async {
+    try {
+      var response = await dio.post('/conversation/create', data: {
+        "sender": sender,
+        "receiver": receiver,
       });
 
       return response;

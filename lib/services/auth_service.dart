@@ -20,9 +20,11 @@ class AuthService {
 
     if (idToken != null) {
       var response = await api.googleLogin(idToken);
-
+      String token = response.data['token'];
       var user = UserModel.fromJson(response.data['user']);
+
       localStorage.write("user", user.toJson()); //Save user to local storage
+      localStorage.write("token", token);
 
       context.read<Auth>().setUser(user);
       context.read<SocketProvider>().initSocket(user.username);

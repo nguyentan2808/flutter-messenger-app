@@ -9,6 +9,9 @@ class MessageModel {
   String content;
   bool isText;
 
+  MessageModel.formMock(
+      this.conversationId, this.sender, this.content, this.isText);
+
   MessageModel(this.conversationId, this.sender, this.content, this.isText);
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>

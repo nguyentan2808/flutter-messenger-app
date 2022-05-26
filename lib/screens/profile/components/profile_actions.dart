@@ -37,10 +37,17 @@ class _ProfileActionsState extends State<ProfileActions> {
     try {
       String me = context.read<Auth>().user!.username;
       var response = await API().fetchConversation(me, user.username);
-      var conversation =
-          ConversationModel.fromJson(response.data['conversation']);
-
-      Get.toNamed(Routes.chatDetail, arguments: conversation);
+      if (response.data["code"] == 1) {
+        Get.toNamed(Routes.chatDetail, arguments: {
+          "conversation":
+              ConversationModel.fromJson(response.data['conversation'])
+        });
+      } else {
+        Get.toNamed(Routes.chatDetail, arguments: {
+          "receiver":
+              UserDetailModel(user.username, user.name, user.avatar, user.name)
+        });
+      }
     } catch (error) {
       NotificationDialog.show(context, "Error", error.toString());
     }

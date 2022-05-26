@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lab6/models/message_model.dart';
 
 part "conversation_model.g.dart";
 
@@ -8,8 +9,9 @@ class ConversationModel {
   String id;
   String theme;
   List<UserDetailModel> users;
+  MessageModel lastMessage;
 
-  ConversationModel(this.id, this.theme, this.users);
+  ConversationModel(this.id, this.theme, this.users, this.lastMessage);
 
   factory ConversationModel.fromJson(Map<String, dynamic> json) =>
       _$ConversationModelFromJson(json);

@@ -31,9 +31,11 @@ class ProfileFriendsState extends State<ProfileFriends> {
 
     List<UserModel> users = decode.map((e) => UserModel.fromJson(e)).toList();
 
-    setState(() {
-      this.users = users;
-    });
+    if (mounted) {
+      setState(() {
+        this.users = users;
+      });
+    }
   }
 
   @override
