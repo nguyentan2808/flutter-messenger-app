@@ -1,0 +1,27 @@
+import 'package:flutter/cupertino.dart';
+import 'package:lab6/providers/conversations_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../api/index.dart';
+import '../models/conversation_model.dart';
+import '../providers/auth_provider.dart';
+
+class ConversationsService {
+  final BuildContext context;
+  final API api = API();
+
+  ConversationsService(this.context);
+
+  Future fetchConversations() async {
+    var response =
+        await api.fetchAllConversation(context.read<Auth>().user!.username);
+    var conversationsJson = response.data['conversations'];
+    List<ConversationModel> temp = [];
+    for (int i = 0; i < conversationsJson.length; i++) {
+      temp.add(ConversationModel.fromJson(conversationsJson[i]));
+    }
+    context.read<ConversationsProvider>().initConversations(temp);
+
+    return response;
+  }
+}

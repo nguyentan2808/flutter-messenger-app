@@ -235,4 +235,20 @@ class API {
       throw "Some thing went wrong!";
     }
   }
+
+  Future updateTheme(String conversationId, String theme) async {
+    try {
+      var response = await dio.post('/conversation/update-theme', data: {
+        "conversationId": conversationId,
+        "theme": theme,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
 }

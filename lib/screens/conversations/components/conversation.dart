@@ -9,10 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../providers/auth_provider.dart';
 
 class Conversation extends StatelessWidget {
-  const Conversation({
-    Key? key,
-    required this.conversation,
-  }) : super(key: key);
+  const Conversation({Key? key, required this.conversation}) : super(key: key);
 
   final ConversationModel conversation;
 

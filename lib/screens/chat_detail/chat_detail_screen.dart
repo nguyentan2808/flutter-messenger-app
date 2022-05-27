@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/providers/socket_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/index.dart';
+import '../../components/notification.dart';
 import '../../models/conversation_model.dart';
 import '../../models/message_model.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/conversations_provider.dart';
 import '../../providers/messages_provider.dart';
+import '../../providers/socket_provider.dart';
 import 'components/app_bar.dart';
 import 'components/input_field.dart';
 import 'components/message_display.dart';
@@ -26,8 +29,26 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   ConversationModel? conversation = Get.arguments["conversation"];
   final ScrollController _scrollController = ScrollController();
 
-  void handleChangeTheme(String newValue) {
-    setState(() => theme = newValue);
+  void handleChangeTheme(String newValue) async {
+    try {
+      setState(() => theme = newValue);
+      if (conversation != null) {
+        await API().updateTheme(conversation!.id, newValue);
+
+        context
+            .read<ConversationsProvider>()
+            .updateTheme(conversation!.id, newValue);
+      }
+    } catch (error) {
+      NotificationDialog.show(context, "Error", error.toString());
+    }
+  }
+
+  void revivalTheme() {
+    String _theme = conversation!.theme;
+    if (_theme != "") {
+      setState(() => theme = _theme);
+    }
   }
 
   void handleChangeConversation(ConversationModel newValue) {
@@ -62,6 +83,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   void initState() {
     super.initState();
     if (conversation != null) {
+      revivalTheme();
       joinRoom(conversation!.id);
       listenMessage();
     }

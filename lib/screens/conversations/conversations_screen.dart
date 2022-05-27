@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/api/index.dart';
-import 'package:lab6/components/notification.dart';
-import 'package:lab6/models/conversation_model.dart';
-import 'package:lab6/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
-import '../../constants/routes_constant.dart';
+import '../../components/notification.dart';
 import '../../constants/theme_constant.dart';
+import '../../models/conversation_model.dart';
+import '../../providers/conversations_provider.dart';
+import '../../services/conversations_service.dart';
 import 'components/app_bar.dart';
 import 'components/conversation.dart';
-import 'components/horizontal_list.dart';
 
 class Conversations extends StatefulWidget {
   const Conversations({Key? key}) : super(key: key);
@@ -19,36 +17,60 @@ class Conversations extends StatefulWidget {
 }
 
 class _ConversationsState extends State<Conversations> {
-  List<ConversationModel> conversations = [];
   bool isLoading = false;
+
+  // Future fetchConversations() async {
+  //   try {
+  //     setState(() => isLoading = true);
+  //     var response =
+  //         await API().fetchAllConversation(context.read<Auth>().user!.username);
+  //     var conversationsJson = response.data['conversations'];
+  //     List<ConversationModel> temp = [];
+  //     for (int i = 0; i < conversationsJson.length; i++) {
+  //       temp.add(ConversationModel.fromJson(conversationsJson[i]));
+  //     }
+  //     setState(() => conversations = temp);
+  //     setState(() => isLoading = false);
+  //     return response;
+  //   } catch (error) {
+  //     setState(() => isLoading = false);
+  //     NotificationDialog.show(context, "Error", error.toString());
+  //   }
+  // }
+
+  // void onThemeChanged(String conversationId, String theme) {
+  //   int index = conversations.indexWhere((e) => e.id == conversationId);
+  //   if (index != -1) {
+  //     setState(() => conversations[index].theme = theme);
+  //   }
+  // }
 
   Future fetchConversations() async {
     try {
       setState(() => isLoading = true);
-      var response =
-          await API().fetchAllConversation(context.read<Auth>().user!.username);
-      var conversationsJson = response.data['conversations'];
-      List<ConversationModel> temp = [];
-      for (int i = 0; i < conversationsJson.length; i++) {
-        temp.add(ConversationModel.fromJson(conversationsJson[i]));
-      }
-      setState(() => conversations = temp);
+
+      await ConversationsService(context).fetchConversations();
+
       setState(() => isLoading = false);
-      return response;
-    } catch (error) {
+    } catch (e) {
       setState(() => isLoading = false);
-      NotificationDialog.show(context, "Error", error.toString());
+
+      NotificationDialog.show(context, "Error", e.toString());
     }
   }
 
   @override
   void initState() {
     super.initState();
+
     fetchConversations();
   }
 
   @override
   Widget build(BuildContext context) {
+    List<ConversationModel> conversations =
+        context.watch<ConversationsProvider>().conversations;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -83,15 +105,14 @@ class _ConversationsState extends State<Conversations> {
         children: [
           const CustomAppBar(),
           Expanded(
-            child: isLoading
+            child: isLoading && conversations.isEmpty
                 ? const Center(child: CircularProgressIndicator())
                 : conversations.isEmpty
                     ? const Center(child: Text("No conversations"))
                     : ListView.builder(
                         itemCount: conversations.length,
-                        itemBuilder: (context, index) => Conversation(
-                          conversation: conversations[index],
-                        ),
+                        itemBuilder: (context, index) =>
+                            Conversation(conversation: conversations[index]),
                       ),
           )
         ],
