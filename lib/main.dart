@@ -26,6 +26,7 @@ import 'screens/onboarding/onboarding_screen.dart';
 import 'screens/otp_form/otp_form_screen.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/reset_password/reset_password_screen.dart';
+import 'screens/search_people/search_people_screen.dart';
 import 'screens/setting/components/language_screen.dart';
 import 'screens/setting/components/theme_mode_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
@@ -182,6 +183,11 @@ class _MyAppState extends State<MyApp> {
             GetPage(
               name: Routes.resetPassword,
               page: () => ResetPassword(),
+              transition: Transition.rightToLeftWithFade,
+            ),
+            GetPage(
+              name: Routes.searchPeople,
+              page: () => const SearchPeopleScreen(),
               transition: Transition.rightToLeftWithFade,
             ),
           ],

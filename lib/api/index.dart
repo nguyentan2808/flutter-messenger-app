@@ -185,9 +185,11 @@ class API {
     }
   }
 
-  Future fetchAllUser() async {
+  Future fetchAllUser([String? search]) async {
     try {
-      var response = await dio.get('/user');
+      var response = await dio.get('/user', queryParameters: {
+        'search': search,
+      });
 
       return response;
     } catch (error) {

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/screens/conversations/components/horizontal_list.dart';
 import 'package:provider/provider.dart';
 import '../../components/notification.dart';
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
 import '../../models/conversation_model.dart';
 import '../../providers/conversations_provider.dart';
 import '../../services/conversations_service.dart';
 import 'components/app_bar.dart';
 import 'components/conversation.dart';
+import 'components/horizontal_list.dart';
 
 class Conversations extends StatefulWidget {
   const Conversations({Key? key}) : super(key: key);
@@ -50,13 +51,15 @@ class _ConversationsState extends State<Conversations> {
     try {
       setState(() => isLoading = true);
 
-      await ConversationsService(context).fetchConversations();
-
-      setState(() => isLoading = false);
+      if (mounted) {
+        await ConversationsService(context).fetchConversations();
+        setState(() => isLoading = false);
+      }
     } catch (e) {
-      setState(() => isLoading = false);
-
-      NotificationDialog.show(context, "Error", e.toString());
+      if (mounted) {
+        setState(() => isLoading = false);
+        NotificationDialog.show(context, "Error", e.toString());
+      }
     }
   }
 
@@ -92,7 +95,11 @@ class _ConversationsState extends State<Conversations> {
             Text('conversation_title'.tr),
           ],
         ),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+        actions: [
+          IconButton(
+              onPressed: () => Get.toNamed(Routes.searchPeople),
+              icon: const Icon(Icons.search))
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
