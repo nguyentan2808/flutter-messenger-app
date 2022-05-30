@@ -31,10 +31,6 @@ class _FriendsTabState extends State<FriendsTab> {
     fetchFriends();
   }
 
-  Future _onRefresh() async {
-    API().fetchAllUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     List<UserModel> users = context.watch<FriendsProvider>().users;
@@ -43,7 +39,7 @@ class _FriendsTabState extends State<FriendsTab> {
       height: Get.height,
       child: users.isNotEmpty
           ? RefreshIndicator(
-              onRefresh: _onRefresh,
+              onRefresh: fetchFriends,
               child: ListView.builder(
                 itemCount: users.length,
                 itemBuilder: (context, index) {

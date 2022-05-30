@@ -160,6 +160,31 @@ class API {
     }
   }
 
+  Future updateProfile(
+    String username,
+    String name,
+    String email,
+    String phone,
+    String status,
+  ) async {
+    try {
+      var response = await dio.put('/auth/update', data: {
+        "username": username,
+        'name': name,
+        'email': email,
+        'phone': phone,
+        'status': status,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
   Future fetchAllUser() async {
     try {
       var response = await dio.get('/user');

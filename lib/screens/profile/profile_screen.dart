@@ -23,8 +23,14 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    user ??= context.watch<Auth>().user;
-    isMe = context.watch<Auth>().user?.username == user?.username;
+    if (user == null || isMe == true) {
+      setState(() {
+        user = context.watch<Auth>().user;
+      });
+    }
+    setState(() {
+      isMe = context.watch<Auth>().user?.username == user?.username;
+    });
 
     return Scaffold(
       appBar: AppBar(

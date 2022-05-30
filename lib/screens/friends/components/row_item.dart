@@ -62,15 +62,17 @@ class RowItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  user.status != null && user.name.length % 2 == 0
+                  user.status != ""
                       ? Padding(
                           padding:
                               const EdgeInsets.only(right: kDefaultPadding),
                           child: Text(
                             user.status,
                             style: const TextStyle(
-                                color: Colors.grey,
-                                overflow: TextOverflow.ellipsis),
+                              fontSize: 12,
+                              color: Colors.grey,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         )
                       : const SizedBox(),

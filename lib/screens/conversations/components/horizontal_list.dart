@@ -80,7 +80,7 @@ class People extends StatelessWidget {
                 const CircleAvatar(radius: 20, backgroundColor: Colors.grey),
             imageBuilder: (context, imageProvider) => CircleAvatar(
               backgroundImage: imageProvider,
-              radius: 20,
+              radius: 22,
             ),
           ),
           Text(

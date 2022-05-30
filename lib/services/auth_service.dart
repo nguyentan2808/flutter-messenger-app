@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../api/index.dart';
 import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
+import '../providers/conversations_provider.dart';
 import '../providers/socket_provider.dart';
 import 'google_signin_service.dart';
 
@@ -138,6 +139,26 @@ class AuthService {
     localStorage.write("token", token);
   }
 
+  Future<void> updateProfile(
+    BuildContext context,
+    String username,
+    String name,
+    String email,
+    String phone,
+    String status,
+  ) async {
+    var response =
+        await api.updateProfile(username, name, email, phone, status);
+    String token = response.data['token'];
+
+    UserModel user = UserModel.fromJson(response.data['user']);
+
+    context.read<Auth>().setUser(user);
+
+    localStorage.write("user", context.read<Auth>().user!.toJson());
+    localStorage.write("token", token);
+  }
+
   void loginWithMockData(BuildContext context) {
     const json =
         '{"user":{"_id":"6278e416261473307cb3bcec","username":"nguyentan08.it","name":"Tân Nguyễn Xuân","email":"nguyentan08.it@gmail.com","phone":"","status":"","gender":"male","avatar":"https://lh3.googleusercontent.com/a-/AOh14GjpGe4CWZxlPMm6T3AnsOrm0cGzSFHf7sd7JvgD=s96-c","coverPhoto":"","isPrivate":false,"createdAt":"2022-05-09T09:51:18.073Z","updatedAt":"2022-05-09T09:51:18.073Z","__v":0}}';
@@ -151,6 +172,7 @@ class AuthService {
     await googleService.signOut();
     context.read<Auth>().initUser(null);
     context.read<SocketProvider>().disconnect();
+    context.read<ConversationsProvider>().initConversations([]);
 
     localStorage.remove("user");
     localStorage.remove("token");
