@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/api/index.dart';
-import 'package:lab6/models/conversation_model.dart';
-import 'package:lab6/models/message_model.dart';
-import 'package:lab6/providers/auth_provider.dart';
-import 'package:lab6/providers/messages_provider.dart';
-import 'package:lab6/providers/socket_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../api/index.dart';
+import '../../../components/loader_dialog.dart';
+import '../../../components/notification.dart';
 import '../../../constants/theme_constant.dart';
+import '../../../models/conversation_model.dart';
+import '../../../models/message_model.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../providers/messages_provider.dart';
+import '../../../providers/socket_provider.dart';
+import '../../../services/upload_image_service.dart';
 
 class InputField extends StatefulWidget {
   const InputField({
@@ -77,15 +80,67 @@ class _InputFieldState extends State<InputField> {
           ]),
       child: Row(
         children: [
-          buildActions(),
+          Actions(
+            isTyping: isTyping,
+            inputFocus: inputFocus,
+            conversation: widget.conversation,
+          ),
           const SizedBox(width: kDefaultPadding * 0.8),
-          buildInput(context)
+          Input(
+            conversation: widget.conversation,
+            inputFocus: inputFocus,
+            inputController: inputController,
+            receiver: widget.receiver,
+            handleChangeConversation: widget.handleChangeConversation,
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget buildActions() {
+class Actions extends StatelessWidget {
+  const Actions(
+      {Key? key,
+      required this.isTyping,
+      required this.inputFocus,
+      required this.conversation})
+      : super(key: key);
+
+  final bool isTyping;
+  final FocusNode inputFocus;
+  final ConversationModel? conversation;
+
+  @override
+  Widget build(BuildContext context) {
+    Future handleSendImage(String url) async {
+      try {
+        LoaderDialog.hide();
+        String sender = context.read<Auth>().user!.username;
+
+        MessageModel message =
+            MessageModel(conversation!.id, sender, url, false);
+
+        context.read<MessageProvider>().newMessage(message);
+        context.read<SocketProvider>().socket.emit(
+          "new-message",
+          {
+            "conversationId": conversation!.id,
+            "content": url,
+            "sender": sender,
+            "isText": false,
+            "receiver": conversation!.users[0].username == sender
+                ? conversation!.users[1].username
+                : conversation!.users[0].username,
+          },
+        );
+      } catch (error) {
+        LoaderDialog.hide();
+
+        NotificationDialog.show(context, "Error", error.toString());
+      }
+    }
+
     if (isTyping) {
       return GestureDetector(
         onTap: inputFocus.unfocus,
@@ -106,16 +161,41 @@ class _InputFieldState extends State<InputField> {
             color: Theme.of(context).primaryColor,
           ),
           const SizedBox(width: kDefaultPadding * (3 / 4)),
-          Icon(
-            Icons.image,
-            color: Theme.of(context).primaryColor,
+          GestureDetector(
+            onTap: () {
+              if (conversation != null) {
+                UploadImageService().openPickerImage(context, handleSendImage);
+              }
+            },
+            child: Icon(
+              Icons.image,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ],
       );
     }
   }
+}
 
-  Expanded buildInput(BuildContext context) {
+class Input extends StatelessWidget {
+  const Input({
+    Key? key,
+    required this.inputFocus,
+    required this.inputController,
+    required this.conversation,
+    required this.receiver,
+    required this.handleChangeConversation,
+  }) : super(key: key);
+
+  final FocusNode inputFocus;
+  final TextEditingController inputController;
+  final ConversationModel? conversation;
+  final UserDetailModel? receiver;
+  final void Function(ConversationModel) handleChangeConversation;
+
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: inputFocus.unfocus,
@@ -152,41 +232,48 @@ class _InputFieldState extends State<InputField> {
             ),
             GestureDetector(
               onTap: () async {
-                String value = inputController.text;
-                String sender = context.read<Auth>().user!.username;
-                MessageModel message = MessageModel("Oke", sender, value, true);
-                inputController.text = "";
+                if (inputController.text.isNotEmpty) {
+                  String value = inputController.text;
+                  String sender = context.read<Auth>().user!.username;
+                  MessageModel message =
+                      MessageModel(conversation!.id, sender, value, true);
+                  inputController.text = "";
 
-                if (widget.conversation == null) {
-                  var response = await API().createConversation(
-                    context.read<Auth>().user!.username,
-                    widget.receiver!.username,
-                  );
+                  if (conversation == null) {
+                    var response = await API().createConversation(
+                      context.read<Auth>().user!.username,
+                      receiver!.username,
+                    );
 
-                  ConversationModel conversation =
-                      ConversationModel.fromJson(response.data["conversation"]);
+                    ConversationModel conversation = ConversationModel.fromJson(
+                        response.data["conversation"]);
 
-                  widget.handleChangeConversation(conversation);
+                    handleChangeConversation(conversation);
 
-                  context.read<MessageProvider>().newMessage(message);
-                  context.read<SocketProvider>().socket.emit("new-message", {
-                    "conversationId": conversation.id,
-                    "content": value,
-                    "sender": sender,
-                    "receiver": conversation.users[0].username == sender
-                        ? conversation.users[1].username
-                        : conversation.users[0].username
-                  });
-                } else {
-                  context.read<MessageProvider>().newMessage(message);
-                  context.read<SocketProvider>().socket.emit("new-message", {
-                    "conversationId": widget.conversation!.id,
-                    "content": value,
-                    "sender": sender,
-                    "receiver": widget.conversation!.users[0].username == sender
-                        ? widget.conversation!.users[1].username
-                        : widget.conversation!.users[0].username
-                  });
+                    context.read<MessageProvider>().newMessage(message);
+                    context.read<SocketProvider>().socket.emit("new-message", {
+                      "conversationId": conversation.id,
+                      "content": value,
+                      "sender": sender,
+                      "receiver": conversation.users[0].username == sender
+                          ? conversation.users[1].username
+                          : conversation.users[0].username
+                    });
+                  } else {
+                    context.read<MessageProvider>().newMessage(message);
+                    context.read<SocketProvider>().socket.emit(
+                      "new-message",
+                      {
+                        "conversationId": conversation!.id,
+                        "content": value,
+                        "sender": sender,
+                        "isText": true,
+                        "receiver": conversation!.users[0].username == sender
+                            ? conversation!.users[1].username
+                            : conversation!.users[0].username
+                      },
+                    );
+                  }
                 }
               },
               child: Icon(

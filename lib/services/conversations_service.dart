@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lab6/providers/conversations_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../api/index.dart';
 import '../models/conversation_model.dart';
 import '../providers/auth_provider.dart';
+import '../providers/conversations_provider.dart';
 
 class ConversationsService {
   final BuildContext context;
