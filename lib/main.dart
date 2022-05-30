@@ -4,16 +4,17 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/components/notification.dart';
-import 'package:lab6/providers/conversations_provider.dart';
-import 'package:lab6/providers/messages_provider.dart';
-import 'package:lab6/providers/socket_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'components/notification.dart';
 import 'constants/routes_constant.dart';
 import 'helpers/jwt_helper.dart';
 import 'models/user_model.dart';
 import 'providers/auth_provider.dart';
+import 'providers/conversations_provider.dart';
+import 'providers/friends_provider.dart';
+import 'providers/messages_provider.dart';
+import 'providers/socket_provider.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/chat_options/chat_options_screen.dart';
 import 'screens/chat_detail/chat_detail_screen.dart';
@@ -42,6 +43,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => MessageProvider()),
       ChangeNotifierProvider(create: (_) => SocketProvider()),
       ChangeNotifierProvider(create: (_) => ConversationsProvider()),
+      ChangeNotifierProvider(create: (_) => FriendsProvider()),
     ],
     child: const MyApp(),
   ));

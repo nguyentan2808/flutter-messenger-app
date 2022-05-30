@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../api/index.dart';
 import '../../../components/notification.dart';
 import '../../../models/user_model.dart';
+import '../../../providers/friends_provider.dart';
+import '../../../services/friends_service.dart';
 import 'row_item.dart';
 
 class FriendsTab extends StatefulWidget {
@@ -14,31 +17,18 @@ class FriendsTab extends StatefulWidget {
 }
 
 class _FriendsTabState extends State<FriendsTab> {
-  List<UserModel> users = [];
-
-  Future fetchUsers() async {
+  Future fetchFriends() async {
     try {
-      var response = await API().fetchAllUser();
-      var usersJSON = response.data['users'];
-
-      List<UserModel> result = [];
-
-      for (int i = 0; i < usersJSON.length; i++) {
-        result.add(UserModel.fromJson(usersJSON[i]));
-      }
-
-      if (mounted) {
-        setState(() => users = result);
-      }
-    } catch (error) {
-      NotificationDialog.show(context, "Error", error.toString());
+      FriendsService(context).fetchFriends();
+    } catch (e) {
+      NotificationDialog.show(context, "Error", e.toString());
     }
   }
 
   @override
   void initState() {
     super.initState();
-    fetchUsers();
+    fetchFriends();
   }
 
   Future _onRefresh() async {
@@ -47,6 +37,8 @@ class _FriendsTabState extends State<FriendsTab> {
 
   @override
   Widget build(BuildContext context) {
+    List<UserModel> users = context.watch<FriendsProvider>().users;
+
     return SizedBox(
       height: Get.height,
       child: users.isNotEmpty

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/screens/conversations/components/horizontal_list.dart';
 import 'package:provider/provider.dart';
 import '../../components/notification.dart';
 import '../../constants/theme_constant.dart';
@@ -104,6 +105,7 @@ class _ConversationsState extends State<Conversations> {
       body: Column(
         children: [
           const CustomAppBar(),
+          const HorizontalList(),
           Expanded(
             child: isLoading && conversations.isEmpty
                 ? const Center(child: CircularProgressIndicator())
