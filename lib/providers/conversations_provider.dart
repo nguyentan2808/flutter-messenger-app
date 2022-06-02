@@ -27,4 +27,17 @@ class ConversationsProvider with ChangeNotifier {
       _conversations[index].theme = theme;
     }
   }
+
+  void updateNickName(String conversationId, String username, String nickname) {
+    int index = _conversations.indexWhere((e) => e.id == conversationId);
+    if (index != -1) {
+      for (var e in _conversations[index].users) {
+        if (e.username == username) {
+          e.nickname = nickname;
+        }
+      }
+
+      notifyListeners();
+    }
+  }
 }

@@ -15,8 +15,10 @@ class Conversation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserDetailModel receiver =
-        context.read<Auth>().user!.username == conversation.users[0].username
+    UserDetailModel receiver = conversation.users.length >= 3
+        ? UserDetailModel.mockData(
+            "You and ${conversation.users.length - 1} others")
+        : context.read<Auth>().user!.username == conversation.users[0].username
             ? conversation.users[1]
             : conversation.users[0];
 
@@ -65,16 +67,23 @@ class Conversation extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      receiver.name,
+                      receiver.nickname != "" && conversation.users.length == 2
+                          ? receiver.nickname
+                          : receiver.name,
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 3),
-                    Text(
-                      "${conversation.lastMessage.sender == context.read<Auth>().user!.username ? "You: " : receiver.name} ${conversation.lastMessage.content}",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 13),
-                    )
+                    conversation.lastMessage != null
+                        ? Text(
+                            "${conversation.lastMessage!.sender == context.read<Auth>().user!.username ? "You: " : receiver.name} ${conversation.lastMessage!.content}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(fontSize: 13),
+                          )
+                        : const Text(
+                            "No message",
+                            style: TextStyle(fontSize: 13),
+                          ),
                   ],
                 ),
               ),

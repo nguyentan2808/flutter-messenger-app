@@ -11,4 +11,4 @@ const kDefaultPadding = 16.0;
 const kDefaultRadius = 16.0;
 
 const kDefaultAvatarUrl =
-    "https://logowik.com/content/uploads/images/flutter5786.jpg";
+    "https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,h_1080,q_100,w_1080/v1/gcs/platform-data-goog/events/flutter_I6JGxZE.jpg";

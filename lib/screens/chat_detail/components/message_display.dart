@@ -81,6 +81,7 @@ class _MessageDisplayState extends State<MessageDisplay> {
                             message: message,
                             isMe: isMe,
                             isShowAvatar: isShowAvatar,
+                            conversation: widget.conversation,
                           );
                         },
                       ),

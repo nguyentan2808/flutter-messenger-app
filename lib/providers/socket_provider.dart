@@ -1,19 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:lab6/models/user_model.dart';
+import 'package:lab6/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketProvider with ChangeNotifier {
   late Socket socket;
+  BuildContext context;
+
+  SocketProvider(this.context);
 
   void initSocket(String username) {
-    socket = io('http://192.168.1.5:5000', <String, dynamic>{
+    socket = io('http://192.168.1.6:5000', <String, dynamic>{
       'transports': ['websocket'],
     });
 
     socket.connect();
 
     socket.onConnect((_) {
-      print('connected');
+      UserModel? user = context.read<Auth>().user;
+      socket.emit("join", {"username": user?.username});
     });
+    socket.on(
+      "notification",
+      (data) {
+        FlutterLocalNotificationsPlugin().show(
+          2,
+          "New Message",
+          "${data['name']}: ${data['content']}",
+          const NotificationDetails(
+            android: AndroidNotificationDetails(
+              "channel.id",
+              "channel.name",
+              channelDescription: "channel.description",
+              importance: Importance.max,
+              playSound: true,
+              icon: '@mipmap/ic_launcher',
+            ),
+          ),
+        );
+      },
+    );
 
     socket.onDisconnect((_) => print('disconnect'));
   }

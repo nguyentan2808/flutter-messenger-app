@@ -4,11 +4,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lab6/components/notification.dart';
+import 'package:lab6/constants/routes_constant.dart';
+import 'package:lab6/models/conversation_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../api/index.dart';
 import '../../constants/theme_constant.dart';
 import '../../models/user_model.dart';
-import '../friends/components/row_item.dart';
+import '../../providers/auth_provider.dart';
+import 'components/people.dart';
+import 'components/row_item.dart';
 
 class SearchPeopleScreen extends StatefulWidget {
   const SearchPeopleScreen({Key? key}) : super(key: key);
@@ -22,6 +28,7 @@ class _SearchPeopleScreenState extends State<SearchPeopleScreen> {
 
   String _search = "";
   List<UserModel> _results = [];
+  List<UserModel> selected = [];
   bool isLoading = false;
   List<String> _historyKeywords = [];
   Timer? _debounce;
@@ -81,6 +88,10 @@ class _SearchPeopleScreenState extends State<SearchPeopleScreen> {
     }
   }
 
+  void _updateSelected(List<UserModel> newSelected) {
+    setState(() => selected = newSelected);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -123,92 +134,177 @@ class _SearchPeopleScreenState extends State<SearchPeopleScreen> {
           ),
         ),
       ),
-      body: _search == ""
-          ? Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: kDefaultPadding / 2,
-                      horizontal: kDefaultPadding),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        children: [
+          selected.isNotEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: kDefaultPadding / 2,
+                          horizontal: kDefaultPadding),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("${selected.length + 1} lựa chọn "),
+                          InkWell(
+                            onTap: () async {
+                              List<String> users = [
+                                context.read<Auth>().user!.username,
+                                ...selected.map((e) => e.username).toList()
+                              ];
+                              if (users.length <= 2) {
+                                NotificationDialog.show(context, "Notification",
+                                    "Cannot create group with less than 2 members");
+                              } else {
+                                var response =
+                                    await API().createConversation(users);
+                                ConversationModel conversation =
+                                    ConversationModel.fromJson(
+                                        response.data["conversation"]);
+
+                                Get.toNamed(Routes.chatDetail,
+                                    arguments: {"conversation": conversation});
+                              }
+                            },
+                            child: Text(
+                              "Tạo cuộc trò chuyện",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 100,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: selected.length + 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 0) {
+                            return People(
+                              user: context.watch<Auth>().user as UserModel,
+                              handleRemove: null,
+                            );
+                          }
+                          return People(
+                            user: selected[index - 1],
+                            handleRemove: () {
+                              _updateSelected(selected
+                                  .where((u) => u.id != selected[index - 1].id)
+                                  .toList());
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const Divider(height: 1, color: Colors.grey),
+                  ],
+                )
+              : Container(),
+          Expanded(
+            child: _search == ""
+                ? Column(
                     children: [
-                      const Text("Tìm kiếm gần đây"),
-                      Text(
-                        "Chỉnh sửa",
-                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: kDefaultPadding / 2,
+                            horizontal: kDefaultPadding),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Tìm kiếm gần đây"),
+                            Text(
+                              "Chỉnh sửa",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: _historyKeywords.length,
+                          itemBuilder: (context, index) => RowHistory(
+                            title: _historyKeywords[index],
+                            onRemove: () {
+                              _removeHistoryKeyword(_historyKeywords[index]);
+                            },
+                            onClick: () {
+                              _searchController.text = _historyKeywords[index];
+                              _handleChange(_historyKeywords[index]);
+                            },
+                          ),
+                        ),
                       )
                     ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: _historyKeywords.length,
-                    itemBuilder: (context, index) => RowHistory(
-                      title: _historyKeywords[index],
-                      onRemove: () {
-                        _removeHistoryKeyword(_historyKeywords[index]);
-                      },
-                      onClick: () {
-                        _searchController.text = _historyKeywords[index];
-                        _handleChange(_historyKeywords[index]);
-                      },
-                    ),
-                  ),
-                )
-              ],
-            )
-          : SizedBox(
-              width: double.infinity,
-              child: isLoading
-                  ? Column(
-                      children: const [
-                        SizedBox(height: kDefaultPadding * 2),
-                        CircularProgressIndicator(),
-                        SizedBox(height: kDefaultPadding),
-                        Text(
-                          "Loading...",
-                          style: TextStyle(fontSize: 12),
-                        )
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: kDefaultPadding / 2,
-                                horizontal: kDefaultPadding),
-                            child: RichText(
-                              overflow: TextOverflow.clip,
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: !isLoading && _results.isEmpty
-                                          ? 'Không tìm thấy kết quả nào cho từ khóa: '
-                                          : "${_results.length} kết quả tìm kiếm cho từ khóa: "),
-                                  TextSpan(
-                                    text: "\"$_search\"",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
+                  )
+                : SizedBox(
+                    width: double.infinity,
+                    child: isLoading
+                        ? Column(
+                            children: const [
+                              SizedBox(height: kDefaultPadding * 2),
+                              CircularProgressIndicator(),
+                              SizedBox(height: kDefaultPadding),
+                              Text(
+                                "Loading...",
+                                style: TextStyle(fontSize: 12),
+                              )
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: kDefaultPadding / 2,
+                                      horizontal: kDefaultPadding),
+                                  child: RichText(
+                                    overflow: TextOverflow.clip,
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .color,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: !isLoading && _results.isEmpty
+                                                ? 'Không tìm thấy kết quả nào cho từ khóa: '
+                                                : "${_results.length} kết quả tìm kiếm cho từ khóa: "),
+                                        TextSpan(
+                                          text: "\"$_search\"",
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: _results.length,
+                                  itemBuilder: (context, index) => RowItem(
+                                    user: _results[index],
+                                    selected: selected,
+                                    updateSelected: _updateSelected,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: _results.length,
-                            itemBuilder: (context, index) =>
-                                RowItem(user: _results[index]),
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }

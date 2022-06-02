@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lab6/models/message_model.dart';
 
+import '../constants/theme_constant.dart';
+
 part "conversation_model.g.dart";
 
 @JsonSerializable()
@@ -9,7 +11,7 @@ class ConversationModel {
   String id;
   String theme;
   List<UserDetailModel> users;
-  MessageModel lastMessage;
+  MessageModel? lastMessage;
 
   ConversationModel(this.id, this.theme, this.users, this.lastMessage);
 
@@ -30,6 +32,15 @@ class UserDetailModel {
   String avatar;
 
   UserDetailModel(this.username, this.nickname, this.avatar, this.name);
+
+  static UserDetailModel mockData(String name) {
+    return UserDetailModel(
+      "clone",
+      "clone",
+      kDefaultAvatarUrl,
+      name,
+    );
+  }
 
   factory UserDetailModel.fromJson(Map<String, dynamic> json) =>
       _$UserDetailModelFromJson(json);

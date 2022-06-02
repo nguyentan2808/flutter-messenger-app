@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class API {
   static var dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.1.5:5000/api/',
+      baseUrl: 'http://192.168.1.6:5000/api/',
       connectTimeout: 1000 * 5,
     ),
   );
@@ -247,11 +247,10 @@ class API {
     }
   }
 
-  Future createConversation(String sender, String receiver) async {
+  Future createConversation(List<String> users) async {
     try {
       var response = await dio.post('/conversation/create', data: {
-        "sender": sender,
-        "receiver": receiver,
+        "users": users,
       });
 
       return response;
@@ -268,6 +267,24 @@ class API {
       var response = await dio.post('/conversation/update-theme', data: {
         "conversationId": conversationId,
         "theme": theme,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future changeNickName(
+      String conversationId, String username, String nickname) async {
+    try {
+      var response = await dio.post('/conversation/change-nickname', data: {
+        "conversationId": conversationId,
+        "username": username,
+        "nickname": nickname,
       });
 
       return response;

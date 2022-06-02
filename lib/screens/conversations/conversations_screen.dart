@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import '../../components/notification.dart';
 import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
@@ -105,7 +106,7 @@ class _ConversationsState extends State<Conversations> {
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: () {},
         child: const Icon(
-          Icons.add,
+          Icons.group_add,
           color: Colors.white,
         ),
       ),

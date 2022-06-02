@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/constants/routes_constant.dart';
 
 import '../../constants/theme_constant.dart';
 import 'components/friends_tab.dart';
@@ -14,6 +15,11 @@ class FriendsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () => Get.toNamed(Routes.searchPeople),
+                icon: const Icon(Icons.search))
+          ],
           title: Row(
             children: [
               const Padding(

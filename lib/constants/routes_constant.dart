@@ -15,4 +15,5 @@ class Routes {
   static const otpForm = '/otpForm';
   static const resetPassword = '/resetPassword';
   static const searchPeople = '/searchPeople';
+  static const changeNickName = '/changeNickName';
 }

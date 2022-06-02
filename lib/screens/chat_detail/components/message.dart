@@ -1,6 +1,7 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/conversation_model.dart';
 import '../../../models/message_model.dart';
 import 'menu_reaction.dart';
 import 'message_avatar.dart';
@@ -14,11 +15,13 @@ class Message extends StatefulWidget {
     required this.message,
     required this.isMe,
     required this.isShowAvatar,
+    required this.conversation,
   }) : super(key: key);
 
   final MessageModel message;
   final bool isMe;
   final bool isShowAvatar;
+  final ConversationModel? conversation;
 
   @override
   State<Message> createState() => _MessageState();
@@ -62,7 +65,10 @@ class _MessageState extends State<Message> {
                   Row(
                     children: [
                       MessageAvatar(
-                          isMe: isMe, isShowAvatar: widget.isShowAvatar),
+                          isMe: isMe,
+                          isShowAvatar: widget.isShowAvatar,
+                          message: widget.message,
+                          conversation: widget.conversation),
                       MessageContent(isMe: isMe, message: widget.message),
                     ],
                   ),

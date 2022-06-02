@@ -235,14 +235,12 @@ class Input extends StatelessWidget {
                 if (inputController.text.isNotEmpty) {
                   String value = inputController.text;
                   String sender = context.read<Auth>().user!.username;
-                  MessageModel message =
-                      MessageModel(conversation!.id, sender, value, true);
+                  MessageModel message = MessageModel("", sender, value, true);
                   inputController.text = "";
 
                   if (conversation == null) {
                     var response = await API().createConversation(
-                      context.read<Auth>().user!.username,
-                      receiver!.username,
+                      [context.read<Auth>().user!.username, receiver!.username],
                     );
 
                     ConversationModel conversation = ConversationModel.fromJson(
@@ -257,22 +255,20 @@ class Input extends StatelessWidget {
                       "sender": sender,
                       "receiver": conversation.users[0].username == sender
                           ? conversation.users[1].username
-                          : conversation.users[0].username
+                          : conversation.users[0].username,
+                      "isText": true,
                     });
                   } else {
                     context.read<MessageProvider>().newMessage(message);
-                    context.read<SocketProvider>().socket.emit(
-                      "new-message",
-                      {
-                        "conversationId": conversation!.id,
-                        "content": value,
-                        "sender": sender,
-                        "isText": true,
-                        "receiver": conversation!.users[0].username == sender
-                            ? conversation!.users[1].username
-                            : conversation!.users[0].username
-                      },
-                    );
+                    context.read<SocketProvider>().socket.emit("new-message", {
+                      "conversationId": conversation!.id,
+                      "content": value,
+                      "sender": sender,
+                      "receiver": conversation!.users[0].username == sender
+                          ? conversation!.users[1].username
+                          : conversation!.users[0].username,
+                      "isText": true,
+                    });
                   }
                 }
               },

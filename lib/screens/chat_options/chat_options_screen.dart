@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/constants/routes_constant.dart';
 import 'package:lab6/models/conversation_model.dart';
 
 import '../../../constants/theme_constant.dart';
@@ -13,8 +14,13 @@ import 'utils/open_change_theme_dialog.dart';
 class ChatOptionsScreen extends StatelessWidget {
   ChatOptionsScreen({Key? key}) : super(key: key);
 
-  final UserDetailModel receiver = Get.arguments[0];
-  final void Function(String) handleChangeTheme = Get.arguments[1];
+  final UserDetailModel receiver = Get.arguments["receiver"];
+  final void Function(String) handleChangeTheme =
+      Get.arguments["handleChangeTheme"];
+  final Function(String, String) updateConversation =
+      Get.arguments["updateConversation"];
+
+  final ConversationModel conversation = Get.arguments["conversation"];
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,12 @@ class ChatOptionsScreen extends StatelessWidget {
                 RowOption(
                     icon: Icons.person,
                     text: "chat_detail_options_nickname".tr,
-                    onTap: () {}),
+                    onTap: () {
+                      Get.toNamed(Routes.changeNickName, arguments: {
+                        "conversation": conversation,
+                        "updateConversation": updateConversation
+                      });
+                    }),
                 GroupTitle(text: "chat_detail_options_more".tr),
                 RowOption(
                     icon: Icons.image,

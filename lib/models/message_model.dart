@@ -16,4 +16,9 @@ class MessageModel {
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
       _$MessageModelFromJson(json);
+
+  @override
+  String toString() {
+    return 'MessageModel{conversationId: $conversationId, sender: $sender, content: $content, isText: $isText}';
+  }
 }

@@ -4,6 +4,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lab6/screens/change_nickname/change_nickname_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'components/notification.dart';
@@ -42,7 +43,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => Auth()),
       ChangeNotifierProvider(create: (_) => MessageProvider()),
-      ChangeNotifierProvider(create: (_) => SocketProvider()),
+      ChangeNotifierProvider(create: (_) => SocketProvider(_)),
       ChangeNotifierProvider(create: (_) => ConversationsProvider()),
       ChangeNotifierProvider(create: (_) => FriendsProvider()),
     ],
@@ -188,6 +189,11 @@ class _MyAppState extends State<MyApp> {
             GetPage(
               name: Routes.searchPeople,
               page: () => const SearchPeopleScreen(),
+              transition: Transition.rightToLeftWithFade,
+            ),
+            GetPage(
+              name: Routes.changeNickName,
+              page: () => const ChangeNicknameScreen(),
               transition: Transition.rightToLeftWithFade,
             ),
           ],

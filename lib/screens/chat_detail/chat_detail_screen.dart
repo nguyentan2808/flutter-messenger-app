@@ -44,6 +44,23 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     }
   }
 
+  void updateConversation(String username, String nickname) async {
+    try {
+      ConversationModel? clone = conversation;
+      if (clone != null) {
+        for (var user in clone.users) {
+          if (user.username == username) {
+            user.nickname = nickname;
+          }
+        }
+
+        setState(() => conversation = clone);
+      }
+    } catch (error) {
+      NotificationDialog.show(context, "Error", error.toString());
+    }
+  }
+
   void revivalTheme() {
     String _theme = conversation!.theme;
     if (_theme != "") {
@@ -60,7 +77,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   void listenMessage() {
     context.read<SocketProvider>().socket.on("new-message", (data) {
       MessageModel message =
-          MessageModel("Oke", data["sender"], data["content"], true);
+          MessageModel("Oke", data["sender"], data["content"], data["isText"]);
       if (mounted) {
         context.read<MessageProvider>().newMessage(message);
       }
@@ -101,6 +118,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         } else {
           _receiver = conversation!.users[0];
         }
+      } else {
+        _receiver = UserDetailModel.mockData(
+            "You and ${conversation!.users.length - 1} others");
       }
     } else {
       _receiver = receiver!;
@@ -127,6 +147,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             handleChangeTheme: handleChangeTheme,
             conversation: conversation,
             receiver: _receiver,
+            updateConversation: updateConversation,
           ),
           body: Column(
             children: [
@@ -143,4 +164,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       ),
     );
   }
+}
+
+class FakeUserModel {
+  final String username;
+  final String name;
+  final String avatar;
+
+  FakeUserModel(this.username, this.avatar, this.name);
 }

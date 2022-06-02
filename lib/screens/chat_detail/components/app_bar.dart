@@ -12,9 +12,11 @@ class ChatDetailAppBar extends StatefulWidget with PreferredSizeWidget {
     required this.handleChangeTheme,
     required this.conversation,
     required this.receiver,
+    required this.updateConversation,
   }) : super(key: key);
 
   final Function(String) handleChangeTheme;
+  final Function(String, String) updateConversation;
   final ConversationModel? conversation;
   final UserDetailModel receiver;
 
@@ -27,8 +29,12 @@ class ChatDetailAppBar extends StatefulWidget with PreferredSizeWidget {
 
 class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
   void _goToOptions(UserDetailModel receiver) {
-    Get.toNamed(Routes.chatOptions,
-        arguments: [receiver, widget.handleChangeTheme]);
+    Get.toNamed(Routes.chatOptions, arguments: {
+      "receiver": receiver,
+      "handleChangeTheme": widget.handleChangeTheme,
+      "conversation": widget.conversation,
+      "updateConversation": widget.updateConversation,
+    });
   }
 
   @override
@@ -72,7 +78,10 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.receiver.name,
+                  widget.receiver.nickname != "" &&
+                          widget.conversation?.users.length == 2
+                      ? widget.receiver.nickname
+                      : widget.receiver.name,
                   style: const TextStyle(fontSize: 16),
                 ),
                 Padding(

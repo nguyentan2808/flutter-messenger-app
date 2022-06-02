@@ -149,6 +149,9 @@ const Map<String, String> vi = {
   "chat_detail_options_snack_bar_title": "Đã thay đổi theme",
   "chat_detail_options_snack_bar_desc":
       "Theme cuộc trò chuyện đã đổi sang @color",
+  "chat_detail_options_change_nickname": "Đặt biệt danh",
+  "chat_detail_options_change_nickname_desc":
+      "Biệt danh sẽ chỉ hiển thị trong cuộc trò chuyện này",
 
   /* Conversation */
   "conversation_title": "Tin nhắn",
