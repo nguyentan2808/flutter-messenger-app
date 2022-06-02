@@ -151,6 +151,7 @@ const Map<String, String> en = {
   "chat_detail_options_snack_bar_title": "Theme changed",
   "chat_detail_options_snack_bar_desc": "Your theme has been changed to @color",
   "chat_detail_options_change_nickname": "Change nickname",
+  "chat_detail_options_change_name": "Edit name of conversation",
   "chat_detail_options_change_nickname_desc":
       "Nickname only display in this conversation",
 

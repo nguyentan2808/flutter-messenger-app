@@ -12,11 +12,13 @@ class ChatDetailAppBar extends StatefulWidget with PreferredSizeWidget {
     required this.handleChangeTheme,
     required this.conversation,
     required this.receiver,
-    required this.updateConversation,
+    required this.updateNickNameConversation,
+    required this.updateNameConversation,
   }) : super(key: key);
 
   final Function(String) handleChangeTheme;
-  final Function(String, String) updateConversation;
+  final Function(String, String) updateNickNameConversation;
+  final Function(String) updateNameConversation;
   final ConversationModel? conversation;
   final UserDetailModel receiver;
 
@@ -33,7 +35,8 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
       "receiver": receiver,
       "handleChangeTheme": widget.handleChangeTheme,
       "conversation": widget.conversation,
-      "updateConversation": widget.updateConversation,
+      "updateNickNameConversation": widget.updateNickNameConversation,
+      "updateNameConversation": widget.updateNameConversation
     });
   }
 
@@ -81,7 +84,11 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
                   widget.receiver.nickname != "" &&
                           widget.conversation?.users.length == 2
                       ? widget.receiver.nickname
-                      : widget.receiver.name,
+                      : widget.conversation != null &&
+                              widget.conversation!.users.length > 2 &&
+                              widget.conversation!.name != ""
+                          ? widget.conversation!.name
+                          : widget.receiver.name,
                   style: const TextStyle(fontSize: 16),
                 ),
                 Padding(

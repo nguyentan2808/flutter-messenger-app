@@ -40,4 +40,13 @@ class ConversationsProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void updateName(String conversationId, String name) {
+    int index = _conversations.indexWhere((e) => e.id == conversationId);
+    if (index != -1) {
+      _conversations[index].name = name;
+
+      notifyListeners();
+    }
+  }
 }

@@ -69,7 +69,10 @@ class Conversation extends StatelessWidget {
                     Text(
                       receiver.nickname != "" && conversation.users.length == 2
                           ? receiver.nickname
-                          : receiver.name,
+                          : conversation.users.length > 2 &&
+                                  conversation.name != ""
+                              ? conversation.name
+                              : receiver.name,
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 3),

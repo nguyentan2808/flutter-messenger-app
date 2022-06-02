@@ -16,6 +16,7 @@ ConversationModel _$ConversationModelFromJson(Map<String, dynamic> json) =>
       json['lastMessage'] == null
           ? null
           : MessageModel.fromJson(json['lastMessage'] as Map<String, dynamic>),
+      json['name'] as String,
     );
 
 Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
@@ -24,6 +25,7 @@ Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
       'theme': instance.theme,
       'users': instance.users,
       'lastMessage': instance.lastMessage,
+      'name': instance.name,
     };
 
 UserDetailModel _$UserDetailModelFromJson(Map<String, dynamic> json) =>

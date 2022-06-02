@@ -12,15 +12,17 @@ class ConversationModel {
   String theme;
   List<UserDetailModel> users;
   MessageModel? lastMessage;
+  String name;
 
-  ConversationModel(this.id, this.theme, this.users, this.lastMessage);
+  ConversationModel(
+      this.id, this.theme, this.users, this.lastMessage, this.name);
 
   factory ConversationModel.fromJson(Map<String, dynamic> json) =>
       _$ConversationModelFromJson(json);
 
   @override
   String toString() {
-    return 'id: $id, theme: $theme, users: $users';
+    return 'ConversationModel{id: $id, theme: $theme, users: $users, lastMessage: $lastMessage, name: $name}';
   }
 }
 

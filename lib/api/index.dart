@@ -278,13 +278,29 @@ class API {
     }
   }
 
-  Future changeNickName(
+  Future editNickName(
       String conversationId, String username, String nickname) async {
     try {
-      var response = await dio.post('/conversation/change-nickname', data: {
+      var response = await dio.post('/conversation/edit-nickname', data: {
         "conversationId": conversationId,
         "username": username,
         "nickname": nickname,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
+
+  Future editName(String conversationId, String name) async {
+    try {
+      var response = await dio.post('/conversation/edit-name', data: {
+        "conversationId": conversationId,
+        "name": name,
       });
 
       return response;

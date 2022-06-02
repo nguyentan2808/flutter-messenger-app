@@ -18,8 +18,8 @@ class ChangeNicknameScreen extends StatefulWidget {
 
 class ChangeNicknameScreenState extends State<ChangeNicknameScreen> {
   ConversationModel conversation = Get.arguments["conversation"];
-  final Function(String, String) updateConversation =
-      Get.arguments["updateConversation"];
+  final Function(String, String) updateNickNameConversation =
+      Get.arguments["updateNickNameConversation"];
 
   final TextEditingController _nicknameController = TextEditingController();
 
@@ -100,10 +100,11 @@ class ChangeNicknameScreenState extends State<ChangeNicknameScreen> {
               try {
                 if (_nicknameController.text != "") {
                   LoaderDialog.show(context);
-                  await API().changeNickName(
+                  await API().editNickName(
                       conversation.id, username, _nicknameController.text);
 
-                  updateConversation(username, _nicknameController.text);
+                  updateNickNameConversation(
+                      username, _nicknameController.text);
 
                   ConversationModel? clone = conversation;
                   for (var user in clone.users) {

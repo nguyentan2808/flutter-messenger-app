@@ -44,7 +44,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     }
   }
 
-  void updateConversation(String username, String nickname) async {
+  void updateNickNameConversation(String username, String nickname) async {
     try {
       ConversationModel? clone = conversation;
       if (clone != null) {
@@ -53,6 +53,19 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             user.nickname = nickname;
           }
         }
+
+        setState(() => conversation = clone);
+      }
+    } catch (error) {
+      NotificationDialog.show(context, "Error", error.toString());
+    }
+  }
+
+  void updateNameConversation(String name) async {
+    try {
+      ConversationModel? clone = conversation;
+      if (clone != null) {
+        clone.name = name;
 
         setState(() => conversation = clone);
       }
@@ -147,7 +160,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             handleChangeTheme: handleChangeTheme,
             conversation: conversation,
             receiver: _receiver,
-            updateConversation: updateConversation,
+            updateNickNameConversation: updateNickNameConversation,
+            updateNameConversation: updateNameConversation,
           ),
           body: Column(
             children: [
