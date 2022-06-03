@@ -16,8 +16,8 @@ class ConversationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeConversation(ConversationModel conversation) {
-    _conversations.remove(conversation);
+  void removeConversation(String conversationId) {
+    _conversations.removeWhere((e) => e.id == conversationId);
     notifyListeners();
   }
 

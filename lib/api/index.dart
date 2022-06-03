@@ -311,4 +311,19 @@ class API {
       throw "Some thing went wrong!";
     }
   }
+
+  Future deleteConversation(String conversationId) async {
+    try {
+      var response = await dio.delete('/conversation/delete', data: {
+        "conversationId": conversationId,
+      });
+
+      return response;
+    } catch (error) {
+      if (error is DioError) {
+        throw (error.response?.data['message'] ?? "Some thing went wrong!");
+      }
+      throw "Some thing went wrong!";
+    }
+  }
 }

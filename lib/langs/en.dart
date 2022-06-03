@@ -161,6 +161,11 @@ const Map<String, String> en = {
   "conversation_recent": "Recent message",
   "conversation_active": "Active",
   "conversation_add": "Add new people",
+  "conversation_delete_title": "Delete conversation",
+  "conversation_delete_content":
+      "Are you sure you want to delete this conversation?",
+  "conversation_delete_cancel": "Cancel",
+  "conversation_delete_confirm": "Delete",
 
   /* Friends */
   "friends_title": "Friends",

@@ -160,6 +160,11 @@ const Map<String, String> vi = {
   "conversation_recent": "Tin nhắn gần đây",
   "conversation_active": "Hoạt động",
   "conversation_add": "Thêm bạn bè",
+  "conversation_delete_title": "Xóa cuộc trò chuyện",
+  "conversation_delete_content":
+      "Bạn có chắc chắn muốn xóa cuộc trò chuyện này?",
+  "conversation_delete_cancel": "Hủy",
+  "conversation_delete_confirm": "Xóa",
 
   /* Friends */
   "friends_title": "Danh bạ",

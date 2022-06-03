@@ -1,31 +1,43 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lab6/components/loader_dialog.dart';
+import 'package:lab6/components/notification.dart';
 import 'package:lab6/constants/routes_constant.dart';
 import 'package:lab6/constants/theme_constant.dart';
 import 'package:lab6/models/conversation_model.dart';
+import 'package:lab6/services/conversations_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/auth_provider.dart';
 
-class Conversation extends StatelessWidget {
+class Conversation extends StatefulWidget {
   const Conversation({Key? key, required this.conversation}) : super(key: key);
 
   final ConversationModel conversation;
 
   @override
+  State<Conversation> createState() => _ConversationState();
+}
+
+class _ConversationState extends State<Conversation> {
+  @override
   Widget build(BuildContext context) {
-    UserDetailModel receiver = conversation.users.length >= 3
+    UserDetailModel receiver = widget.conversation.users.length >= 3
         ? UserDetailModel.mockData(
-            "You and ${conversation.users.length - 1} others")
-        : context.read<Auth>().user!.username == conversation.users[0].username
-            ? conversation.users[1]
-            : conversation.users[0];
+            "You and ${widget.conversation.users.length - 1} others")
+        : context.read<Auth>().user!.username ==
+                widget.conversation.users[0].username
+            ? widget.conversation.users[1]
+            : widget.conversation.users[0];
 
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.chatDetail,
-            arguments: {"conversation": conversation});
+            arguments: {"conversation": widget.conversation});
+      },
+      onLongPress: () {
+        openDeleteModal(widget.conversation.id);
       },
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -67,18 +79,19 @@ class Conversation extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      receiver.nickname != "" && conversation.users.length == 2
+                      receiver.nickname != "" &&
+                              widget.conversation.users.length == 2
                           ? receiver.nickname
-                          : conversation.users.length > 2 &&
-                                  conversation.name != ""
-                              ? conversation.name
+                          : widget.conversation.users.length > 2 &&
+                                  widget.conversation.name != ""
+                              ? widget.conversation.name
                               : receiver.name,
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 3),
-                    conversation.lastMessage != null
+                    widget.conversation.lastMessage != null
                         ? Text(
-                            "${conversation.lastMessage!.sender == context.read<Auth>().user!.username ? "You: " : receiver.name} ${conversation.lastMessage!.content}",
+                            "${widget.conversation.lastMessage!.sender == context.read<Auth>().user!.username ? "You: " : receiver.name} ${widget.conversation.lastMessage!.content}",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 13),
@@ -102,6 +115,58 @@ class Conversation extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  void openDeleteModal(String conversationId) {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "conversation_delete_title".tr,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.start,
+            ),
+            const SizedBox(height: kDefaultPadding / 2),
+            Text(
+              "conversation_delete_content".tr,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: Text('conversation_delete_cancel'.tr),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          TextButton(
+            child: Text('conversation_delete_confirm'.tr),
+            onPressed: () async {
+              try {
+                LoaderDialog.show(context, "Deleting...");
+                await ConversationsService(context)
+                    .deleteConversation(conversationId);
+                LoaderDialog.hide();
+                Get.back();
+                NotificationDialog.show(context, "Delete conversation",
+                    "Delete conversation successfully");
+              } catch (error) {
+                LoaderDialog.hide();
+
+                NotificationDialog.show(context, "Error", error.toString());
+              }
+            },
+          ),
+        ],
       ),
     );
   }

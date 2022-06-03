@@ -24,4 +24,12 @@ class ConversationsService {
 
     return response;
   }
+
+  Future deleteConversation(String conversationId) async {
+    var response = await api.deleteConversation(conversationId);
+
+    context.read<ConversationsProvider>().removeConversation(conversationId);
+
+    return response;
+  }
 }
