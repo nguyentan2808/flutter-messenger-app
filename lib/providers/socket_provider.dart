@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:lab6/models/user_model.dart';
-import 'package:lab6/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+
+import '../models/user_model.dart';
+import 'auth_provider.dart';
+import 'messages_provider.dart';
 
 class SocketProvider with ChangeNotifier {
   late Socket socket;
@@ -22,6 +24,7 @@ class SocketProvider with ChangeNotifier {
       UserModel? user = context.read<Auth>().user;
       socket.emit("join", {"username": user?.username});
     });
+
     socket.on(
       "notification",
       (data) {
@@ -42,6 +45,10 @@ class SocketProvider with ChangeNotifier {
         );
       },
     );
+
+    socket.on("new-reaction", (data) {
+      context.read<MessageProvider>().reaction(data["id"], data["reaction"]);
+    });
 
     socket.onDisconnect((_) => print('disconnect'));
   }

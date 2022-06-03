@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/models/message_model.dart';
+
+import '../models/message_model.dart';
 
 class MessageProvider with ChangeNotifier {
   List<MessageModel> _messages = [];
@@ -14,6 +15,19 @@ class MessageProvider with ChangeNotifier {
   void newMessage(MessageModel newMessage) {
     _messages.add(newMessage);
 
+    notifyListeners();
+  }
+
+  void reaction(String id, String reaction) {
+    for (var message in _messages) {
+      if (message.id == id) {
+        if (message.reaction == reaction) {
+          message.reaction = "";
+        } else {
+          message.reaction = reaction;
+        }
+      }
+    }
     notifyListeners();
   }
 }

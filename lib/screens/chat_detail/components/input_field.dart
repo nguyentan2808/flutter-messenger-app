@@ -117,14 +117,16 @@ class Actions extends StatelessWidget {
       try {
         LoaderDialog.hide();
         String sender = context.read<Auth>().user!.username;
+        String id = DateTime.now().microsecondsSinceEpoch.toString();
 
         MessageModel message =
-            MessageModel(conversation!.id, sender, url, false);
+            MessageModel(id, conversation!.id, sender, url, false, "");
 
         context.read<MessageProvider>().newMessage(message);
         context.read<SocketProvider>().socket.emit(
           "new-message",
           {
+            "id": id,
             "conversationId": conversation!.id,
             "content": url,
             "sender": sender,
@@ -233,9 +235,11 @@ class Input extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 if (inputController.text.isNotEmpty) {
+                  String id = DateTime.now().microsecondsSinceEpoch.toString();
                   String value = inputController.text;
                   String sender = context.read<Auth>().user!.username;
-                  MessageModel message = MessageModel("", sender, value, true);
+                  MessageModel message =
+                      MessageModel(id, "", sender, value, true, "");
                   inputController.text = "";
 
                   if (conversation == null) {
@@ -250,6 +254,7 @@ class Input extends StatelessWidget {
 
                     context.read<MessageProvider>().newMessage(message);
                     context.read<SocketProvider>().socket.emit("new-message", {
+                      "id": id,
                       "conversationId": conversation.id,
                       "content": value,
                       "sender": sender,
@@ -261,6 +266,7 @@ class Input extends StatelessWidget {
                   } else {
                     context.read<MessageProvider>().newMessage(message);
                     context.read<SocketProvider>().socket.emit("new-message", {
+                      "id": id,
                       "conversationId": conversation!.id,
                       "content": value,
                       "sender": sender,

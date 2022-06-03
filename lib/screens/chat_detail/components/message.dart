@@ -47,8 +47,10 @@ class _MessageState extends State<Message> {
       controller: _reactionController,
       barrierColor: Colors.transparent,
       pressType: PressType.longPress,
-      menuBuilder: () =>
-          !isMe ? MenuReaction(controller: _reactionController) : Container(),
+      menuBuilder: () => !isMe
+          ? MenuReaction(
+              controller: _reactionController, message: widget.message)
+          : Container(),
       child: GestureDetector(
         onTap: _handleShowDetail,
         child: Padding(
@@ -62,14 +64,38 @@ class _MessageState extends State<Message> {
                     isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
                   MessageTime(isShowDetail: isShowDetail, isMe: isMe),
-                  Row(
+                  Stack(
                     children: [
-                      MessageAvatar(
-                          isMe: isMe,
-                          isShowAvatar: widget.isShowAvatar,
-                          message: widget.message,
-                          conversation: widget.conversation),
-                      MessageContent(isMe: isMe, message: widget.message),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              MessageAvatar(
+                                  isMe: isMe,
+                                  isShowAvatar: widget.isShowAvatar,
+                                  message: widget.message,
+                                  conversation: widget.conversation),
+                              MessageContent(
+                                  isMe: isMe, message: widget.message),
+                            ],
+                          ),
+                          widget.message.reaction != ""
+                              ? const SizedBox(height: 9)
+                              : Container()
+                        ],
+                      ),
+                      widget.message.reaction != ""
+                          ? Positioned(
+                              right: isMe ? null : 4,
+                              left: isMe ? 4 : null,
+                              bottom: 0,
+                              child: Image.asset(
+                                widget.message.reaction,
+                                height: 18,
+                                width: 18,
+                              ),
+                            )
+                          : Container()
                     ],
                   ),
                   MessageStatus(isShowDetail: isShowDetail, isMe: isMe),

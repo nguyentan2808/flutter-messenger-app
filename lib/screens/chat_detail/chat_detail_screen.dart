@@ -89,8 +89,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
 
   void listenMessage() {
     context.read<SocketProvider>().socket.on("new-message", (data) {
-      MessageModel message =
-          MessageModel("Oke", data["sender"], data["content"], data["isText"]);
+      MessageModel message = MessageModel(data["id"], data["conversationId"],
+          data["sender"], data["content"], data["isText"], "");
       if (mounted) {
         context.read<MessageProvider>().newMessage(message);
       }
