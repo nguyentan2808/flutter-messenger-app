@@ -122,32 +122,23 @@ class ProfileFriendsState extends State<ProfileFriends> {
                       )
                     ],
                   )
-                : GestureDetector(
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.profile,
-                        arguments: users[index],
-                        preventDuplicates: false,
-                      );
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: CachedNetworkImage(
-                              imageUrl: users[index].avatar,
-                              fit: BoxFit.cover,
-                              height: 200,
-                              width: 200,
-                              alignment: Alignment.center,
-                            ),
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: CachedNetworkImage(
+                            imageUrl: users[index].avatar,
+                            fit: BoxFit.cover,
+                            height: 200,
+                            width: 200,
+                            alignment: Alignment.center,
                           ),
                         ),
-                        Text(users[index].name),
-                      ],
-                    ),
+                      ),
+                      Text(users[index].name),
+                    ],
                   );
           },
         )

@@ -66,7 +66,7 @@ class OtherSection extends StatelessWidget {
               subTitle: "setting_logout_desc",
               isNavigation: false,
               handleClick: () async {
-                LoaderDialog.show(context);
+                LoaderDialog.show(context, "Logout...");
 
                 await AuthService().logOut(context);
                 LoaderDialog.hide();

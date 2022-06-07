@@ -2,10 +2,7 @@ import 'package:dio/dio.dart';
 
 class API {
   static var dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://tdt-flutter-server.up.railway.app/api/',
-      connectTimeout: 1000 * 5,
-    ),
+    BaseOptions(baseUrl: 'http://192.168.1.10:5000/api/'),
   );
 
   Future googleLogin(String idToken) async {

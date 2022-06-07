@@ -46,4 +46,9 @@ class UserDetailModel {
 
   factory UserDetailModel.fromJson(Map<String, dynamic> json) =>
       _$UserDetailModelFromJson(json);
+
+  @override
+  String toString() {
+    return 'UserDetailModel{username: $username, nickname: $nickname, name: $name, avatar: $avatar}';
+  }
 }

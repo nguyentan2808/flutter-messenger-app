@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
           themeMode: ThemeService().theme,
           theme: lightThemeData(context),
           darkTheme: darkThemeData(context),
-          title: 'Telegram',
+          title: 'Messenger Clone',
           builder: DevicePreview.appBuilder,
           home: const SplashScreen(),
           translations: I18nService(),

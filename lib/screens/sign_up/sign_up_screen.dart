@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lab6/components/loader_dialog.dart';
 
 import '../../components/notification.dart';
 import '../../constants/theme_constant.dart';
@@ -49,6 +50,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           final phone = _phoneController.text;
           final birthday = _birthdayController.text;
 
+          LoaderDialog.show(context, "Signing up...");
+
           await AuthService().signUp(
             context,
             username: username,
@@ -59,10 +62,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
             birthday: birthday,
           );
 
+          LoaderDialog.hide();
+
           NotificationDialog.show(context, "Sign Up", 'Sign up successfully...',
               isPrimary: true, duration: 3000);
         }
       } catch (error) {
+        LoaderDialog.hide();
         NotificationDialog.show(context, "Error", error.toString());
       }
     }

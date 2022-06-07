@@ -24,7 +24,7 @@ class LoaderDialog {
                 ),
               ),
               const SizedBox(width: kDefaultPadding),
-              Text(title ?? "Login..."),
+              Text(title ?? "Loading..."),
             ],
           ),
         ),

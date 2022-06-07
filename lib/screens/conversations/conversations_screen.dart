@@ -122,6 +122,7 @@ class _ConversationsState extends State<Conversations> {
       body: Column(
         children: [
           const CustomAppBar(),
+          const HorizontalList(),
           Expanded(
             child: isLoading && conversations.isEmpty
                 ? const Center(child: CircularProgressIndicator())
@@ -130,11 +131,9 @@ class _ConversationsState extends State<Conversations> {
                     : RefreshIndicator(
                         onRefresh: fetchConversations,
                         child: ListView.builder(
-                          itemCount: conversations.length + 1,
-                          itemBuilder: (context, index) => index == 0
-                              ? const HorizontalList()
-                              : Conversation(
-                                  conversation: conversations[index - 1]),
+                          itemCount: conversations.length,
+                          itemBuilder: (context, index) =>
+                              Conversation(conversation: conversations[index]),
                         ),
                       ),
           )

@@ -99,7 +99,7 @@ class ChangeNicknameScreenState extends State<ChangeNicknameScreen> {
             onPressed: () async {
               try {
                 if (_nicknameController.text != "") {
-                  LoaderDialog.show(context);
+                  LoaderDialog.show(context, "Changing nickname...");
                   await API().editNickName(
                       conversation.id, username, _nicknameController.text);
 

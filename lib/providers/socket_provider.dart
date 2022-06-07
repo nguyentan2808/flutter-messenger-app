@@ -14,7 +14,7 @@ class SocketProvider with ChangeNotifier {
   SocketProvider(this.context);
 
   void initSocket(String username) {
-    socket = io('https://tdt-flutter-server.up.railway.app', <String, dynamic>{
+    socket = io('http://192.168.1.10:5000', <String, dynamic>{
       'transports': ['websocket'],
     });
 

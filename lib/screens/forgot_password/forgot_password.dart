@@ -192,7 +192,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         contentPadding: const EdgeInsets.symmetric(
             horizontal: kDefaultPadding * 1.5, vertical: kDefaultPadding),
         hintStyle: const TextStyle(fontSize: 14),
-        hintText: "Ex: john@doe.com",
+        hintText: "Ex: 0333-1234567",
       ),
     );
   }

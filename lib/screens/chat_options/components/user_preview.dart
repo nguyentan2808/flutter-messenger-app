@@ -17,7 +17,8 @@ class UserPreview extends StatelessWidget {
         Stack(
           children: [
             CachedNetworkImage(
-              imageUrl: receiver.avatar,
+              imageUrl:
+                  receiver.avatar != "" ? receiver.avatar : kDefaultAvatarUrl,
               imageBuilder: (context, imageProvider) => CircleAvatar(
                 backgroundImage: imageProvider,
                 radius: Get.width * 1 / 8,

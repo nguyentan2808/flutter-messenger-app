@@ -36,8 +36,7 @@ class MessageAvatar extends StatelessWidget {
         // ),
         child: isShowAvatar
             ? CachedNetworkImage(
-                imageUrl:
-                    message.sender != "" ? user.avatar : kDefaultAvatarUrl,
+                imageUrl: user.avatar != "" ? user.avatar : kDefaultAvatarUrl,
                 imageBuilder: (context, imageProvider) => CircleAvatar(
                   radius: 14,
                   backgroundImage: imageProvider,

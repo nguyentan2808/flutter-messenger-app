@@ -22,8 +22,10 @@ class ConversationsService {
     }
 
     temp.sort((a, b) {
-      DateTime aDate = DateTime.parse(a.lastMessage!.createdAt);
-      DateTime bDate = DateTime.parse(b.lastMessage!.createdAt);
+      DateTime aDate =
+          DateTime.parse(a.lastMessage?.createdAt ?? DateTime.now().toString());
+      DateTime bDate =
+          DateTime.parse(b.lastMessage?.createdAt ?? DateTime.now().toString());
       return bDate.compareTo(aDate);
     });
     context.read<ConversationsProvider>().initConversations(temp);
