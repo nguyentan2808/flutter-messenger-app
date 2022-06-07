@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class API {
   static var dio = Dio(
-    BaseOptions(baseUrl: 'http://192.168.1.10:5000/api/'),
+    BaseOptions(baseUrl: 'https://tdt-flutter-server.up.railway.app/api/'),
   );
 
   Future googleLogin(String idToken) async {
