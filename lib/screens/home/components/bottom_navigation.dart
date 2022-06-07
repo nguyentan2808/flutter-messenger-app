@@ -1,5 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+import '../../../constants/theme_constant.dart';
+import '../../../providers/auth_provider.dart';
 
 class BottomNavigation extends StatelessWidget {
   final int selectedIndex;
@@ -30,9 +35,18 @@ class BottomNavigation extends StatelessWidget {
         //   label: 'Story',
         // ),
         BottomNavigationBarItem(
-          icon: const CircleAvatar(
-            radius: 13,
-            backgroundImage: AssetImage('assets/images/avatar.jpg'),
+          icon: CachedNetworkImage(
+            imageUrl: context.watch<Auth>().user?.avatar == ""
+                ? kDefaultAvatarUrl
+                : context.watch<Auth>().user?.avatar as String,
+            imageBuilder: (context, imageProvider) => CircleAvatar(
+              backgroundImage: imageProvider,
+              radius: 13,
+            ),
+            placeholder: (context, url) => const CircleAvatar(radius: 13),
+            errorWidget: (context, url, error) => const CircleAvatar(
+              radius: 13,
+            ),
           ),
           label: 'bottom_settings'.tr,
         ),

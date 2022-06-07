@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/models/conversation_model.dart';
 
 import '../../../constants/theme_constant.dart';
+import '../../../models/conversation_model.dart';
 
 class UserPreview extends StatelessWidget {
   const UserPreview({Key? key, required this.receiver}) : super(key: key);

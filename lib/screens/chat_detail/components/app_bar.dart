@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/models/conversation_model.dart';
 
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
+import '../../../models/conversation_model.dart';
 
 class ChatDetailAppBar extends StatefulWidget with PreferredSizeWidget {
   const ChatDetailAppBar({

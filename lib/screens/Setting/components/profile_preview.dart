@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
+import '../../../providers/auth_provider.dart';
 
 class ProfilePreview extends StatelessWidget {
   const ProfilePreview({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/screens/setting/components/other_section.dart';
-import 'package:lab6/screens/setting/components/preference_section.dart';
 
 import 'components/app_section.dart';
+import 'components/other_section.dart';
+import 'components/preference_section.dart';
 import 'components/profile_preview.dart';
 import 'components/setting_appbar.dart';
 

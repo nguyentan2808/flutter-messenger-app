@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lab6/models/conversation_model.dart';
-import 'package:provider/provider.dart';
 
 import '../../../constants/theme_constant.dart';
+import '../../../models/conversation_model.dart';
 import '../../../models/message_model.dart';
 
 class MessageAvatar extends StatelessWidget {

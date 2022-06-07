@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/constants/theme_constant.dart';
-import 'package:lab6/models/conversation_model.dart';
-import 'package:lab6/models/message_model.dart';
-import 'package:lab6/providers/auth_provider.dart';
-import 'package:lab6/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../api/index.dart';
 import '../../../components/notification.dart';
+import '../../../constants/theme_constant.dart';
+import '../../../models/conversation_model.dart';
+import '../../../models/message_model.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../providers/messages_provider.dart';
 import 'message.dart';
 
 class MessageDisplay extends StatefulWidget {

@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/constants/routes_constant.dart';
+import 'package:provider/provider.dart';
 
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
+import '../../providers/auth_provider.dart';
 import 'components/friends_tab.dart';
 
 class FriendsScreen extends StatelessWidget {
@@ -22,13 +25,22 @@ class FriendsScreen extends StatelessWidget {
           ],
           title: Row(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   vertical: kDefaultPadding / 2,
                 ),
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                child: CachedNetworkImage(
+                  imageUrl: context.watch<Auth>().user?.avatar == ""
+                      ? kDefaultAvatarUrl
+                      : context.watch<Auth>().user?.avatar as String,
+                  imageBuilder: (context, imageProvider) => CircleAvatar(
+                    backgroundImage: imageProvider,
+                    radius: 18,
+                  ),
+                  placeholder: (context, url) => const CircleAvatar(radius: 18),
+                  errorWidget: (context, url, error) => const CircleAvatar(
+                    radius: 18,
+                  ),
                 ),
               ),
               const SizedBox(width: kDefaultPadding),
@@ -48,7 +60,7 @@ class FriendsScreen extends StatelessWidget {
         body: const TabBarView(
           children: [
             FriendsTab(),
-            Icon(Icons.directions_bike),
+            Center(child: Text("Developing...🚀")),
           ],
         ),
       ),

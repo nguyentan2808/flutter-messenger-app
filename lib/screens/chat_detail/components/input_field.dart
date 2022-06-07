@@ -119,8 +119,15 @@ class Actions extends StatelessWidget {
         String sender = context.read<Auth>().user!.username;
         String id = DateTime.now().microsecondsSinceEpoch.toString();
 
-        MessageModel message =
-            MessageModel(id, conversation!.id, sender, url, false, "");
+        MessageModel message = MessageModel(
+          id,
+          conversation!.id,
+          sender,
+          url,
+          false,
+          "",
+          DateTime.now().toString(),
+        );
 
         context.read<MessageProvider>().newMessage(message);
         context.read<SocketProvider>().socket.emit(
@@ -134,6 +141,7 @@ class Actions extends StatelessWidget {
             "receiver": conversation!.users[0].username == sender
                 ? conversation!.users[1].username
                 : conversation!.users[0].username,
+            "createdAt": DateTime.now().toString(),
           },
         );
       } catch (error) {
@@ -238,8 +246,15 @@ class Input extends StatelessWidget {
                   String id = DateTime.now().microsecondsSinceEpoch.toString();
                   String value = inputController.text;
                   String sender = context.read<Auth>().user!.username;
-                  MessageModel message =
-                      MessageModel(id, "", sender, value, true, "");
+                  MessageModel message = MessageModel(
+                    id,
+                    "",
+                    sender,
+                    value,
+                    true,
+                    "",
+                    DateTime.now().toString(),
+                  );
                   inputController.text = "";
 
                   if (conversation == null) {
@@ -262,6 +277,7 @@ class Input extends StatelessWidget {
                           ? conversation.users[1].username
                           : conversation.users[0].username,
                       "isText": true,
+                      "createdAt": DateTime.now().toString(),
                     });
                   } else {
                     context.read<MessageProvider>().newMessage(message);
@@ -274,6 +290,7 @@ class Input extends StatelessWidget {
                           ? conversation!.users[1].username
                           : conversation!.users[0].username,
                       "isText": true,
+                      "createdAt": DateTime.now().toString(),
                     });
                   }
                 }

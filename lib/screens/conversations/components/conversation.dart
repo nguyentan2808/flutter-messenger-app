@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/components/loader_dialog.dart';
-import 'package:lab6/components/notification.dart';
-import 'package:lab6/constants/routes_constant.dart';
-import 'package:lab6/constants/theme_constant.dart';
-import 'package:lab6/models/conversation_model.dart';
-import 'package:lab6/services/conversations_service.dart';
 import 'package:provider/provider.dart';
 
+import '../../../components/loader_dialog.dart';
+import '../../../components/notification.dart';
+import '../../../constants/routes_constant.dart';
+import '../../../constants/theme_constant.dart';
+import '../../../models/conversation_model.dart';
 import '../../../providers/auth_provider.dart';
+import '../../../services/conversations_service.dart';
 
 class Conversation extends StatefulWidget {
   const Conversation({Key? key, required this.conversation}) : super(key: key);
@@ -91,7 +91,7 @@ class _ConversationState extends State<Conversation> {
                     const SizedBox(height: 3),
                     widget.conversation.lastMessage != null
                         ? Text(
-                            "${widget.conversation.lastMessage!.sender == context.read<Auth>().user!.username ? "You: " : receiver.name} ${widget.conversation.lastMessage!.content}",
+                            "${widget.conversation.lastMessage!.sender == context.read<Auth>().user!.username ? "You" : receiver.name}: ${widget.conversation.lastMessage!.content}",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(fontSize: 13),

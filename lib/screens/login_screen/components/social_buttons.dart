@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lab6/components/loader_dialog.dart';
-import 'package:lab6/services/auth_service.dart';
 
+import '../../../components/loader_dialog.dart';
 import '../../../components/notification.dart';
 import '../../../constants/routes_constant.dart';
 import '../../../constants/theme_constant.dart';
+import '../../../services/auth_service.dart';
 
 class SocialButtons extends StatelessWidget {
   const SocialButtons({Key? key}) : super(key: key);

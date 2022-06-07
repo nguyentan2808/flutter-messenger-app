@@ -20,6 +20,12 @@ class ConversationsService {
     for (int i = 0; i < conversationsJson.length; i++) {
       temp.add(ConversationModel.fromJson(conversationsJson[i]));
     }
+
+    temp.sort((a, b) {
+      DateTime aDate = DateTime.parse(a.lastMessage!.createdAt);
+      DateTime bDate = DateTime.parse(b.lastMessage!.createdAt);
+      return bDate.compareTo(aDate);
+    });
     context.read<ConversationsProvider>().initConversations(temp);
 
     return response;

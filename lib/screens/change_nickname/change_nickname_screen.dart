@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/api/index.dart';
-import 'package:lab6/components/loader_dialog.dart';
-import 'package:lab6/models/conversation_model.dart';
-import 'package:lab6/providers/conversations_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/index.dart';
+import '../../components/loader_dialog.dart';
 import '../../constants/theme_constant.dart';
+import '../../models/conversation_model.dart';
+import '../../providers/conversations_provider.dart';
 
 class ChangeNicknameScreen extends StatefulWidget {
   const ChangeNicknameScreen({Key? key}) : super(key: key);

@@ -4,13 +4,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/components/notification.dart';
-import 'package:lab6/constants/routes_constant.dart';
-import 'package:lab6/models/conversation_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../api/index.dart';
+import '../../components/notification.dart';
+import '../../constants/routes_constant.dart';
 import '../../constants/theme_constant.dart';
+import '../../models/conversation_model.dart';
 import '../../models/user_model.dart';
 import '../../providers/auth_provider.dart';
 import 'components/people.dart';

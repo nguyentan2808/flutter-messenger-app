@@ -13,6 +13,7 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       json['content'] as String,
       json['isText'] as bool,
       json['reaction'] as String,
+      json['createdAt'] as String,
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'content': instance.content,
       'isText': instance.isText,
       'reaction': instance.reaction,
+      'createdAt': instance.createdAt,
     };

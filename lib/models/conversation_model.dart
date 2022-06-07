@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lab6/models/message_model.dart';
 
 import '../constants/theme_constant.dart';
+import 'message_model.dart';
 
 part "conversation_model.g.dart";
 

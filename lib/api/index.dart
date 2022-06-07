@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class API {
   static var dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.1.6:5000/api/',
+      baseUrl: 'https://tdt-flutter-server.up.railway.app/api/',
       connectTimeout: 1000 * 5,
     ),
   );

@@ -1,9 +1,9 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:lab6/providers/messages_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/message_model.dart';
+import '../../../providers/messages_provider.dart';
 import '../../../providers/socket_provider.dart';
 
 class ItemModel {

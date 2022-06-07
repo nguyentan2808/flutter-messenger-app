@@ -4,7 +4,6 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lab6/screens/change_nickname/change_nickname_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'components/notification.dart';
@@ -16,6 +15,7 @@ import 'providers/conversations_provider.dart';
 import 'providers/friends_provider.dart';
 import 'providers/messages_provider.dart';
 import 'providers/socket_provider.dart';
+import 'screens/change_nickname/change_nickname_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/chat_options/chat_options_screen.dart';
 import 'screens/chat_detail/chat_detail_screen.dart';
@@ -152,7 +152,7 @@ class _MyAppState extends State<MyApp> {
             ),
             GetPage(
               name: Routes.chatOptions,
-              page: () => ChatOptionsScreen(),
+              page: () => const ChatOptionsScreen(),
               transition: Transition.rightToLeftWithFade,
               transitionDuration: const Duration(microseconds: 100),
             ),
@@ -163,7 +163,7 @@ class _MyAppState extends State<MyApp> {
             ),
             GetPage(
               name: Routes.editProfile,
-              page: () => EditProfileScreen(),
+              page: () => const EditProfileScreen(),
               transition: Transition.cupertinoDialog,
             ),
             GetPage(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/models/conversation_model.dart';
+
+import '../models/conversation_model.dart';
 
 class ConversationsProvider with ChangeNotifier {
   List<ConversationModel> _conversations = [];

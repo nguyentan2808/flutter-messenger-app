@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lab6/providers/friends_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../api/index.dart';
 import '../models/user_model.dart';
+import '../providers/friends_provider.dart';
 
 class FriendsService {
   final BuildContext context;

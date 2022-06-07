@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/theme_constant.dart';
 
@@ -7,10 +8,12 @@ class MessageTime extends StatelessWidget {
     Key? key,
     required this.isShowDetail,
     required this.isMe,
+    required this.time,
   }) : super(key: key);
 
   final bool isShowDetail;
   final bool isMe;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,9 @@ class MessageTime extends StatelessWidget {
             bottom: kDefaultPadding / 5,
             left: isMe ? 0 : 40,
             right: isMe ? 28 : 0),
-        child: const Text(
-          "15 THG 4 Lúc 10:42",
-          style: TextStyle(fontSize: 10),
+        child: Text(
+          "${DateFormat('dd').format(DateTime.parse(time))} THG ${DateFormat('MM').format(DateTime.parse(time))} AT ${DateFormat('HH:mm').format(DateTime.parse(time))}",
+          style: const TextStyle(fontSize: 10),
           textAlign: TextAlign.end,
         ),
       ),

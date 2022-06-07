@@ -10,12 +10,13 @@ class MessageModel {
   String content;
   bool isText;
   String reaction;
+  String createdAt;
 
   // MessageModel.formMock(
   //     this.conversationId, this.sender, this.content, this.isText, );
 
   MessageModel(this.id, this.conversationId, this.sender, this.content,
-      this.isText, this.reaction);
+      this.isText, this.reaction, this.createdAt);
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
       _$MessageModelFromJson(json);
@@ -24,4 +25,6 @@ class MessageModel {
   String toString() {
     return 'MessageModel{id: $id, conversationId: $conversationId, sender: $sender, content: $content, isText: $isText, reaction: $reaction}';
   }
+
+  compareTo(MessageModel? lastMessage) {}
 }

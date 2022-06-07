@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lab6/models/user_model.dart';
+
+import '../models/user_model.dart';
 
 class Auth with ChangeNotifier {
   UserModel? _user;

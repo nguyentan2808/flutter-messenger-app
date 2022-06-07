@@ -28,6 +28,12 @@
       "deviceId": "emulator-5554"
     },
     {
+      "name": "Emulator 2",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "emulator-5556"
+    },
+    {
       "name": "Redmi Note 7",
       "request": "launch",
       "type": "dart",
@@ -38,6 +44,10 @@
     {
       "name": "All devices",
       "configurations": ["Emulator", "Redmi Note 7"]
+    },
+    {
+      "name": "All devices (Emulator)",
+      "configurations": ["Emulator", "Emulator 2"]
     }
   ]
 }

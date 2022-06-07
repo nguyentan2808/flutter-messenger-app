@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lab6/api/index.dart';
-import 'package:lab6/constants/routes_constant.dart';
-import 'package:lab6/models/conversation_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/theme_constant.dart';
+import '../../api/index.dart';
 import '../../components/loader_dialog.dart';
+import '../../constants/routes_constant.dart';
+import '../../models/conversation_model.dart';
 import '../../providers/conversations_provider.dart';
 import 'components/app_bar.dart';
 import 'components/circle_option.dart';

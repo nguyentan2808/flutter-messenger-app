@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lab6/components/loader_dialog.dart';
-import 'package:lab6/components/notification.dart';
-import 'package:lab6/services/auth_service.dart';
 
 import '../../components/facebook_button.dart';
+import '../../components/loader_dialog.dart';
+import '../../components/notification.dart';
 import '../../constants/theme_constant.dart';
 import '../../models/user_model.dart';
+import '../../services/auth_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);

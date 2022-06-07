@@ -63,7 +63,11 @@ class _MessageState extends State<Message> {
                 crossAxisAlignment:
                     isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
-                  MessageTime(isShowDetail: isShowDetail, isMe: isMe),
+                  MessageTime(
+                    isShowDetail: isShowDetail,
+                    isMe: isMe,
+                    time: widget.message.createdAt,
+                  ),
                   Stack(
                     children: [
                       Column(
